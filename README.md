@@ -62,7 +62,11 @@ $emails = filter(
     mapOr(
         $users, 
         fn (User $user) => $users->getEmail(), 
-        fn (Throwable $throwable, User $user) => null
+        function (Throwable $throwable, User $user) {
+            $logger->log($throwable->getMessage());
+            
+            return null;
+        }
     )
 );
 ```
