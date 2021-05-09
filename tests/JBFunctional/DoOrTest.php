@@ -7,37 +7,37 @@ use Closure;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Throwable;
-use function JBFunctional\invokeOr;
+use function JBFunctional\doOr;
 
-class InvokeOrTest extends TestCase
+class DoOrTest extends TestCase
 {
     public function testTheCardinalFunctionReturnValueIsReturned(): void
     {
-        self::assertEquals('expectedString', invokeOr(fn() => 'expectedString', fn() => null)());
+        self::assertEquals('expectedString', doOr(fn() => 'expectedString', fn() => null)());
     }
 
     public function testTheCardinalFunctionIsCalledWithParameters(): void
     {
         self::assertEquals(
             'expectedString',
-            invokeOr(fn($param) => $param, fn() => null)('expectedString')
+            doOr(fn($param) => $param, fn() => null)('expectedString')
         );
         self::assertEquals(
             'anotherExpectedString',
-            invokeOr(fn($param) => $param, fn() => null)('anotherExpectedString')
+            doOr(fn($param) => $param, fn() => null)('anotherExpectedString')
         );
     }
 
     public function testTheFailHandlerFunctionIsCalledWhenAnExceptionIsThrown(): void
     {
-        self::assertEquals('exception', invokeOr($this->failingFunction(), fn() => 'exception')());
+        self::assertEquals('exception', doOr($this->failingFunction(), fn() => 'exception')());
     }
 
     public function testTheFailHandlerFunctionIsCalledWithThrowableObjectWhenAnExceptionIsThrown(): void
     {
         self::assertEquals(
             'Exception thrown',
-            invokeOr($this->failingFunction(), fn(Throwable $throwable) => $throwable->getMessage())()
+            doOr($this->failingFunction(), fn(Throwable $throwable) => $throwable->getMessage())()
         );
     }
 
@@ -45,7 +45,7 @@ class InvokeOrTest extends TestCase
     {
         self::assertEquals(
             'Failing expectedString',
-            invokeOr(
+            doOr(
                 $this->failingFunction(),
                 fn(Throwable $throwable, string $string) => sprintf("Failing %s", $string)
             )('expectedString')

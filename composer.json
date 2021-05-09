@@ -1,6 +1,7 @@
 {
     "name": "jordibisbal/functional-php",
     "description": "Functional primitives for PHP",
+    "version": "0.1",
     "keywords": [
         "functional"
     ],
@@ -26,7 +27,7 @@
             "JBFunctional\\": "src/JBFunctional"
         },
         "files": [
-            "src/JBFunctional/InvokeOr.php",
+            "src/JBFunctional/DoOr.php",
             "src/JBFunctional/MapOr.php"
         ]
     },
