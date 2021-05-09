@@ -38,7 +38,7 @@ $fn = static function ($param) {
 };
 
 $failFn = static function (Throwable $throwable, ...$params) {
-    return sprintf("%s whit parameters %s",$throwable->getMessage(),$params);
+    return sprintf("%s with parameters %s", $throwable->getMessage(), print_r($params));
 };
 
 doOr($fn, $failFn); 
@@ -56,11 +56,13 @@ Applies ```$fn``` to each element in the collection and collects the return valu
 use function Functional\filter;
 use function JBFunctional\mapOr;
 
+...
+
 $emails = filter(
     mapOr(
         $users, 
-        fn ($user) => $users->getEmail(), 
-        fn (Throwable $throwable, $user) => null
+        fn (User $user) => $users->getEmail(), 
+        fn (Throwable $throwable, User $user) => null
     )
 );
 ```
