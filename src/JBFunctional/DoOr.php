@@ -6,7 +6,7 @@ namespace JBFunctional;
 
 use Closure;
 
-function invokeOr(Callable $fn, Callable $failFn): Closure
+function doOr(Callable $fn, Callable $failFn): Closure
 {
     return static function (...$params) use ($fn, $failFn)
     {
