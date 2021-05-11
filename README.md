@@ -15,7 +15,7 @@ add to composer.json
         }
     ],
 
-```composer require jordibisbal/functional-php```
+```composer require jordibisbal/functional-php:@dev```
 
 ## Usage
 
