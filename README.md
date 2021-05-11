@@ -23,7 +23,7 @@ add to composer.json
 
 #### doOr()
 
-Return a function than invokes `$fn` a throwable is  thrown, `$failFn` is invoked, prefixing the throwable to the function parameters.
+Return a function than invokes `$fn`, if a throwable is  thrown, `$failFn` is invoked, prefixing the throwable to the function parameters.
 
 ``Closure JBFunctional\doOr(callable $fn, callable $failFn)``
 
@@ -41,7 +41,7 @@ $failFn = static function (Throwable $throwable, ...$params) {
     return sprintf("%s with parameters %s", $throwable->getMessage(), print_r($params));
 };
 
-doOr($fn, $failFn); 
+doOr($fn, $failFn)($params); 
 ```
 
 #### mapOr()
@@ -62,7 +62,7 @@ $emails = filter(
     mapOr(
         $users, 
         fn (User $user) => $users->getEmail(), 
-        function (Throwable $throwable, User $user) {
+        function (Throwable $throwable, User $user) use ($logger) {
             $logger->log($throwable->getMessage());
             
             return null;
