@@ -11,6 +11,7 @@ use PHPUnit\Framework\TestCase;
 use Throwable;
 use function JBFunctional\assertIsAOr;
 use function JBFunctional\doOr;
+use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertTrue;
 
@@ -18,38 +19,38 @@ class AssertIsAOrTest extends TestCase
 {
     public function testTheFailHandlerFunctionIsCalledWhenTypeDoesNotMatch(): void
     {
-        $called = false;
+        $parameters = [];
 
-        assertIsAOr('object', $this->setTrue($called))('string');
+        assertIsAOr('object', $this->setCallParametersInto($parameters))('string');
 
-        assertTrue($called);
+        assertEquals(['string', 'object'],$parameters);
     }
 
     public function testTheFailHandlerFunctionIsNotCalledWhenTypeMatch(): void
     {
-        $called = false;
+        $parameters = [];
 
-        assertIsAOr(AClass::class, $this->setTrue($called))(new AClass());
+        assertIsAOr(AClass::class, $this->setCallParametersInto($parameters))(new AClass());
 
-        assertFalse($called);
+        assertEquals([],$parameters);
     }
 
     public function testTheFailHandlerFunctionIsNotCalledWhenParentTypeMatch(): void
     {
-        $called = false;
+        $parameters = [];
 
         assertIsAOr(
             AClass::class,
-            $this->setTrue($called)
+            $this->setCallParametersInto($parameters)
         )(new AChildClass());
 
-        assertFalse($called);
+        assertEquals([],$parameters);
     }
 
-    public function setTrue(bool &$called): Closure
+    public function setCallParametersInto(&$parametersBag): Closure
     {
-        return function () use (&$called): void {
-            $called = true;
+        return function (...$parameters) use (&$parametersBag): void {
+            $parametersBag = $parameters;
         };
     }
 }

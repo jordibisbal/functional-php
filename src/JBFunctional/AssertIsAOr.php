@@ -14,7 +14,7 @@ function assertIsAOr(string $className, Callable $failFn): Closure
             return;
         }
 
-        $failFn($item);
+        $failFn($item, $className);
     };
 }
 
