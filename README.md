@@ -1,6 +1,6 @@
 # Functional-php
 
-Some functional oriented add-ons/ideas
+Some functional oriented add-ons/ideas, favouring the use of high order functions
 
 On https://github.com/lstrojny/functional-php (uses and copied code from)
 
@@ -53,9 +53,11 @@ doOr($fn, $failFn)($params);
 
 #### mapOr()
 
-Applies `$fn` to each element in the collection and collects the return value, if a throwable is thrown, `$failFn` is applied instead
+Returns a function that applies `$fn` to each element in the given collection and collects the return value, if a throwable is thrown, `$failFn` is applied instead.
 
-`array Functional\map(array|Traversable $collection, callable $fn, callable $failFn)`
+Keys are maintained.
+
+`array Functional\map(callable $fn, callable $failFn)` → `(array|Traversable $collection $collection): array|Traversable`
 
 ##### Example
 
@@ -66,14 +68,13 @@ use function JBFunctional\mapOr;
 ...
 
 $emails = filter(
-    mapOr(
-        $users, 
-        fn (User $user) => $users->getEmail(), 
-        function (Throwable $throwable, User $user) use ($logger) {
+    mapOr(         
+        fn (User $user): Email => $users->getEmail(), 
+        function (Throwable $throwable, User $user): ?Email use ($logger) {
             $logger->log($throwable->getMessage());
             
             return null;
         }
-    )
+    )($users)
 );
 ```

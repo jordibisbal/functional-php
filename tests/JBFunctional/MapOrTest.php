@@ -34,12 +34,12 @@ class MapOrTest extends TestCase
             InvalidArgumentException::assertCollection($collection, __FUNCTION__, 3);
             return $k . $v;
         };
-        self::assertSame(['0value', '1value'], mapOr($this->list, $fn, $this->uncalledThrowable()));
-        self::assertSame(['0value', '1value'], mapOr($this->listIterator, $fn, $this->uncalledThrowable()));
-        self::assertSame(['k1' => 'k1val1', 'k2' => 'k2val2'], mapOr($this->hash, $fn, $this->uncalledThrowable()));
+        self::assertSame(['0value', '1value'], mapOr($fn, $this->uncalledThrowable())($this->list));
+        self::assertSame(['0value', '1value'], mapOr($fn, $this->uncalledThrowable())($this->listIterator));
+        self::assertSame(['k1' => 'k1val1', 'k2' => 'k2val2'], mapOr($fn, $this->uncalledThrowable())($this->hash));
         self::assertSame(
             ['k1' => 'k1val1', 'k2' => 'k2val2'],
-            mapOr($this->hashIterator, $fn, $this->uncalledThrowable())
+            mapOr($fn, $this->uncalledThrowable())($this->hashIterator)
         );
     }
 
@@ -47,28 +47,28 @@ class MapOrTest extends TestCase
     {
         $this->expectException('TypeError');
         $this->expectExceptionMessage('must be of type callable, array given,');
-        mapOr($this->list, [$this, 'exception'], $this->uncalledThrowable());
+        mapOr([$this, 'exception'], $this->uncalledThrowable())($this->list);
     }
 
     public function testExceptionIsThrownInHash(): void
     {
         $this->expectException('TypeError');
         $this->expectExceptionMessage('must be of type callable, array given,');
-        mapOr($this->hash, [$this, 'exception'], $this->uncalledThrowable());
+        mapOr([$this, 'exception'], $this->uncalledThrowable())($this->hash);
     }
 
     public function testExceptionIsThrownInIterator(): void
     {
         $this->expectException('TypeError');
         $this->expectExceptionMessage('must be of type callable, array given,');
-        mapOr($this->listIterator, [$this, 'exception'], $this->uncalledThrowable());
+        mapOr([$this, 'exception'], $this->uncalledThrowable())($this->listIterator);
     }
 
     public function testExceptionIsThrownInHashIterator(): void
     {
         $this->expectException('TypeError');
         $this->expectExceptionMessage('must be of type callable, array given,');
-        mapOr($this->hashIterator, [$this, 'exception'], $this->uncalledThrowable());
+        mapOr([$this, 'exception'], $this->uncalledThrowable())($this->hashIterator);
     }
 
     public function testPassNoCollection(): void
@@ -78,23 +78,14 @@ class MapOrTest extends TestCase
             'must be of type Traversable|array, string given'
         );
 
-        mapOr('invalidCollection', 'strlen', $this->uncalledThrowable());
+        mapOr('strlen', $this->uncalledThrowable())('invalidCollection');
     }
-
-    public function testPassNonCallable(): void
-    {
-        $this->expectException('TypeError');
-        $this->expectExceptionMessage('Argument #2 ($callback) must be of type callable, string given,');
-
-        mapOr($this->list, 'undefinedFunction', $this->uncalledThrowable());
-    }
-
 
     public function testTheFailHandlerFunctionIsCalledWhenAnExceptionIsThrown(): void
     {
         self::assertEquals(
             ['exception'],
-            mapOr(['foo'], $this->failingFunction(), fn() => 'exception')
+            mapOr($this->failingFunction(), fn() => 'exception')(['foo'])
         );
     }
 
@@ -102,7 +93,7 @@ class MapOrTest extends TestCase
     {
         self::assertEquals(
             ['Exception thrown'],
-            mapOr(['foo'], $this->failingFunction(), fn(Throwable $throwable) => $throwable->getMessage())
+            mapOr($this->failingFunction(), fn(Throwable $throwable) => $throwable->getMessage())(['foo'])
         );
     }
 
@@ -111,10 +102,9 @@ class MapOrTest extends TestCase
         self::assertEquals(
             ['Failing foo'],
             mapOr(
-                ['foo'],
                 $this->failingFunction(),
                 fn(Throwable $throwable, string $value) => sprintf("Failing %s", $value)
-            )
+            )(['foo'])
         );
     }
 
@@ -123,10 +113,9 @@ class MapOrTest extends TestCase
         self::assertEquals(
             ['foo', 'Failing bar'],
             mapOr(
-                ['foo', 'bar'],
                 $this->failingForFunction('bar'),
                 fn(Throwable $throwable, string $value) => sprintf("Failing %s", $value)
-            )
+            )(['foo', 'bar'])
         );
     }
 
@@ -144,7 +133,7 @@ class MapOrTest extends TestCase
         };
     }
 
-    private function failingForFunction(string $failingValue)
+    private function failingForFunction(string $failingValue): Closure
     {
         return static function ($value) use ($failingValue) {
             if ($value !== $failingValue) {

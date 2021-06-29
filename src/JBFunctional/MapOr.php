@@ -4,25 +4,27 @@ declare(strict_types=1);
 
 namespace JBFunctional;
 
+use Closure;
 use Functional\Exceptions\InvalidArgumentException;
 use Traversable;
 
 function mapOr(
-    Traversable|array $collection,
     callable $callback,
     callable $failFn = null
-): array {
-    InvalidArgumentException::assertCollection($collection, __FUNCTION__, 1);
+): Closure {
+    return function (Traversable|array $collection) use ($callback, $failFn): Traversable|array {
+        InvalidArgumentException::assertCollection($collection, __FUNCTION__, 1);
 
-    $aggregation = [];
+        $newCollection = [];
 
-    foreach ($collection as $index => $element) {
-        try {
-            $aggregation[$index] = $callback($element, $index, $collection);
-        } catch (\Throwable $throwable) {
-            $aggregation[$index] = $failFn($throwable, $element, $index, $collection);
+        foreach ($collection as $index => $element) {
+            try {
+                $newCollection[$index] = $callback($element, $index, $collection);
+            } catch (\Throwable $throwable) {
+                $newCollection[$index] = $failFn($throwable, $element, $index, $collection);
+            }
         }
-    }
 
-    return $aggregation;
+        return $newCollection;
+    };
 }
