@@ -6,10 +6,8 @@ namespace JBFunctional;
 
 use Closure;
 
-function mapOr(
-    callable $callback,
-    callable $failFn = null
-): Closure {
+function mapOr(callable $callback, callable $failFn = null): Closure
+{
     return function (iterable $collection) use ($callback, $failFn): iterable {
         $newCollection = [];
 
