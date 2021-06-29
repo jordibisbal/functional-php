@@ -75,7 +75,7 @@ class MapOrTest extends TestCase
     {
         $this->expectException('TypeError');
         $this->expectExceptionMessage(
-            'must be of type Traversable|array, string given'
+            'must be of type iterable, string given'
         );
 
         mapOr('strlen', $this->uncalledThrowable())('invalidCollection');

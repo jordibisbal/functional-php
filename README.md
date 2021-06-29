@@ -25,7 +25,7 @@ add to composer.json
 
 Return a function that asserts the type of the parameter is the given one or otherwise the alternate function ``$fn`` is called, the function does return nothing. 
 
-`assertIsAOr(string $className, Callable $failFn): Closure` → `($item): void` 
+`assertIsAOr(string $className, Callable $failFn): Closure` <br/> → `($item): void` 
 
 ##### Example
 
@@ -51,7 +51,7 @@ assertIsAOr(
 
 Return a function than invokes `$fn`, if a throwable is  thrown, `$failFn` is invoked, prefixing the throwable to the function parameters.
 
-`Closure JBFunctional\doOr(callable $fn, callable $failFn)`  → `(mixed ...$params): mixed`
+`Closure JBFunctional\doOr(callable $fn, callable $failFn)` <br/> → `(mixed ...$params): mixed`
 
 ##### Example
 
@@ -75,7 +75,7 @@ Returns a function that applies `$fn` to each element in the given collection an
 
 Keys are maintained.
 
-`array Functional\map(callable $fn, callable $failFn)` → `(array|Traversable $collection $collection): array|Traversable`
+`array Functional\map(callable $fn, callable $failFn)` <br/> → `(iterable $collection $collection): iterable`
 
 ##### Example
 
