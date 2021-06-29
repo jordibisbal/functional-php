@@ -6,15 +6,15 @@ namespace JBFunctional;
 
 use Closure;
 
-function assertIsAOr(string $className, Callable $failFn): Closure
+function assertIsAOr(string $fn, Callable $failFn): Closure
 {
-    return static function ($item) use ($className, $failFn): void
+    return static function ($item) use ($fn, $failFn): void
     {
-        if (is_a($item, $className)) {
+        if (is_a($item, $fn)) {
             return;
         }
 
-        $failFn($item, $className);
+        $failFn($item, $fn);
     };
 }
 
