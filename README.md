@@ -58,11 +58,11 @@ Return a function than invokes `$fn`, if a throwable is  thrown, `$failFn` is in
 ```php
 use function JBFunctional\doOr;
 
-$fn = static function ($param) {
+$fn = static function ($param): void {
     throw new Exception('exception');
 };
 
-$failFn = static function (Throwable $throwable, ...$params) {
+$failFn = static function (Throwable $throwable, ...$params): string {
     return sprintf("%s with parameters %s", $throwable->getMessage(), print_r($params));
 };
 
