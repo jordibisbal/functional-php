@@ -15,9 +15,17 @@ add to composer.json
         }
     ],
 
-```composer require jordibisbal/functional-php:@dev```
+`composer require jordibisbal/functional-php:@dev`
 
 ## Usage
+
+### Assertions
+
+#### AssertIsAOr()
+
+Return a function that asserts the type of the parameter is the given one or otherwise the alternate function ``$fn`` is called, the function does return nothing. 
+
+`assertIsAOr(string $className, Callable $failFn): Closure` → `($item): void` 
 
 ### Failsafe
 
@@ -25,13 +33,12 @@ add to composer.json
 
 Return a function than invokes `$fn`, if a throwable is  thrown, `$failFn` is invoked, prefixing the throwable to the function parameters.
 
-``Closure JBFunctional\doOr(callable $fn, callable $failFn)``
+`Closure JBFunctional\doOr(callable $fn, callable $failFn)`  → `(mixed ...$params): mixed`
 
 ##### Example
 
 ```php
 use function JBFunctional\doOr;
-
 
 $fn = static function ($param) {
     throw new Exception('exception');
@@ -46,7 +53,7 @@ doOr($fn, $failFn)($params);
 
 #### mapOr()
 
-Applies ```$fn``` to each element in the collection and collects the return value, if a throwable is thrown, ```$failFn``` is applied instead
+Applies `$fn` to each element in the collection and collects the return value, if a throwable is thrown, `$failFn` is applied instead
 
 `array Functional\map(array|Traversable $collection, callable $fn, callable $failFn)`
 

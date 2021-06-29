@@ -8,7 +8,7 @@ use Closure;
 
 function doOr(Callable $fn, Callable $failFn): Closure
 {
-    return static function (...$params) use ($fn, $failFn)
+    return static function (mixed ...$params) use ($fn, $failFn): mixed
     {
         try {
             return $fn(...$params);
