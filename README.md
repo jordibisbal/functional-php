@@ -27,6 +27,24 @@ Return a function that asserts the type of the parameter is the given one or oth
 
 `assertIsAOr(string $className, Callable $failFn): Closure` → `($item): void` 
 
+##### Example
+
+```php
+use function JBFunctional\assertIsAOr;
+
+...
+
+$object = new Aclass();
+
+assertIsAOr(
+    AClass::class, 
+    function static (): void 
+    { 
+        throw new TypeError();
+    }
+)($object);
+```
+
 ### Failsafe
 
 #### doOr()
