@@ -1,8 +1,6 @@
 # Functional-php
 
-Some functional oriented add-ons/ideas, favouring the use of high order functions
-
-On https://github.com/lstrojny/functional-php (uses and copied code from)
+Baes on https://github.com/lstrojny/functional-php (uses and copied code from)
 
 ## Install
 

@@ -13,7 +13,7 @@
         }
     ],
     "require": {
-        "php": "~8",
+        "php": ">=7.1",
         "lstrojny/functional-php": "^1.17"
     },
     "require-dev": {
@@ -26,17 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "JBFunctional\\": "src/JBFunctional"
-        },
-        "files": [
-            "src/JBFunctional/DoOr.php",
-            "src/JBFunctional/MapOr.php",
-            "src/JBFunctional/AssertIsAOr.php"
-        ]
+            "jbisbal\\functional\\": "src"
+        }
     },
     "autoload-dev": {
         "psr-4": {
-            "JBFunctional\\Tests\\": "tests/JBFunctional"
+            "jbisbal\\Tests\\": "functional"
         }
     },
     "scripts": {
