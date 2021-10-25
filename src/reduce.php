@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 Namespace jordibisbal\functional;
 
-use function Functional\reduce_right;
+use function Functional\reduce_left;
 
 /**
  * @template T,CT
@@ -17,5 +17,5 @@ use function Functional\reduce_right;
 function reduce(iterable $collection, callable $callback, $initial = null): mixed
 {
     /** @noinspection PhpParamsInspection */
-    return reduce_right($collection, $callback, $initial);
+    return reduce_left($collection, $callback, $initial);
 }
