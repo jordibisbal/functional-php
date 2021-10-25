@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "jbisbal\\functional\\": "src"
+            "jordibisbal\\functional\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "jbisbal\\Tests\\": "functional"
+            "jordibisbal\\Tests\\": "functional"
         }
     },
     "scripts": {
