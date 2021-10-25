@@ -14,7 +14,7 @@ use function Functional\reduce_right;
  * @return <T>
  * @no-named-arguments
  */
-function reduce(iterable $collection, callable $callback, mixed $initial = null): mixed
+function reduce(iterable $collection, callable $callback, $initial = null): mixed
 {
     /** @noinspection PhpParamsInspection */
     return reduce_right($collection, $callback, $initial);
