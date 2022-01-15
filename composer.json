@@ -31,7 +31,8 @@
             "j45l\\functional\\": "src"
         },
         "files": [
-            "src/reduce.php"
+            "src/Reduce.php",
+            "src/RepeatPipe.php"
         ]
     },
     "autoload-dev": {
