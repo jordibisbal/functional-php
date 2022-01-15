@@ -2,20 +2,19 @@
 
 declare(strict_types=1);
 
-Namespace jordibisbal\functional;
+namespace j45l\functional;
+
+use Closure;
 
 use function Functional\reduce_left;
 
 /**
- * @template T,CT
- * @param iterable||CT $collection
- * @param callable $callback
- * @param <T> $initial
- * @return <T>
- * @no-named-arguments
+ * @phpstan-param iterable<mixed> $collection Collection
+ * @phpstan-param Closure(mixed $value, mixed $index, mixed $collection, mixed $initial) : mixed $callback
+ * @param null|mixed $initial
+ * @return mixed
  */
-function reduce(iterable $collection, callable $callback, $initial = null): mixed
+function reduce(iterable $collection, Closure $callback, $initial = null)
 {
-    /** @noinspection PhpParamsInspection */
     return reduce_left($collection, $callback, $initial);
 }
