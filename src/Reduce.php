@@ -12,8 +12,9 @@ use function Functional\reduce_left;
  * @phpstan-param iterable<mixed> $collection Collection
  * @phpstan-param Closure(mixed $value, mixed $index, mixed $collection, mixed $initial): mixed $callback
  *                Closure(mixed $value, mixed $index, mixed $collection, mixed $initial)
- * @param null|mixed $initial
- * @return mixed
+ * @param         null|mixed $initial
+ * @return        mixed
+ * @noinspection  PhpPluralMixedCanBeReplacedWithArrayInspection
  */
 function reduce(iterable $collection, Closure $callback, $initial = null)
 {

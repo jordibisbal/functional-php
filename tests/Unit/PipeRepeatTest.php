@@ -33,5 +33,4 @@ class PipeRepeatTest extends TestCase
             return $value + 1;
         };
     }
-
 }

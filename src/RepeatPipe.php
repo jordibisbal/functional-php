@@ -11,14 +11,18 @@ use function Functional\tail_recursion;
  */
 function repeatPipe(Closure $map): Closure
 {
-    $doMap = tail_recursion(static function ($initial, $times) use ($map, &$doMap) {
-        if ($times < 1) {
-            return $initial;
-        }
+    $doMap = tail_recursion(
+        static function ($initial, $times) use ($map, &$doMap) {
+            if ($times < 1) {
+                return $initial;
+            }
 
-        /** @phpstan-var Closure $doMap */
-        return $doMap($map($initial), $times - 1);
-    });
+            /**
+        * @phpstan-var Closure $doMap
+        */
+            return $doMap($map($initial), $times - 1);
+        }
+    );
 
     return static function (int $times) use ($doMap) {
         return static function ($initial) use ($times, $doMap) {
