@@ -3,8 +3,8 @@
 namespace j45l\functional;
 
 /**
- * @phpstan-template T1
- * @phpstan-template T2
+ * @template T1
+ * @template T2
  */
 class Pair
 {

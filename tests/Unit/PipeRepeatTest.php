@@ -25,7 +25,7 @@ class PipeRepeatTest extends TestCase
     }
 
     /**
-     * @phpstan-return Closure(int) : int
+     * @return Closure(int) : int
      */
     private function increment(): Closure
     {

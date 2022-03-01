@@ -18,8 +18,8 @@ function repeatPipe(Closure $map): Closure
             }
 
             /**
-        * @phpstan-var Closure $doMap
-        */
+             * @phpstan-var Closure $doMap
+             */
             return $doMap($map($initial), $times - 1);
         }
     );
