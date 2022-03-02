@@ -32,7 +32,8 @@
         },
         "files": [
             "src/Reduce.php",
-            "src/RepeatPipe.php"
+            "src/RepeatPipe.php",
+            "src/Unindex.php"
         ]
     },
     "autoload-dev": {
