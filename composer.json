@@ -33,8 +33,9 @@
         "files": [
             "src/Filter.php",
             "src/Reduce.php",
-            "src/Select.php",
             "src/RepeatPipe.php",
+            "src/Select.php",
+            "src/TryOr.php",
             "src/Unindex.php"
         ]
     },
