@@ -31,7 +31,9 @@
             "j45l\\functional\\": "src"
         },
         "files": [
+            "src/Filter.php",
             "src/Reduce.php",
+            "src/Select.php",
             "src/RepeatPipe.php",
             "src/Unindex.php"
         ]

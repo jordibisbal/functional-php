@@ -1,12 +1,16 @@
 <?php
 
+declare(strict_types=1);
 
-namespace Functional;
+namespace j45l\functional;
+
+use JetBrains\PhpStorm\Pure;
 
 /**
  * based on Functional-php by Lars Strojny <lstrojny@php.net> / https://github.com/lstrojny/functional-php
+ * @phpstan-ignore-next-line
  */
-function select(iterable $collection, callable $callback = null): array
+#[Pure] function select(iterable $collection, callable $callback = null): array
 {
     $aggregation = [];
 
