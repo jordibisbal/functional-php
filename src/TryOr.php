@@ -2,9 +2,10 @@
 
 namespace j45l\functional;
 
+use JetBrains\PhpStorm\Pure;
 use Throwable;
 
-function tryOr(callable $callable, mixed $alternative): mixed
+#[Pure] function tryOr(callable $callable, mixed $alternative): mixed
 {
     try {
         return $callable();
