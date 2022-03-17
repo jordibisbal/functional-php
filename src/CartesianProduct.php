@@ -13,26 +13,9 @@ use function j45l\functional\reduce;
   */
 function cartesianProduct(array $vectors, Closure $productFunction): ?array
 {
-    $vectorTwoCartesianProduct = function (array $vectors, Closure $productFunction) {
-        return reduce(
-            head($vectors),
-            /**  @SuppressWarnings(PHPMD.UnusedFormalParameter) */
-            function ($one, $_1, $_2, $acc) use ($productFunction, $vectors) {
-                return reduce(
-                    last($vectors),
-                    function ($another, $_1, $_2, $acc) use ($one, $productFunction) {
-                        return merge($acc, $productFunction($one, $another));
-                    },
-                    $acc
-                );
-            },
-            []
-        );
-    };
-
     switch (true) {
         case count($vectors) === 0:
-            return null;
+            return [];
         case count($vectors) === 1:
             return reduce(
                 head($vectors),
@@ -43,7 +26,22 @@ function cartesianProduct(array $vectors, Closure $productFunction): ?array
                 []
             );
         default:
-            return $vectorTwoCartesianProduct(
+            return (function (array $vectors, Closure $productFunction) {
+                return reduce(
+                    head($vectors),
+                    /**  @SuppressWarnings(PHPMD.UnusedFormalParameter) */
+                    function ($one, $_1, $_2, $acc) use ($productFunction, $vectors) {
+                        return reduce(
+                            last($vectors),
+                            function ($another, $_1, $_2, $acc) use ($one, $productFunction) {
+                                return merge($acc, $productFunction($one, $another));
+                            },
+                            $acc
+                        );
+                    },
+                    []
+                );
+            })(
                 [cartesianProduct(but_last($vectors), $productFunction), last($vectors)],
                 $productFunction
             );
