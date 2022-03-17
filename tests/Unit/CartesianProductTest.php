@@ -32,7 +32,6 @@ class CartesianProductTest extends TestCase
                     '2 x a x α', '2 x a x β', '2 x b x α', '2 x b x β', '2 x c x α', '2 x c x β',
                     '3 x a x α', '3 x a x β', '3 x b x α', '3 x b x β', '3 x c x α', '3 x c x β',
                     '4 x a x α', '4 x a x β', '4 x b x α', '4 x b x β', '4 x c x α', '4 x c x β',
-
                 ],
                 [[1, 2, 3, 4], ['a', 'b', 'c'], ['α', 'β']]
             ]

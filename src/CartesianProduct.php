@@ -42,8 +42,6 @@ function cartesianProduct(array $vectors, Closure $productFunction): ?array
                 },
                 []
             );
-        case count($vectors) === 2:
-            return $vectorTwoCartesianProduct($vectors, $productFunction);
         default:
             return $vectorTwoCartesianProduct(
                 [cartesianProduct(but_last($vectors), $productFunction), last($vectors)],
