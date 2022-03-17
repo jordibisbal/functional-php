@@ -33,7 +33,9 @@
         "files": [
             "src/Reduce.php",
             "src/RepeatPipe.php",
-            "src/Unindex.php"
+            "src/Unindex.php",
+            "src/Merge.php",
+            "src/CartesianProduct.php"
         ]
     },
     "autoload-dev": {
