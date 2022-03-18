@@ -38,6 +38,7 @@
             "src/Reduce.php",
             "src/ReduceRight.php",
             "src/RepeatPipe.php",
+            "src/Take.php",
             "src/Unindex.php"
         ]
     },

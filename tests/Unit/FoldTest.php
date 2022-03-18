@@ -7,7 +7,6 @@ namespace j45l\functional\Test\Unit;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\fold;
-use function j45l\functional\reduce;
 
 class FoldTest extends TestCase
 {

@@ -6,7 +6,6 @@ namespace j45l\functional\Test\Unit;
 
 use PHPUnit\Framework\TestCase;
 
-use function j45l\functional\reduce;
 use function j45l\functional\reduceRight;
 
 class ReduceRightTest extends TestCase
