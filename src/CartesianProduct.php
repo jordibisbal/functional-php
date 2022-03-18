@@ -7,11 +7,12 @@ use function j45l\functional\merge;
 use function j45l\functional\reduce;
 
 /**
- * @param        array<mixed> $vectors
- * @return       array<mixed>|null
+ * @param array<mixed> $vectors
+ * @param callable(mixed, mixed): mixed $productFunction
+ * @return array<mixed>|null
  * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
   */
-function cartesianProduct(array $vectors, Closure $productFunction): ?array
+function cartesianProduct(array $vectors, callable $productFunction): ?array
 {
     switch (true) {
         case count($vectors) === 0:
@@ -26,7 +27,7 @@ function cartesianProduct(array $vectors, Closure $productFunction): ?array
                 []
             );
         default:
-            return (function (array $vectors, Closure $productFunction) {
+            return (function (array $vectors, callable $productFunction) {
                 return reduce(
                     head($vectors),
                     /**  @SuppressWarnings(PHPMD.UnusedFormalParameter) */

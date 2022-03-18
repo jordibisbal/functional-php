@@ -7,16 +7,17 @@ namespace j45l\functional\Test\Unit;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\reduce;
+use function j45l\functional\reduceRight;
 
-class ReduceTest extends TestCase
+class ReduceRightTest extends TestCase
 {
-    public function testReduces(): void
+    public function testReducesRight(): void
     {
         $concat = static function ($value, $index, $collection, $initial): string {
             return $initial . $value;
         };
 
-        self::assertEquals(':ABC', reduce(['A', 'B', 'C'], $concat, ':'));
+        self::assertEquals(':CBA', reduceRight(['A', 'B', 'C'], $concat, ':'));
     }
 
     public function testReducesIndexed(): void
@@ -25,6 +26,6 @@ class ReduceTest extends TestCase
             return $initial . $index;
         };
 
-        self::assertEquals(':⍺βγ', reduce(['⍺' => 'A', 'β' => 'B', 'γ' => 'C'], $concat, ':'));
+        self::assertEquals(':γβ⍺', reduceRight(['⍺' => 'A', 'β' => 'B', 'γ' => 'C'], $concat, ':'));
     }
 }

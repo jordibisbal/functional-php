@@ -31,11 +31,14 @@
             "j45l\\functional\\": "src"
         },
         "files": [
-            "src/Reduce.php",
-            "src/RepeatPipe.php",
-            "src/Unindex.php",
+            "src/CartesianProduct.php",
+            "src/Fold.php",
+            "src/FoldRight.php",
             "src/Merge.php",
-            "src/CartesianProduct.php"
+            "src/Reduce.php",
+            "src/ReduceRight.php",
+            "src/RepeatPipe.php",
+            "src/Unindex.php"
         ]
     },
     "autoload-dev": {

@@ -28,12 +28,12 @@ class CartesianProductTest extends TestCase
                 [[1, 2, 3, 4],['a', 'b', 'c']]
             ],
             '3 Vectors'  => [[
-                    '1 x a x α', '1 x a x β', '1 x b x α', '1 x b x β', '1 x c x α', '1 x c x β',
-                    '2 x a x α', '2 x a x β', '2 x b x α', '2 x b x β', '2 x c x α', '2 x c x β',
-                    '3 x a x α', '3 x a x β', '3 x b x α', '3 x b x β', '3 x c x α', '3 x c x β',
-                    '4 x a x α', '4 x a x β', '4 x b x α', '4 x b x β', '4 x c x α', '4 x c x β',
+                    '1 x a x ⍺', '1 x a x β', '1 x b x ⍺', '1 x b x β', '1 x c x ⍺', '1 x c x β',
+                    '2 x a x ⍺', '2 x a x β', '2 x b x ⍺', '2 x b x β', '2 x c x ⍺', '2 x c x β',
+                    '3 x a x ⍺', '3 x a x β', '3 x b x ⍺', '3 x b x β', '3 x c x ⍺', '3 x c x β',
+                    '4 x a x ⍺', '4 x a x β', '4 x b x ⍺', '4 x b x β', '4 x c x ⍺', '4 x c x β',
                 ],
-                [[1, 2, 3, 4], ['a', 'b', 'c'], ['α', 'β']]
+                [[1, 2, 3, 4], ['a', 'b', 'c'], ['⍺', 'β']]
             ]
         ];
     }

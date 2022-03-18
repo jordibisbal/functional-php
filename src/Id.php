@@ -9,32 +9,11 @@ namespace j45l\functional;
 final class Id implements Functor
 {
     /**
-     * @var T
-     */
-    private $value;
-
-    /**
-     * @param T $value
-     */
-    private function __construct($value)
-    {
-        $this->value = $value;
-    }
-
-    /**
-     * @param  callable $callable
-     * @return Id<T>
+     * @param  callable(Functor): Functor $callable
+     * @return Functor
      */
     public function map(callable $callable): Functor
     {
-        return new self($callable($this->value));
-    }
-
-    /**
-     * @return T
-     */
-    public function get()
-    {
-        return $this->value;
+        return $callable($this);
     }
 }
