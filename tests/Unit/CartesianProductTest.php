@@ -3,11 +3,13 @@
 namespace j45l\functional\Test\Unit;
 
 use Closure;
+use j45l\functional\Pair;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \j45l\functional\Pair
- */
+use function Functional\map;
+use function j45l\functional\cartesianProduct;
+use function j45l\functional\yieldIterable;
+
 class CartesianProductTest extends TestCase
 {
     /**
@@ -44,9 +46,29 @@ class CartesianProductTest extends TestCase
      * @dataProvider quotientProductProvider
      * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
      */
-    public function testCartesianProductOfTwoVectors(?array $result, array $vectors): void
+    public function testCartesianProductOfVectors(?array $result, array $vectors): void
     {
         $this->assertEquals($result, cartesianProduct($vectors, $this->productFunction()));
+    }
+
+    /**
+     * @param        array<mixed>|Null   $result
+     * @param        array<array<mixed>> $vectors
+     * @dataProvider quotientProductProvider
+     * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
+     */
+    public function testCartesianProductOfGenerators(?array $result, array $vectors): void
+    {
+        $vectors = map($vectors, function ($item) {
+            return yieldIterable($item);
+        });
+
+        $this->assertEquals($result, cartesianProduct($vectors, $this->productFunction()));
+    }
+
+    public function testCartesianProductReturnsPairsIfNoProductFunctionIsProvided(): void
+    {
+        $this->assertEquals([Pair::from(1, 'a'), Pair::from(1, 'b')], cartesianProduct([[1],['a','b']]));
     }
 
     /**

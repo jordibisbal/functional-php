@@ -10,6 +10,7 @@ use function j45l\functional\reduce;
 
 class ReduceTest extends TestCase
 {
+    /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
     public function testReduces(): void
     {
         $concat = static function ($value, $index, $collection, $initial): string {
@@ -19,6 +20,7 @@ class ReduceTest extends TestCase
         self::assertEquals(':ABC', reduce(['A', 'B', 'C'], $concat, ':'));
     }
 
+    /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
     public function testReducesIndexed(): void
     {
         $concat = static function ($value, $index, $collection, $initial): string {

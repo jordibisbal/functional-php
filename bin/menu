@@ -108,12 +108,17 @@ function main() {
         choice=$(dialog --no-cancel --menu "Menu" 11 40 $largeDialogHeight \
             1 "Tests" \
             2 "Code quality" \
+            3 "Composer dump autoloader" \
             0 "bye!" \
             2>&1 >/dev/tty)
         case $choice in
             1)  tests
                 ;;
             2) codeQuality
+                ;;
+            3)  clear
+                composer dumpa
+                enterToContinue
                 ;;
             0)  return
                 ;;

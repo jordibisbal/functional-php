@@ -31,15 +31,22 @@
             "j45l\\functional\\": "src"
         },
         "files": [
+            "src/Best.php",
             "src/CartesianProduct.php",
+            "src/CrossCompareSet.php",
             "src/Fold.php",
             "src/FoldRight.php",
             "src/Merge.php",
+            "src/Pluck.php",
             "src/Reduce.php",
             "src/ReduceRight.php",
             "src/RepeatPipe.php",
             "src/Take.php",
-            "src/Unindex.php"
+            "src/ToArray.php",
+            "src/ToIterable.php",
+            "src/Unindex.php",
+            "src/Worst.php",
+            "src/YieldIterable.php"
         ]
     },
     "autoload-dev": {

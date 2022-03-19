@@ -14,7 +14,7 @@ class TakeTest extends TestCase
      * @return array<array<mixed>>
      * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
      */
-    public function pluckDataProvider(): array
+    public function takeDataProvider(): array
     {
         $target = [
             1 => 'one',
@@ -23,6 +23,7 @@ class TakeTest extends TestCase
         ];
 
         return [
+            'Neither array nor object' => ['potato', '1', 'default'],
             'No property' => [$target, [], 'default'],
             'Not found in array' => [$target, 'not found', 'default'],
             'Not found in object' => [(object) $target, 'not found', 'default'],
@@ -39,7 +40,7 @@ class TakeTest extends TestCase
      * @phpstan-param array<mixed>|object $target
      * @param string|int|array<string|int> $propertyName
      * @param mixed $value
-     * @dataProvider pluckDataProvider
+     * @dataProvider takeDataProvider
      * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
      */
     public function testTake($target, $propertyName, $value): void

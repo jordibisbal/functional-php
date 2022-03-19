@@ -10,6 +10,7 @@ use function j45l\functional\reduceRight;
 
 class ReduceRightTest extends TestCase
 {
+    /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
     public function testReducesRight(): void
     {
         $concat = static function ($value, $index, $collection, $initial): string {
@@ -19,6 +20,7 @@ class ReduceRightTest extends TestCase
         self::assertEquals(':CBA', reduceRight(['A', 'B', 'C'], $concat, ':'));
     }
 
+    /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
     public function testReducesIndexed(): void
     {
         $concat = static function ($value, $index, $collection, $initial): string {

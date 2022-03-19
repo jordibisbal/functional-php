@@ -12,7 +12,7 @@ class FoldTest extends TestCase
 {
     public function testFold(): void
     {
-        $concat = static function ($value, $collection, $initial): string {
+        $concat = static function ($value, $initial): string {
             return $initial . $value;
         };
 

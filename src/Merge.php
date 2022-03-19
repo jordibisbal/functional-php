@@ -1,27 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace j45l\functional;
 
-use Traversable;
+use Generator;
 
 /**
- * @param        mixed $first
- * @param        mixed $second
- * @return       array<mixed>
+ * @phpstan-param iterable<iterable<mixed>> $generators
+ * @return        Generator
  * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
  */
-function merge($first, $second): array
+function merge(...$generators): Generator
 {
-    $toArray = function ($item): array {
-        switch (true) {
-            case $item instanceof Traversable:
-                return iterator_to_array($item);
-            case is_array($item):
-                return $item;
-            default:
-                return [$item];
+    foreach ($generators as $generator) {
+        foreach ($generator as $value) {
+            yield $value;
         }
-    };
-
-    return array_merge($toArray($first), $toArray($second));
+    }
 }
