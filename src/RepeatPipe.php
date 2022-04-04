@@ -11,7 +11,7 @@ use function Functional\tail_recursion;
 /**
  * @phpstan-return Closure(int): (Closure(mixed): mixed)
  */
-function repeatPipe(Closure $map): Closure
+function repeatPipe(callable $map): Closure
 {
     $doMap = tail_recursion(
         static function ($initial, $times) use ($map, &$doMap) {

@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace j45l\functional;
 
-use Closure;
-
-use function Functional\reduce_left;
-
 /**
  * @phpstan-param iterable<mixed> $collection Collection
- * @phpstan-param Closure(mixed $value, mixed $index, mixed $collection, mixed $initial): mixed $callback
- *                Closure(mixed $value, mixed $index, mixed $collection, mixed $initial)
+ * @phpstan-param callable(mixed $value, mixed $index, mixed $collection, mixed $initial): mixed $callback
  * @param         null|mixed $initial
  * @return        mixed
  * @noinspection  PhpPluralMixedCanBeReplacedWithArrayInspection
  */
-function reduce(iterable $collection, Closure $callback, $initial = null)
+function reduce(iterable $collection, callable $callback, mixed $initial = null): mixed
 {
-    return reduce_left($collection, $callback, $initial);
+    foreach ($collection as $index => $value) {
+        $initial = $callback($value, $index, $collection, $initial);
+    }
+
+    return $initial;
 }

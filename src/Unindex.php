@@ -6,8 +6,8 @@ namespace j45l\functional;
 
 /**
  * @template T
- * @param array<T> $collection
- * @return array<T>
+ * @param    array<T> $collection
+ * @return   array<T>
  */
 function unindex(array $collection): array
 {

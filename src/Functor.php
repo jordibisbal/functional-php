@@ -1,10 +1,13 @@
 <?php
 
-namespace j45l\functional;
+declare(strict_types=1);
 
-use Closure;
+namespace j45l\functional;
 
 interface Functor
 {
-    public function map(Closure $closure): Functor;
+    /**
+     * @return Functor
+     */
+    public function map(callable $function): Functor;
 }
