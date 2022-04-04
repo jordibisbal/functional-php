@@ -12,7 +12,7 @@ class ReduceRightTest extends TestCase
 {
     /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
     public function testReducesRight(): void
-    {
+    {/** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
         $concat = static function ($value, $index, $collection, $initial): string {
             return $initial . $value;
         };
