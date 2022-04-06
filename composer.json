@@ -44,6 +44,7 @@
             "src/Take.php",
             "src/ToArray.php",
             "src/ToIterable.php",
+            "src/TryOrThrow.php",
             "src/Unindex.php",
             "src/Worst.php",
             "src/YieldIterable.php"
