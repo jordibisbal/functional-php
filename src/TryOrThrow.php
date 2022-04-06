@@ -7,9 +7,11 @@ namespace j45l\functional;
 use Throwable;
 
 /**
- * @throws Throwable
+ * @template T of Throwable
+ * @param T $throwable
+ * @throws T
  */
-function tryOrThrow(callable $callable, Throwable $throwable): void
+function tryOrThrow(callable $callable, $throwable): void
 {
     try {
         $callable();
