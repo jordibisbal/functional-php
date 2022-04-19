@@ -12,9 +12,11 @@ function take($target, $propertyName, $defaultValue = null)
 {
     $takeValue = function ($target, $propertyName, $defaultValue) {
         switch (true) {
-            case is_object($target) && !is_array($propertyName):
+            case is_object($target) && method_exists($target, $propertyName):
+                return $target->$propertyName() ?? $defaultValue;
+            case is_object($target):
                 return $target->$propertyName ?? $defaultValue;
-            case is_array($target) && !is_array($propertyName):
+            case is_array($target):
                 return $target[$propertyName] ?? $defaultValue;
             default:
                 return $defaultValue;
@@ -27,7 +29,7 @@ function take($target, $propertyName, $defaultValue = null)
         case count($propertyName) == 0:
             return $defaultValue;
         case count($propertyName) == 1:
-            return $takeValue($target, $propertyName[0], $defaultValue);
+            return take($target, $propertyName[0], $defaultValue);
         default:
             return take(
                 take($target, array_slice($propertyName, 0, -1), $defaultValue),

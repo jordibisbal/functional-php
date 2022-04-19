@@ -47,4 +47,15 @@ class TakeTest extends TestCase
     {
         self::assertEquals($value, take($target, $propertyName, 'default'));
     }
+
+    public function testTakeCanGetPropertyByGetter(): void
+    {
+        $object = new class {
+            public function property(): int {
+                return 42;
+            }
+        };
+
+        self::assertEquals(42, take($object,'property', 'default'));
+    }
 }
