@@ -6,6 +6,7 @@ use _PHPStan_156cb69be\Symfony\Component\Console\Exception\LogicException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Throwable;
+
 use function j45l\functional\tryOrThrow;
 
 final class TryOrThrowTest extends TestCase
@@ -15,7 +16,8 @@ final class TryOrThrowTest extends TestCase
      */
     public function testThrowsNothingWhenNoException(): void
     {
-        tryOrThrow(function () {}, new RuntimeException('Thrown exception'));
+        tryOrThrow(function () {
+        }, new RuntimeException('Thrown exception'));
 
         $this->expectNotToPerformAssertions();
     }
@@ -29,7 +31,9 @@ final class TryOrThrowTest extends TestCase
         $this->expectExceptionMessage('Thrown exception');
 
         tryOrThrow(
-            function () { throw new LogicException('Original Exception'); },
+            function () {
+                throw new LogicException('Original Exception');
+            },
             new RuntimeException('Thrown exception')
         );
     }
