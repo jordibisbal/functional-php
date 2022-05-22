@@ -28,13 +28,4 @@ final class ApplyTest extends TestCase
 
         self::assertEquals(42, apply($callable, 43, 1)());
     }
-
-    public function testAppliedParametersAreAddedFromCallbackAndApplied(): void
-    {
-        $callable = function ($a, $b) {
-            return $a - $b;
-        };
-
-        self::assertEquals(42, apply($callable, 1)(43));
-    }
 }

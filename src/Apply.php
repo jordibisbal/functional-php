@@ -7,11 +7,11 @@ namespace j45l\functional;
 use Closure;
 
 /**
- * @param mixed[] $appliedParameters
+ * @param mixed[] $parameters
  */
-function apply(callable $callback, ...$appliedParameters): Closure
+function apply(callable $callback, ...$parameters): Closure
 {
-    return function (...$parameters) use ($callback, $appliedParameters) {
-        return $callback(...$parameters, ...$appliedParameters);
+    return function () use ($callback, $parameters) {
+        return $callback(...$parameters);
     };
 }
