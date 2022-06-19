@@ -33,6 +33,7 @@
         "files": [
             "src/Apply.php",
             "src/Best.php",
+            "src/ButLast.php",
             "src/CartesianProduct.php",
             "src/CrossCompareSet.php",
             "src/Delay.php",
@@ -46,6 +47,7 @@
             "src/Take.php",
             "src/ToArray.php",
             "src/ToIterable.php",
+            "src/ToGenerator.php",
             "src/TryOrThrow.php",
             "src/Unindex.php",
             "src/Worst.php",
