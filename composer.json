@@ -36,7 +36,6 @@
             "src/ButLast.php",
             "src/CartesianProduct.php",
             "src/CrossCompareSet.php",
-            "src/Cons.php",
             "src/Delay.php",
             "src/Fold.php",
             "src/FoldRight.php",
@@ -51,6 +50,7 @@
             "src/ToGenerator.php",
             "src/TryOrThrow.php",
             "src/Unindex.php",
+            "src/Value.php",
             "src/Worst.php",
             "src/YieldIterable.php"
         ]
