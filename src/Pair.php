@@ -56,6 +56,14 @@ class Pair
     }
 
     /**
+     * @return array{T1, T2}
+     */
+    public function toArray(): array
+    {
+        return [$this->first, $this->second];
+    }
+
+    /**
      * @param iterable<mixed> $collection
      * @return array<Pair<T1, T2>>
      * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection

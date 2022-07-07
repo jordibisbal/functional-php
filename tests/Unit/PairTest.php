@@ -20,6 +20,13 @@ class PairTest extends TestCase
         $this->assertEquals('1', $pair->second());
     }
 
+    public function testAPairValueCanBeRetrievedAsArray(): void
+    {
+        $pair = Pair::from(1, '1');
+
+        $this->assertEquals([1, '1'], $pair->toArray());
+    }
+
     public function testAPairCanBeCreateFromTwoObjects(): void
     {
         // This test in fact helps to debug issues with template (generics) rendering within phpstorm
