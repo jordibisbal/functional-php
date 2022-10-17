@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "php": "^7.1|~8",
+        "php": "^8.1",
         "lstrojny/functional-php": "^1.17"
     },
     "require-dev": {
@@ -31,28 +31,7 @@
             "j45l\\functional\\": "src"
         },
         "files": [
-            "src/Apply.php",
-            "src/Best.php",
-            "src/ButLast.php",
-            "src/CartesianProduct.php",
-            "src/CrossCompareSet.php",
-            "src/Delay.php",
-            "src/Fold.php",
-            "src/FoldRight.php",
-            "src/Merge.php",
-            "src/Pluck.php",
-            "src/Reduce.php",
-            "src/ReduceRight.php",
-            "src/RepeatPipe.php",
-            "src/Take.php",
-            "src/ToArray.php",
-            "src/ToIterable.php",
-            "src/ToGenerator.php",
-            "src/TryOrThrow.php",
-            "src/Unindex.php",
-            "src/Value.php",
-            "src/Worst.php",
-            "src/YieldIterable.php"
+            "src/Functions.php"
         ]
     },
     "autoload-dev": {

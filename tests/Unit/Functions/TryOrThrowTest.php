@@ -1,12 +1,11 @@
 <?php
 
-namespace j45l\functional\Test\Unit;
+namespace j45l\functional\Test\Unit\Functions;
 
 use _PHPStan_156cb69be\Symfony\Component\Console\Exception\LogicException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Throwable;
-
 use function j45l\functional\tryOrThrow;
 
 final class TryOrThrowTest extends TestCase

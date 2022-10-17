@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace j45l\functional\Test\Unit;
+namespace j45l\functional\Test\Unit\Functions;
 
 use j45l\functional\Pair;
 use PHPUnit\Framework\TestCase;
-
 use function j45l\functional\worst;
 
 class WorstTest extends TestCase

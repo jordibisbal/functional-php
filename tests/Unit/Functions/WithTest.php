@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace j45l\functional\Test\Unit;
+namespace j45l\functional\Test\Unit\Functions;
 
 use LogicException;
 use PHPUnit\Framework\TestCase;
+use function j45l\functional\with;
 
-use function j45l\functional\apply;
-
-final class ApplyTest extends TestCase
+final class WithTest extends TestCase
 {
     public function testAppliedFunctionDoesNotGetExecuted(): void
     {
@@ -17,7 +16,7 @@ final class ApplyTest extends TestCase
             throw new LogicException('Should not be called');
         };
 
-        self::assertIsCallable(apply($callable, 42));
+        self::assertIsCallable(with($callable, 42));
     }
 
     public function testAppliedParametersAreApplied(): void
@@ -26,6 +25,6 @@ final class ApplyTest extends TestCase
             return $a - $b;
         };
 
-        self::assertEquals(42, apply($callable, 43, 1)());
+        self::assertEquals(42, with($callable, 43, 1)());
     }
 }

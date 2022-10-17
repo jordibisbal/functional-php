@@ -1,11 +1,10 @@
 <?php
 
-namespace j45l\functional\Test\Unit;
+namespace j45l\functional\Test\Unit\Functions;
 
 use Closure;
 use j45l\functional\Pair;
 use PHPUnit\Framework\TestCase;
-
 use function Functional\map;
 use function j45l\functional\cartesianProduct;
 use function j45l\functional\yieldIterable;

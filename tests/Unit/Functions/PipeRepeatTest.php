@@ -1,10 +1,9 @@
 <?php
 
-namespace j45l\functional\Test\Unit;
+namespace j45l\functional\Test\Unit\Functions;
 
 use Closure;
 use PHPUnit\Framework\TestCase;
-
 use function j45l\functional\repeatPipe;
 
 class PipeRepeatTest extends TestCase
