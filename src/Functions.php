@@ -10,6 +10,8 @@ include_once(__DIR__ . '/Functions/Delay.php');
 include_once(__DIR__ . '/Functions/Fold.php');
 include_once(__DIR__ . '/Functions/FoldRight.php');
 include_once(__DIR__ . '/Functions/Merge.php');
+include_once(__DIR__ . '/Functions/Partial.php');
+include_once(__DIR__ . '/Functions/PartialRight.php');
 include_once(__DIR__ . '/Functions/Pluck.php');
 include_once(__DIR__ . '/Functions/Reduce.php');
 include_once(__DIR__ . '/Functions/ReduceRight.php');
