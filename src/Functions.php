@@ -25,5 +25,3 @@ include_once(__DIR__ . '/Functions/Unindex.php');
 include_once(__DIR__ . '/Functions/Value.php');
 include_once(__DIR__ . '/Functions/Worst.php');
 include_once(__DIR__ . '/Functions/YieldIterable.php');
-
-

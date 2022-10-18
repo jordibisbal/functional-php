@@ -2,10 +2,11 @@
 
 namespace j45l\functional\Test\Unit\Functions;
 
-use _PHPStan_156cb69be\Symfony\Component\Console\Exception\LogicException;
+use LogicException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Throwable;
+
 use function j45l\functional\tryOrThrow;
 
 final class TryOrThrowTest extends TestCase
@@ -15,7 +16,7 @@ final class TryOrThrowTest extends TestCase
      */
     public function testThrowsNothingWhenNoException(): void
     {
-        tryOrThrow(function () {
+        tryOrThrow(static function () {
         }, new RuntimeException('Thrown exception'));
 
         $this->expectNotToPerformAssertions();

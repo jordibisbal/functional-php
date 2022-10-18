@@ -6,6 +6,7 @@ namespace j45l\functional\Test\Unit\Functions;
 
 use LogicException;
 use PHPUnit\Framework\TestCase;
+
 use function j45l\functional\with;
 
 final class WithTest extends TestCase

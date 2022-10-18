@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace j45l\functional\Test\Unit\Functions;
 
 use PHPUnit\Framework\TestCase;
+
 use function j45l\functional\merge;
 use function j45l\functional\toArray;
 use function j45l\functional\yieldIterable;
