@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace j45l\functional;
 
 use Closure;
-use function array_merge;
-use function Functional\partial_right;
+use function array_merge as arrayMerge;
 
 /**
  * @param mixed $arguments
  */
-function partial(callable $callback, ...$arguments): Closure
+function partialRight(callable $callback, ...$arguments): Closure
 {
-    return static fn(...$innerArguments) => $callback(...array_merge($innerArguments, $arguments));
+    return static fn(...$innerArguments) => $callback(...arrayMerge($innerArguments, $arguments));
 }
