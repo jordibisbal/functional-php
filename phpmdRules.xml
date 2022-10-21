@@ -16,6 +16,7 @@
     <rule ref="rulesets/design.xml" />
     <rule ref="rulesets/naming.xml">
         <exclude name="ShortVariable" />
+        <exclude name="ShortMethodName" />
         <exclude name="LongVariable" />
     </rule>
     <rule ref="rulesets/naming.xml/LongVariable">
@@ -25,7 +26,12 @@
     </rule>
     <rule ref="rulesets/naming.xml/ShortVariable">
         <properties>
-            <property name="exceptions" value="id,em,fn,_,_1,_2,_3,_4,_5" />
+            <property name="exceptions" value="x,id,em,fn,_,_1,_2,_3,_4,_5" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/naming.xml/ShortMethodName">
+        <properties>
+            <property name="exceptions" value="id" />
         </properties>
     </rule>
     <rule ref="rulesets/unusedcode.xml" />

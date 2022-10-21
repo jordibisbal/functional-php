@@ -7,7 +7,7 @@ namespace j45l\functional\Test\Unit\Functions;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\first;
-use function j45l\functional\true;
+use function j45l\functional\trueFn;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNull;
 
@@ -48,6 +48,6 @@ class FirstTest extends TestCase
 
     public function testFirstReturnsDefaultIfNoElementsAndDefaultStated(): void
     {
-        assertEquals('default', first([], true(...), 'default'));
+        assertEquals('default', first([], trueFn(...), 'default'));
     }
 }

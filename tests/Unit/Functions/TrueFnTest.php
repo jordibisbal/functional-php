@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace j45l\functional\Test\Unit\Functions;
 
 use PHPUnit\Framework\TestCase;
-use function j45l\functional\true;
+
+use function j45l\functional\trueFn;
 use function PHPUnit\Framework\assertTrue;
 
-class TrueTest extends TestCase
+class TrueFnTest extends TestCase
 {
     public function testFalse(): void
     {
-        assertTrue(true());
+        assertTrue(trueFn());
     }
 }

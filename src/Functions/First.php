@@ -14,7 +14,7 @@ namespace j45l\functional;
  */
 function first(iterable $collection, callable $predicate = null, mixed $default = null): mixed
 {
-    $predicate ??= true(...);
+    $predicate ??= trueFn(...);
 
     foreach ($collection as $index => $element) {
         if ($predicate($element, $index, $collection)) {
