@@ -32,7 +32,7 @@ function take($target, $propertyName, $defaultValue = null)
             return take($target, $propertyName[0], $defaultValue);
         default:
             return take(
-                take($target, array_slice($propertyName, 0, -1), $defaultValue),
+                take($target, array_slice($propertyName, 0, -1)[0], $defaultValue),
                 array_slice($propertyName, -1),
                 $defaultValue
             );
