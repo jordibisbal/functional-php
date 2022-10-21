@@ -26,9 +26,9 @@ function take($target, $propertyName, $defaultValue = null)
     switch (true) {
         case !is_array($propertyName):
             return $takeValue($target, $propertyName, $defaultValue);
-        case count($propertyName) == 0:
+        case count($propertyName) === 0:
             return $defaultValue;
-        case count($propertyName) == 1:
+        case count($propertyName) === 1:
             return take($target, $propertyName[0], $defaultValue);
         default:
             return take(
