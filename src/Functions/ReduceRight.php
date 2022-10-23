@@ -6,15 +6,14 @@ namespace j45l\functional;
 
 /**
  * @phpstan-param iterable<mixed> $collection Collection
- * @phpstan-param callable(mixed $value, mixed $index, mixed $collection, mixed $initial): mixed $callback
- * @param         null|mixed $initial
+ * @phpstan-param callable(mixed $initial, mixed $value, mixed $index, mixed $collection): mixed $callback
  * @return        mixed|null
  * @noinspection  PhpPluralMixedCanBeReplacedWithArrayInspection
  */
-function reduceRight(iterable $collection, callable $callback, $initial = null)
+function reduceRight(iterable $collection, callable $callback, mixed $initial = null): mixed
 {
     foreach (array_reverse(Pair::arrayFromIndexed($collection)) as $pair) {
-        $initial = $callback($pair->second(), $pair->first(), $collection, $initial);
+        $initial = $callback($initial, $pair->second(), $pair->first(), $collection);
     }
 
     return $initial;

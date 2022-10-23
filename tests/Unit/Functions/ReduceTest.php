@@ -13,7 +13,7 @@ class ReduceTest extends TestCase
     /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
     public function testReduces(): void
     {
-        $concat = static function ($value, $index, $collection, $initial): string {
+        $concat = static function ($initial, $value, $index, $collection): string {
             return $initial . $value;
         };
 
@@ -23,7 +23,7 @@ class ReduceTest extends TestCase
     /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
     public function testReducesIndexed(): void
     {
-        $concat = static function ($value, $index, $collection, $initial): string {
+        $concat = static function ($initial, $value, $index, $collection): string {
             return $initial . $index;
         };
 

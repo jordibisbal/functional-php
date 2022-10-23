@@ -7,11 +7,9 @@ namespace j45l\functional;
 /**
  * @phpstan-param iterable<mixed> $collection
  * @phpstan-param callable(mixed $first, mixed $second): int $callback
- * @param         mixed|null $default
- * @return        mixed|null
  * @noinspection  PhpPluralMixedCanBeReplacedWithArrayInspection
  */
-function best(iterable $collection, callable $callback, $default = null)
+function best(iterable $collection, callable $callback, mixed $default = null): mixed
 {
     return fold(
         $collection,

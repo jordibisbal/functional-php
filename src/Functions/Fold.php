@@ -19,7 +19,7 @@ function fold(iterable $collection, callable $callback, $default = null)
     return reduce(
         tail($collection),
         /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
-        function ($value, $_1, $_2, $initial) use ($callback) {
+        function ($initial, $value) use ($callback) {
             return $callback($value, $initial);
         },
         head($collection)
