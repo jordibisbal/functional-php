@@ -10,7 +10,7 @@ namespace j45l\functional;
  * @phpstan-param iterable<T> $collection Collection
  * @phpstan-param callable(T, mixed=, iterable<T>=): bool $predicate
  * @phpstan-param T2 $default
- * @return        T|T2|null
+ * @phpstan-return ($collection is non-empty-array<T> ? T : T2|null)
  */
 function first(iterable $collection, callable $predicate = null, mixed $default = null): mixed
 {

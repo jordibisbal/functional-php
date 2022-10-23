@@ -38,12 +38,12 @@ class TakeTest extends TestCase
 
     /**
      * @phpstan-param array<mixed>|object $target
-     * @param string|int|array<string|int> $propertyName
+     * @param int|string|array<string|int> $propertyName
      * @param mixed $value
      * @dataProvider takeDataProvider
      * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
      */
-    public function testTake($target, $propertyName, $value): void
+    public function testTake($target, array|int|string $propertyName, mixed $value): void
     {
         self::assertEquals($value, take($target, $propertyName, 'default'));
     }

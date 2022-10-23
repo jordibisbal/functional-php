@@ -10,7 +10,7 @@ use Closure;
  * @param mixed $value
  * @return Closure
  */
-function value($value): Closure
+function value(mixed $value): Closure
 {
     return static function () use ($value) {
         return $value;
