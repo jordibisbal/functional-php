@@ -29,7 +29,7 @@ function take(mixed $target, array|int|string $propertyName, mixed $defaultValue
         count($propertyName) === 0 =>
             $defaultValue,
         count($propertyName) === 1 =>
-            take($target, $propertyName[0], $defaultValue),
+            take($target, first($propertyName), $defaultValue),
         default =>
             take(
                 take($target, array_slice($propertyName, 0, -1)[0], $defaultValue),

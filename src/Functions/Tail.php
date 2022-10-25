@@ -11,5 +11,5 @@ namespace j45l\functional;
  */
 function tail(iterable $collection): array
 {
-    return array_slice((array) $collection, 1, null, true);
+    return array_slice((array)$collection, 1, preserve_keys: true);
 }

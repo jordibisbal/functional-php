@@ -4,10 +4,7 @@ namespace j45l\functional\Test\Unit\Fixtures;
 
 class ValueObjectB
 {
-    /**
-     * @var string
-     */
-    private $value;
+    private string $value;
 
     public function __construct(string $value)
     {
