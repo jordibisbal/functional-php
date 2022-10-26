@@ -8,8 +8,9 @@ use Closure;
 
 /**
  * @param mixed[] $parameters
+ * @return Closure(callable): mixed
  */
-function with(callable $callback, ...$parameters): Closure
+function with(...$parameters): Closure
 {
-    return static fn() => $callback(...$parameters);
+    return static fn(callable $callback) => $callback(...$parameters);
 }

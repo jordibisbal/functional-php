@@ -8,8 +8,9 @@ use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\isAOr;
 use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertNull;
 
-class IsATest extends TestCase
+class IsAOrTest extends TestCase
 {
     public function testIsAIs(): void
     {
@@ -32,6 +33,13 @@ class IsATest extends TestCase
         assertEquals(
             new ValueObjectA('42'),
             isAOr(1, ValueObjectA::class, new ValueObjectA('42'))
+        );
+    }
+
+    public function testIsAIsNotObjectDefaultNull(): void
+    {
+        assertNull(
+            isAOr(1, ValueObjectA::class)
         );
     }
 }
