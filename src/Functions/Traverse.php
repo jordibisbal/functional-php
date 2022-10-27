@@ -8,31 +8,30 @@ use function is_iterable as isIterable;
 
 /**
  * @phpstan-param iterable<mixed> $collection Collection
- * @phpstan-param array<callable(mixed, mixed=, iterable<mixed>=): bool>|null $predicates
- * @phpstan-param array<callable(mixed, mixed=, iterable<mixed>=): bool>|null $mappers
+ * @phpstan-param array<array{
+ *         0:(callable(mixed,mixed,iterable<mixed>):bool),
+ *         1?:callable(mixed,mixed,iterable<mixed>):bool
+ *     }> $queries
  * @phpstan-return array<mixed>
  * @SuppressWarnings(PHPMD.UnusedFormalParameter)
  */
-function traverse(iterable $collection, array $predicates = null, array $mappers = null): array
+function traverse(iterable $collection, array $queries): array
 {
-    return with(
-        first($predicates ?? []) ?? trueFn(...),
-        first($mappers ?? []) ?? id(...)
-    )(static fn ($currentPredicate, $currentMapper) => reduce(
-        $collection,
-        fn ($result, $node, $index) => [
-            ...$result,
-            ...with(
-                $currentPredicate($node, $index, $collection),
-                tail($predicates ?? [])
-            )(static fn (bool $matches, array $predicatesLeft): array => match (true) {
-                $matches && empty($predicatesLeft) =>
-                    [$index => $currentMapper($node)],
-                $matches && isIterable($mappedNode = $currentMapper($node)) =>
-                    traverse($mappedNode, $predicatesLeft, tail($mappers ?? [])),
-                default => []
-            })
-        ],
-        []
-    ));
+    return with(first($queries)[0] ?? trueFn(...), first($queries)[1] ?? id(...), tail($queries))(
+        static fn ($currentPredicate, $currentMapper, $queriesLeft) => reduce(
+            $collection,
+            fn ($projections, $node, $index) => [
+                ...$projections,
+                ...!$currentPredicate($node, $index, $collection) ? [] : match (true) {
+                    empty($queriesLeft) =>
+                        [$index => $currentMapper($node)],
+                    isIterable($mappedNode = $currentMapper($node)) =>
+                        traverse($mappedNode, $queriesLeft),
+                    default =>
+                        []
+                }
+            ],
+            []
+        )
+    );
 }

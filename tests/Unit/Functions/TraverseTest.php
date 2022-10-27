@@ -6,8 +6,8 @@ namespace j45l\functional\Test\Unit\Functions;
 
 use PHPUnit\Framework\TestCase;
 
+use function j45l\functional\id;
 use function j45l\functional\traverse;
-use function j45l\functional\unzip;
 
 class TraverseTest extends TestCase
 {
@@ -22,9 +22,9 @@ class TraverseTest extends TestCase
             ['bacon' => 'spam'],
             traverse(
                 $target,
-                ...unzip([
-                    [fn ($value) => $value === 'spam']
-                ])
+                [
+                    [fn ($value): bool => $value === 'spam']
+                ]
             )
         );
     }
@@ -41,9 +41,9 @@ class TraverseTest extends TestCase
             ['bacon' => 'spam'],
             traverse(
                 $target,
-                ...unzip([
+                [
                     [fn ($value, $key) => [$key, $value] === ['bacon', 'spam']]
-                ])
+                ]
             )
         );
     }
@@ -63,9 +63,9 @@ class TraverseTest extends TestCase
             ],
             traverse(
                 $target,
-                ...unzip([
+                [
                     [fn ($value) => $value === 'spam']
-                ])
+                ]
             )
         );
     }
@@ -93,10 +93,10 @@ class TraverseTest extends TestCase
             ],
             traverse(
                 $target,
-                ...unzip([
+                [
                     [fn ($value, $key) => ($value['bacon'] ?? null) === 'spam', fn ($value) => $value['eggs'] ?? null],
-                    [fn ($value, $key) => $key === 'bacon'],
-                ])
+                    [fn ($value, $key) => $key === 'bacon', id(...)],
+                ]
             )
         );
     }
@@ -132,11 +132,11 @@ class TraverseTest extends TestCase
             ],
             traverse(
                 $target,
-                ...unzip([
+                [
                     [fn ($value, $key) => ($value['bacon'] ?? null) === 'spam', fn ($value) => $value['eggs'] ?? null],
                     [fn ($value, $key) => $key === 'sausage'],
                     [fn ($value, $key) => $key === 'lobster'],
-                ])
+                ]
             )
         );
     }
