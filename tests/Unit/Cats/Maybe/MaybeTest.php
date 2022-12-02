@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace j45l\functional\Test\Unit\Maybe;
+namespace j45l\functional\Test\Unit\Cats\Maybe;
 
-use j45l\functional\Maybe\None;
-use j45l\functional\Maybe\Maybe;
-use j45l\functional\Maybe\Some;
+use j45l\functional\Cats\Maybe\Maybe;
+use j45l\functional\Cats\Maybe\None;
+use j45l\functional\Cats\Maybe\Some;
 use PHPUnit\Framework\TestCase;
 
-use function j45l\functional\Maybe\Maybe;
+use function j45l\functional\Cats\Maybe\Maybe;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertInstanceOf;
 
 /**
  * @covers ::\j45l\functional\Optional\Optional()
- * @covers \j45l\functional\Maybe\Maybe
+ * @covers \j45l\functional\Cats\Maybe\Maybe
  */
 final class MaybeTest extends TestCase
 {

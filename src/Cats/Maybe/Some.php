@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace j45l\functional\Maybe;
+namespace j45l\functional\Cats\Maybe;
 
-use j45l\functional\Either\DoTry;
-use j45l\functional\Either\Success;
+use j45l\functional\Cats\DoTry\DoTry;
+use j45l\functional\Cats\DoTry\Success;
 
 /**
  * @template T
@@ -25,45 +25,6 @@ final class Some extends Maybe
     public static function pure(mixed $value): self
     {
         return new self($value);
-    }
-
-    /**
-     * @template T2
-     * @param callable(T):T2 $fn
-     * @phpstan-return self<T2>
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
-    public function map(callable $fn): self
-    {
-        return new self($fn($this->value));
-    }
-
-    /**
-     * @return T
-     */
-    public function get(): mixed
-    {
-        return $this->value;
-    }
-
-    /**
-     * @template R
-     * @param callable(T):R $fn
-     * @phpstan-return $this
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
-    public function orElse(callable $fn): self
-    {
-        return $this;
-    }
-
-    /**
-     * @return T
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
-    public function getOrFail(string $message = null): mixed
-    {
-        return $this->get();
     }
 
     /**
@@ -87,28 +48,42 @@ final class Some extends Maybe
         return $this->value;
     }
 
-#region Try
-
     /**
-     * @template R
-     * @param callable(T):R $fn
-     * @return Success<T>
+     * @return T
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function orElseTry(callable $fn): Success
+    public function getOrFail(string $message = null): mixed
     {
-        return Success::pure($this->get());
+        return $this->get();
+    }
+
+    /**
+     * @return T
+     */
+    public function get(): mixed
+    {
+        return $this->value;
+    }
+
+    /**
+     * @template T2
+     * @param callable(T):T2 $fn
+     * @phpstan-return self<T2>
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
+    public function map(callable $fn): self
+    {
+        return new self($fn($this->value));
     }
 
     /**
      * @template R
      * @param callable(T):R $fn
-     * @return DoTry<R>
+     * @phpstan-return $this
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function andThenTry(callable $fn): DoTry
+    public function orElse(callable $fn): self
     {
-        return DoTry::try(fn () => $fn($this->get()));
+        return $this;
     }
-#endregion
 }

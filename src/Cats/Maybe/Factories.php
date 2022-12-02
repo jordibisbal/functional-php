@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace j45l\functional\Maybe;
+namespace j45l\functional\Cats\Maybe;
 
 /**
  * @template T

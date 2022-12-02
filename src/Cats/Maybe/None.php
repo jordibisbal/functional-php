@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace j45l\functional\Maybe;
+namespace j45l\functional\Cats\Maybe;
 
-use j45l\functional\Cats\Either\Reason\BecauseNull;
-use j45l\functional\Either\DoTry;
-use j45l\functional\Either\Failure;
+use j45l\functional\Cats\DoTry\Reason\BecauseNull;
+use j45l\functional\Cats\DoTry\DoTry;
+use j45l\functional\Cats\DoTry\Failure;
 use RuntimeException;
 
 /**
@@ -29,7 +29,7 @@ final class None extends Maybe
     /**
      * @template R
      * @param callable(T|null):R $fn
-     * @return DoTry<R>
+     * @phpstan-return DoTry<R>
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function orElseTry(callable $fn): DoTry
@@ -45,7 +45,7 @@ final class None extends Maybe
      */
     public function andThenTry(callable $fn): Failure
     {
-        return Failure::of(BecauseNull::create());
+        return Failure::because(BecauseNull::create());
     }
 
     /**
@@ -53,7 +53,7 @@ final class None extends Maybe
      * @param callable(T):R $fn
      * @return Maybe<R>
      */
-    public function orElse(callable $fn): mixed
+    public function orElse(callable $fn): Maybe
     {
         /** @phpstan-ignore-next-line */
         return self::ofNullable($fn($this));
@@ -89,6 +89,8 @@ final class None extends Maybe
 
     public function getOrFail(string $message = null): mixed
     {
-        throw new RuntimeException($message ?? 'None::getOrFail invoked.');
+        throw new RuntimeException(
+            $message ?? sprintf('getOrFail() called upon a Left object (%s).', __CLASS__)
+        );
     }
 }

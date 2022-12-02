@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace j45l\functional\Cats\Either\Reason;
+namespace j45l\functional\Cats\DoTry\Reason;
 
-final class Because implements Reason
+final class BecauseNull implements Reason
 {
     private function __construct(public readonly string $reason)
     {
     }
 
-    public static function of(string $reason): self
+    public static function create(): self
     {
-        return new self($reason);
+        return new self('From None optional');
     }
 
     public function reason(): string

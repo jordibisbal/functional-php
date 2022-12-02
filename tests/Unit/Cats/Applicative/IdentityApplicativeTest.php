@@ -10,7 +10,7 @@ use function j45l\functional\identity;
 /**
  * @extends ApplicativeTestCase<mixed>
  */
-final class TestIdentityApplicative extends ApplicativeTestCase
+final class IdentityApplicativeTest extends ApplicativeTestCase
 {
     public function setUp(): void
     {

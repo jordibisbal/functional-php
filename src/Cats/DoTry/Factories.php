@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace j45l\functional\Either;
+namespace j45l\functional\Cats\DoTry;
 
 use Exception;
-use j45l\functional\Cats\Either\Reason\Because;
-use j45l\functional\Cats\Either\Reason\BecauseException;
-use j45l\functional\Cats\Either\Reason\BecauseNull;
-use j45l\functional\Cats\Either\Reason\Reason;
+use j45l\functional\Cats\DoTry\Reason\Because;
+use j45l\functional\Cats\DoTry\Reason\BecauseException;
+use j45l\functional\Cats\DoTry\Reason\BecauseNull;
+use j45l\functional\Cats\DoTry\Reason\Reason;
 
 /**
  * @template T
@@ -25,7 +25,7 @@ function Success(mixed $value): Success
  */
 function Failure(Reason $reason): Failure
 {
-    return Failure::of($reason);
+    return Failure::because($reason);
 }
 
 function Because(string $reason): Because
@@ -48,7 +48,7 @@ function BecauseNull(): BecauseNull
  * @param callable():T $fn
  * @return DoTry<T>
  */
-function Either(callable $fn): DoTry
+function DoTry(callable $fn): DoTry
 {
     return DoTry::try($fn);
 }

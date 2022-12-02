@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace j45l\functional\Test\Unit\Maybe;
+namespace j45l\functional\Test\Unit\Cats\Maybe;
 
-use j45l\functional\Maybe\None;
+use j45l\functional\Cats\Maybe\None;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-use function j45l\functional\Either\BecauseNull;
-use function j45l\functional\Either\Failure;
-use function j45l\functional\Either\Success;
-use function j45l\functional\Maybe\None;
-use function j45l\functional\Maybe\Some;
+use function j45l\functional\Cats\DoTry\BecauseNull;
+use function j45l\functional\Cats\DoTry\Failure;
+use function j45l\functional\Cats\DoTry\Success;
+use function j45l\functional\Cats\Maybe\None;
+use function j45l\functional\Cats\Maybe\Some;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertInstanceOf;
 
-/** @covers \j45l\functional\Maybe\None */
+/** @covers \j45l\functional\Cats\Maybe\None */
 final class NoneTest extends TestCase
 {
     public function testOrElseFromNone(): void
@@ -37,7 +37,7 @@ final class NoneTest extends TestCase
     public function testNoneGetOrFailFails(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('getOrFail() called upon a Left object.');
+        $this->expectExceptionMessage('getOrFail() called upon a Left object (j45l\functional\Cats\Maybe\None).');
 
         None()->getOrFail();
     }

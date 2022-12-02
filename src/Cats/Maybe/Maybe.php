@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace j45l\functional\Maybe;
+namespace j45l\functional\Cats\Maybe;
 
 use j45l\functional\Cats\Functors\Functor;
-use j45l\functional\Either\DoTry;
+use j45l\functional\Cats\DoTry\DoTry;
 
 /**
  * @template T
@@ -39,7 +39,7 @@ abstract class Maybe implements Functor
      * @param callable(T):R $fn
      * @return self<R|T>
      */
-    abstract public function orElse(callable $fn): mixed;
+    abstract public function orElse(callable $fn): Maybe;
 
     /**
      * @template R
@@ -62,17 +62,11 @@ abstract class Maybe implements Functor
 
     /**
      * @template R
-     * @param callable(T):R $fn
+     * @param callable(T|null):R $fn
      * @phpstan-return DoTry<R>
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    abstract public function orElseTry(callable $fn): DoTry;
-
-    /**
-     * @template R
-     * @param callable(T):R $fn
-     * @phpstan-return DoTry<R>
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
-    abstract public function andThenTry(callable $fn): DoTry;
+    public function try(callable $fn): DoTry
+    {
+        return DoTry::try(fn () => $fn($this->getOrElse(null)));
+    }
 }
