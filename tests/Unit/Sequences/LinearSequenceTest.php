@@ -16,7 +16,6 @@ final class LinearSequenceTest extends TestCase
         $returned = [];
         $sequence = LinearSequence::create(1, 2);
 
-
         $returned[] = $sequence->value();
         $sequence = $sequence->next();
         $returned[] = $sequence->value();

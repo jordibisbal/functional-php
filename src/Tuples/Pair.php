@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace j45l\functional;
+namespace j45l\functional\Tuples;
 
 /**
  * @template T1

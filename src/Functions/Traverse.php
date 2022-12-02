@@ -17,7 +17,7 @@ use function is_iterable as isIterable;
  */
 function traverse(iterable $collection, array $queries): array
 {
-    return with(first($queries)[0] ?? trueFn(...), first($queries)[1] ?? id(...), tail($queries))(
+    return with(first($queries)[0] ?? trueFn(...), first($queries)[1] ?? identity(...), tail($queries))(
         static fn ($currentPredicate, $currentMapper, $queriesLeft) => reduce(
             $collection,
             fn ($projections, $node, $index) => [

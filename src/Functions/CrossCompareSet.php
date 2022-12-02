@@ -1,6 +1,6 @@
 <?php
 
-use j45l\functional\Pair;
+use j45l\functional\Tuples\Pair;
 
 /**
  * @param iterable<mixed> $collection

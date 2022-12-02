@@ -2,13 +2,13 @@
 
 namespace j45l\functional\Test\Unit;
 
-use j45l\functional\Pair;
 use j45l\functional\Test\Unit\Fixtures\ValueObjectA;
 use j45l\functional\Test\Unit\Fixtures\ValueObjectB;
+use j45l\functional\Tuples\Pair;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \j45l\functional\Pair
+ * @covers \j45l\functional\Tuples\Pair
  */
 class PairTest extends TestCase
 {

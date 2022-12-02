@@ -6,7 +6,7 @@ namespace j45l\functional\Test\Unit\Functions;
 
 use PHPUnit\Framework\TestCase;
 
-use function j45l\functional\id;
+use function j45l\functional\identity;
 use function PHPUnit\Framework\assertSame;
 
 class IdTest extends TestCase
@@ -29,6 +29,6 @@ class IdTest extends TestCase
     /** @dataProvider thingsProvider */
     public function testFalse(mixed $x): void
     {
-        assertSame($x, id($x));
+        assertSame($x, identity($x));
     }
 }

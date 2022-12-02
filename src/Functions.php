@@ -13,7 +13,7 @@ include_once(__DIR__ . '/Functions/FirstMap.php');
 include_once(__DIR__ . '/Functions/Fold.php');
 include_once(__DIR__ . '/Functions/FoldRight.php');
 include_once(__DIR__ . '/Functions/Head.php');
-include_once(__DIR__ . '/Functions/Id.php');
+include_once(__DIR__ . '/Functions/Identity.php');
 include_once(__DIR__ . '/Functions/IsAOr.php');
 include_once(__DIR__ . '/Functions/IsCallableOr.php');
 include_once(__DIR__ . '/Functions/Nop.php');

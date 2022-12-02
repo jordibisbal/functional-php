@@ -6,7 +6,7 @@ namespace j45l\functional\Test\Unit\Functions;
 
 use PHPUnit\Framework\TestCase;
 
-use function j45l\functional\id;
+use function j45l\functional\identity;
 use function j45l\functional\traverse;
 
 class TraverseTest extends TestCase
@@ -95,7 +95,7 @@ class TraverseTest extends TestCase
                 $target,
                 [
                     [fn ($value, $key) => ($value['bacon'] ?? null) === 'spam', fn ($value) => $value['eggs'] ?? null],
-                    [fn ($value, $key) => $key === 'bacon', id(...)],
+                    [fn ($value, $key) => $key === 'bacon', identity(...)],
                 ]
             )
         );

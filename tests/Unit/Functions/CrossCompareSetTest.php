@@ -2,9 +2,8 @@
 
 namespace j45l\functional\Test\Unit\Functions;
 
-use j45l\functional\Pair;
+use j45l\functional\Tuples\Pair;
 use PHPUnit\Framework\TestCase;
-
 use function j45l\functional\yieldIterable;
 
 class CrossCompareSetTest extends TestCase

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace j45l\functional;
 
-function nop(): void
+/** @return null */
+function nop()
 {
+    return null;
 }

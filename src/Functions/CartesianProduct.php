@@ -2,6 +2,7 @@
 
 namespace j45l\functional;
 
+use j45l\functional\Tuples\Pair;
 use function Functional\but_last;
 use function Functional\head;
 use function Functional\last;

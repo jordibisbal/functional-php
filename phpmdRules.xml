@@ -31,7 +31,7 @@
     </rule>
     <rule ref="rulesets/naming.xml/ShortMethodName">
         <properties>
-            <property name="exceptions" value="id" />
+            <property name="exceptions" value="id,of" />
         </properties>
     </rule>
     <rule ref="rulesets/unusedcode.xml" />

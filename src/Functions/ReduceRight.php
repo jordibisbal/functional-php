@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace j45l\functional;
 
+use j45l\functional\Tuples\Pair;
+
 /**
  * @phpstan-param iterable<mixed> $collection Collection
  * @phpstan-param callable(mixed $initial, mixed $value, mixed $index, mixed $collection): mixed $callback
