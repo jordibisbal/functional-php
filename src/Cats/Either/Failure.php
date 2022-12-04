@@ -2,31 +2,33 @@
 
 declare(strict_types=1);
 
-namespace j45l\functional\Cats\DoTry;
+namespace j45l\functional\Cats\Either;
 
-use j45l\functional\Cats\DoTry\Reason\Reason;
+use j45l\functional\Cats\Either\Reason\Reason;
 use j45l\functional\Cats\Maybe\None;
 use RuntimeException;
 
 /**
- * @template T
- * @extends DoTry<T>
+ * @template Left
+ * @template Right
+ * @extends Either<Left, Right>
  */
-final class Failure extends DoTry
+final class Failure extends Either
 {
     private function __construct(public readonly Reason $reason)
     {
     }
 
-    /** @return self<T> */
+    /** @return self<Left, Right> */
     public static function because(Reason $reason): Failure
     {
         return new self($reason);
     }
 
     /**
-     * @phpstan-return $this
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @template Result
+     * @param callable(Right):Result $fn
+     * @return self<Left,Result>
      */
     public function andThen(callable $fn): self
     {
@@ -58,11 +60,11 @@ final class Failure extends DoTry
     /**
      * @template R
      * @param callable(Failure<T>):R $fn
-     * @return DoTry<R>
+     * @return Either<R>
      */
-    public function orElse(callable $fn): DoTry
+    public function orElse(callable $fn): Either
     {
-        return DoTry::try(fn () => $fn($this)); /** @phpstan-ignore-line  */
+        return Either::try(fn () => $fn($this)); /** @phpstan-ignore-line  */
     }
 
     public function reason(): reason

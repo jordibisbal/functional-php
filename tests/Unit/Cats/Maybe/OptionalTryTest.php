@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace j45l\functional\Test\Unit\Cats\Maybe;
 
-use j45l\functional\Cats\DoTry\Failure;
+use j45l\functional\Cats\Either\Failure;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-use function j45l\functional\Cats\DoTry\BecauseException;
-use function j45l\functional\Cats\DoTry\BecauseNull;
-use function j45l\functional\Cats\DoTry\Failure;
-use function j45l\functional\Cats\DoTry\Success;
+use function j45l\functional\Cats\Either\BecauseException;
+use function j45l\functional\Cats\Either\BecauseNull;
+use function j45l\functional\Cats\Either\Failure;
+use function j45l\functional\Cats\Either\Success;
 use function j45l\functional\Cats\Maybe\None;
 use function j45l\functional\Cats\Maybe\Some;
 use function PHPUnit\Framework\assertEquals;

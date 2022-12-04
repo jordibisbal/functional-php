@@ -2,24 +2,25 @@
 
 declare(strict_types=1);
 
-namespace j45l\functional\Cats\DoTry;
+namespace j45l\functional\Cats\Either;
 
 use Exception;
-use j45l\functional\Cats\DoTry\Reason\BecauseException;
+use j45l\functional\Cats\Either\Reason\BecauseException;
 use j45l\functional\Cats\Functors\Functor;
 use j45l\functional\Cats\Maybe\Maybe;
 
 /**
- * @template T
- * @implements Functor<T>
+ * @template Left
+ * @template Right
+ * @implements Functor<Right>
  */
-abstract class DoTry implements Functor
+abstract class Either implements Functor
 {
     /**
-     * @param callable():T $fn
-     * @phpstan-return DoTry<T>
+     * @param callable():Right $fn
+     * @phpstan-return Either<Left,Right>
      */
-    public static function try(callable $fn): DoTry
+    public static function try(callable $fn): Either
     {
         try {
             return Success::pure($fn());
@@ -29,33 +30,33 @@ abstract class DoTry implements Functor
     }
 
     /**
-     * @template R
-     * @param callable(T):R $fn
-     * @return $this|DoTry<R>
+     * @template Result
+     * @param callable(Right):Result $fn
+     * @return $this|Either<Left, Result>
      */
     abstract public function orElse(callable $fn): self;
 
     /**
-     * @template R
-     * @param R $value
-     * @return R|T
+     * @template Result
+     * @param Result $value
+     * @return Result|Right
      */
     abstract public function getOrElse(mixed $value): mixed;
 
     /**
-     * @template R
-     * @param callable(T):R $fn
-     * @return self<R|T>
+     * @template Result
+     * @param callable(Right):Result $fn
+     * @return self<Left,Result>
      */
     abstract public function andThen(callable $fn): mixed;
 
     /**
-     * @return T
+     * @return Right
      */
     abstract public function getOrFail(string $message = null): mixed;
 
     /**
-     * @phpstan-return Maybe<T>
+     * @phpstan-return Maybe<Right>
      */
     abstract public function toMaybe(): Maybe;
 }

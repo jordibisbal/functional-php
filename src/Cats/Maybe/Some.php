@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace j45l\functional\Cats\Maybe;
 
-use j45l\functional\Cats\DoTry\DoTry;
-use j45l\functional\Cats\DoTry\Success;
+use j45l\functional\Cats\Either\Either;
+use j45l\functional\Cats\Either\Success;
 
 /**
  * @template T
@@ -39,6 +39,14 @@ final class Some extends Maybe
     }
 
     /**
+     * @return T
+     */
+    public function get(): mixed
+    {
+        return $this->value;
+    }
+
+    /**
      * @param mixed $value
      * @return T
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
@@ -57,12 +65,10 @@ final class Some extends Maybe
         return $this->get();
     }
 
-    /**
-     * @return T
-     */
-    public function get(): mixed
+    /** @return T */
+    public function getOrNull(): mixed
     {
-        return $this->value;
+        return $this->get();
     }
 
     /**

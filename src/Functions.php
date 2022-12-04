@@ -7,6 +7,7 @@ include_once(__DIR__ . '/Functions/CartesianProduct.php');
 include_once(__DIR__ . '/Functions/CloneWith.php');
 include_once(__DIR__ . '/Functions/CrossCompareSet.php');
 include_once(__DIR__ . '/Functions/Delay.php');
+include_once(__DIR__ . '/Functions/DoWhile.php');
 include_once(__DIR__ . '/Functions/FalseFn.php');
 include_once(__DIR__ . '/Functions/First.php');
 include_once(__DIR__ . '/Functions/FirstMap.php');

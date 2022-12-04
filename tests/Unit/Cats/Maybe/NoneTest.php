@@ -8,9 +8,9 @@ use j45l\functional\Cats\Maybe\None;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-use function j45l\functional\Cats\DoTry\BecauseNull;
-use function j45l\functional\Cats\DoTry\Failure;
-use function j45l\functional\Cats\DoTry\Success;
+use function j45l\functional\Cats\Either\BecauseNull;
+use function j45l\functional\Cats\Either\Failure;
+use function j45l\functional\Cats\Either\Success;
 use function j45l\functional\Cats\Maybe\None;
 use function j45l\functional\Cats\Maybe\Some;
 use function PHPUnit\Framework\assertEquals;

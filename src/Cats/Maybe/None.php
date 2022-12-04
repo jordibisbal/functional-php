@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace j45l\functional\Cats\Maybe;
 
-use j45l\functional\Cats\DoTry\Reason\BecauseNull;
-use j45l\functional\Cats\DoTry\DoTry;
-use j45l\functional\Cats\DoTry\Failure;
+use j45l\functional\Cats\Either\Reason\BecauseNull;
+use j45l\functional\Cats\Either\Either;
+use j45l\functional\Cats\Either\Failure;
 use RuntimeException;
 
 /**
@@ -29,12 +29,12 @@ final class None extends Maybe
     /**
      * @template R
      * @param callable(T|null):R $fn
-     * @phpstan-return DoTry<R>
+     * @phpstan-return Either<R>
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function orElseTry(callable $fn): DoTry
+    public function orElseTry(callable $fn): Either
     {
-        return DoTry::try(static fn () => $fn(null));
+        return Either::try(static fn () => $fn(null));
     }
 
     /**
@@ -92,5 +92,11 @@ final class None extends Maybe
         throw new RuntimeException(
             $message ?? sprintf('getOrFail() called upon a Left object (%s).', __CLASS__)
         );
+    }
+
+    /** @return null */
+    public function getOrNull(): mixed
+    {
+        return null;
     }
 }

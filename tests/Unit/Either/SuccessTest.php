@@ -6,10 +6,10 @@ namespace j45l\functional\Test\Unit\Either;
 
 use PHPUnit\Framework\TestCase;
 
-use function j45l\functional\Cats\DoTry\Success;
+use function j45l\functional\Cats\Either\Success;
 use function PHPUnit\Framework\assertEquals;
 
-/** @covers \j45l\functional\Cats\DoTry\Success */
+/** @covers \j45l\functional\Cats\Either\Success */
 final class SuccessTest extends TestCase
 {
     public function testOrElseFromSuccess(): void

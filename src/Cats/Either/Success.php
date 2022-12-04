@@ -2,34 +2,36 @@
 
 declare(strict_types=1);
 
-namespace j45l\functional\Cats\DoTry;
+namespace j45l\functional\Cats\Either;
 
 use j45l\functional\Cats\Maybe\Maybe;
 
 /**
- * @template T
- * @extends DoTry<T>
+ * @template Left
+ * @template Right
+ * @extends Either<Left,Right>
  */
-final class Success extends DoTry
+final class Success extends Either
 {
-    /** @param T $value */
+    /** @param Right $value */
     private function __construct(private readonly mixed $value)
     {
     }
 
     /**
-     * @template R
-     * @param callable(T):R $fn
-     * @phpstan-return $this
+     * @template Result
+     * @param callable(Right):Result $fn
+     * @return self<Left,Result>
      */
-    public function andThen(callable $fn): DoTry
+    public function andThen(callable $fn): Either
     {
         return self::pure($fn($this->get()));
     }
 
     /**
-     * @param T $value
-     * @phpstan-return self<T>
+     * @template Value
+     * @param Value $value
+     * @phpstan-return self<Left,Value>
      */
     public static function pure(mixed $value): self
     {
@@ -37,7 +39,7 @@ final class Success extends DoTry
     }
 
     /**
-     * @return T
+     * @return Right
      */
     public function get(): mixed
     {
@@ -45,9 +47,9 @@ final class Success extends DoTry
     }
 
     /**
-     * @template R
-     * @param R $value
-     * @return T
+     * @template Result
+     * @param Result $value
+     * @return Result|Right
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function getOrElse(mixed $value): mixed
@@ -56,7 +58,7 @@ final class Success extends DoTry
     }
 
     /**
-     * @return T
+     * @return Right
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function getOrFail(string $message = null): mixed
@@ -65,19 +67,19 @@ final class Success extends DoTry
     }
 
     /**
-     * @template R
-     * @param callable(T):R $fn
-     * @phpstan-return DoTry<R>
+     * @template Result
+     * @param callable(Right):Result $fn
+     * @phpstan-return Either<Left,Result>
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function map(callable $fn): DoTry
+    public function map(callable $fn): Either
     {
-        return DoTry::try(fn () => $fn($this->value)); /** @phpstan-ignore-line  */
+        return Either::try(fn () => $fn($this->value)); /** @phpstan-ignore-line  */
     }
 
     /**
-     * @template R
-     * @param callable(T):R $fn
+     * @template Result
+     * @param callable(Right):Result $fn
      * @phpstan-return $this
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
@@ -90,5 +92,4 @@ final class Success extends DoTry
     {
         return Maybe::of($this->getOrElse(null));
     }
-
 }

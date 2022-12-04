@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace j45l\functional\Cats\DoTry;
+namespace j45l\functional\Cats\Either;
 
 use Exception;
-use j45l\functional\Cats\DoTry\Reason\Because;
-use j45l\functional\Cats\DoTry\Reason\BecauseException;
-use j45l\functional\Cats\DoTry\Reason\BecauseNull;
-use j45l\functional\Cats\DoTry\Reason\Reason;
+use j45l\functional\Cats\Either\Reason\Because;
+use j45l\functional\Cats\Either\Reason\BecauseException;
+use j45l\functional\Cats\Either\Reason\BecauseNull;
+use j45l\functional\Cats\Either\Reason\Reason;
 
 /**
  * @template T
@@ -46,9 +46,9 @@ function BecauseNull(): BecauseNull
 /**
  * @template T
  * @param callable():T $fn
- * @return DoTry<T>
+ * @return Either<T>
  */
-function DoTry(callable $fn): DoTry
+function DoTry(callable $fn): Either
 {
-    return DoTry::try($fn);
+    return Either::try($fn);
 }
