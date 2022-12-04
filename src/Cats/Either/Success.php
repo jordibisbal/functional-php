@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace j45l\functional\Cats\Either;
 
 use j45l\functional\Cats\Maybe\Maybe;
+use function j45l\functional\with;
 
 /**
  * @template Left
@@ -21,11 +22,15 @@ final class Success extends Either
     /**
      * @template Result
      * @param callable(Right):Result $fn
-     * @return self<Left,Result>
+     * @return self<mixed,Result>
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
      */
     public function andThen(callable $fn): Either
     {
-        return self::pure($fn($this->get()));
+        return with(self::try(fn() => $fn($this->get())))(static fn (Either $either) => match (true) {
+            isSuccess($either) => $either->get(),
+            default => $either
+        });
     }
 
     /**

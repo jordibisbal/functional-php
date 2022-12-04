@@ -6,7 +6,7 @@ namespace j45l\functional\Cats\Either;
 
 /**
  * @param Either<mixed,mixed> $either
- * @return bool
+ * @phpstan-return ($either is Success<mixed,mixed> ? true : false)
  */
 function isSuccess(Either $either): bool
 {

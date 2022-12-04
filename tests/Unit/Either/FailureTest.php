@@ -14,16 +14,10 @@ use function j45l\functional\Cats\Either\isSuccess;
 use function j45l\functional\Cats\Either\Success;
 use function j45l\functional\Cats\Maybe\None;
 use function PHPUnit\Framework\assertEquals;
-use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertTrue;
 
 final class FailureTest extends TestCase
 {
-    public function testOrElseFromFailure(): void
-    {
-        assertEquals(Success(42), Failure(Because('whatever'))->orElse(fn () => 42));
-    }
-
     public function testFailureGetOrFailFails(): void
     {
         $this->expectException(RuntimeException::class);
@@ -40,12 +34,16 @@ final class FailureTest extends TestCase
         None()->getOrFail('Message.');
     }
 
-    public function testOrElseTryFromFailure(): void
+    public function testOrElseSuccessFromFailure(): void
     {
-        /** @var Success<mixed,int> $success */
-        $success = Failure(Because('whatever'))->orElse(fn() => 42);
+        assertEquals(Success(42), Failure(Because('whatever'))->orElse(fn () => Success(42)));
+    }
 
-        assertTrue(isSuccess($success));
-        assertEquals(42, $success->get());
+    public function testOrElseWrapsInSuccessFromFailure(): void
+    {
+        assertEquals(
+            Success(Failure(Because('whatever'))),
+            Failure(Because('whatever'))->orElse(fn ($x) => Success($x))
+        );
     }
 }

@@ -7,6 +7,7 @@ namespace j45l\functional\Cats\Either;
 use j45l\functional\Cats\Either\Reason\Reason;
 use j45l\functional\Cats\Maybe\None;
 use RuntimeException;
+use function j45l\functional\with;
 
 /**
  * @template Left
@@ -58,13 +59,17 @@ final class Failure extends Either
     }
 
     /**
-     * @template R
-     * @param callable(Failure<T>):R $fn
-     * @return Either<R>
+     * @template Result
+     * @param callable(Failure<Left, Right>):Result $fn
+     * @return Either<mixed, Result>
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
      */
     public function orElse(callable $fn): Either
     {
-        return Either::try(fn () => $fn($this)); /** @phpstan-ignore-line  */
+        return with(self::try(fn() => $fn($this)))(static fn (Either $either) => match (true) {
+            isSuccess($either) => $either->get(),
+            default => $either
+        });
     }
 
     public function reason(): reason
