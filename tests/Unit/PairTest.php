@@ -6,6 +6,7 @@ use j45l\functional\Test\Unit\Fixtures\ValueObjectA;
 use j45l\functional\Test\Unit\Fixtures\ValueObjectB;
 use j45l\functional\Tuples\Pair;
 use PHPUnit\Framework\TestCase;
+use function j45l\functional\Tuples\Pair;
 
 /**
  * @covers \j45l\functional\Tuples\Pair
@@ -22,7 +23,7 @@ class PairTest extends TestCase
 
     public function testAPairValueCanBeRetrievedAsArray(): void
     {
-        $pair = Pair::from(1, '1');
+        $pair = Pair(1, '1');
 
         $this->assertEquals([1, '1'], $pair->toArray());
     }

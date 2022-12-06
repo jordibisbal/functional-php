@@ -34,7 +34,7 @@
         },
         "files": [
             "src/Functions.php",
-          "src/Cats/FunctionsLoader.php"
+            "src/FunctionsLoader.php"
         ]
     },
     "autoload-dev": {
