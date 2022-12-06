@@ -13,7 +13,7 @@ use j45l\functional\Cats\Either\Reason\Reason;
 /**
  * @template T
  * @param T $value
- * @return Success<T>
+ * @return Success<mixed,T>
  */
 function Success(mixed $value): Success
 {
@@ -21,7 +21,7 @@ function Success(mixed $value): Success
 }
 
 /**
- * @return Failure<mixed>
+ * @return Failure<mixed,mixed>
  */
 function Failure(Reason $reason): Failure
 {
@@ -46,7 +46,7 @@ function BecauseNull(): BecauseNull
 /**
  * @template T
  * @param callable():T $fn
- * @return Either<T>
+ * @return Either<mixed,T>
  */
 function DoTry(callable $fn): Either
 {
