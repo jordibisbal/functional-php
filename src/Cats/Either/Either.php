@@ -10,7 +10,6 @@ use j45l\functional\Cats\Functors\Functor;
 use j45l\functional\Cats\Maybe\Maybe;
 
 /**
- * @template Left
  * @template Right
  * @implements Functor<Right>
  */
@@ -18,7 +17,7 @@ abstract class Either implements Functor
 {
     /**
      * @param callable():Right $fn
-     * @phpstan-return Either<Left,Right>
+     * @phpstan-return Either<Right>
      */
     public static function try(callable $fn): Either
     {
@@ -32,7 +31,7 @@ abstract class Either implements Functor
     /**
      * @template Result
      * @param callable(Right):Result $fn
-     * @return $this|Either<Left, Result>
+     * @return $this|Either<Result>
      */
     abstract public function orElse(callable $fn): self;
 
@@ -46,7 +45,7 @@ abstract class Either implements Functor
     /**
      * @template Result
      * @param callable(Right):Result $fn
-     * @return self<Left,Result>
+     * @return self<Result>
      */
     abstract public function andThen(callable $fn): mixed;
 

@@ -10,9 +10,8 @@ use RuntimeException;
 use function j45l\functional\with;
 
 /**
- * @template Left
  * @template Right
- * @extends Either<Left, Right>
+ * @extends Either<Right>
  */
 final class Failure extends Either
 {
@@ -20,7 +19,7 @@ final class Failure extends Either
     {
     }
 
-    /** @return self<Left, Right> */
+    /** @return self<Right> */
     public static function because(Reason $reason): Failure
     {
         return new self($reason);
@@ -29,7 +28,8 @@ final class Failure extends Either
     /**
      * @template Result
      * @param callable(Right):Result $fn
-     * @return self<Left,Result>
+     * @return self<Result>
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function andThen(callable $fn): self
     {
@@ -42,7 +42,7 @@ final class Failure extends Either
     }
 
     /**
-     * @return T
+     * @never-return
      */
     public function getOrFail(string $message = null): mixed
     {
@@ -60,14 +60,13 @@ final class Failure extends Either
 
     /**
      * @template Result
-     * @param callable(Failure<Left, Right>):Result $fn
-     * @return Either<mixed, Result>
-     * @noinspection PhpPossiblePolymorphicInvocationInspection
+     * @param callable(Failure<Right>):Result $fn
+     * @return Either<Result>
      */
     public function orElse(callable $fn): Either
     {
         return with(self::try(fn() => $fn($this)))(static fn (Either $either) => match (true) {
-            isSuccess($either) => $either->get(),
+            $either instanceof Success => $either->get(),
             default => $either
         });
     }
@@ -77,7 +76,7 @@ final class Failure extends Either
         return $this->reason;
     }
 
-    /** @return None<T> */
+    /** @return None<Right> */
     public function toMaybe(): None
     {
         return None::create();

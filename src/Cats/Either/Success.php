@@ -8,9 +8,8 @@ use j45l\functional\Cats\Maybe\Maybe;
 use function j45l\functional\with;
 
 /**
- * @template Left
  * @template Right
- * @extends Either<Left,Right>
+ * @extends Either<Right>
  */
 final class Success extends Either
 {
@@ -22,7 +21,7 @@ final class Success extends Either
     /**
      * @template Result
      * @param callable(Right):Result $fn
-     * @return self<mixed,Result>
+     * @return self<Result>
      */
     public function andThen(callable $fn): Either
     {
@@ -35,7 +34,7 @@ final class Success extends Either
     /**
      * @template Value
      * @param Value $value
-     * @phpstan-return self<Left,Value>
+     * @phpstan-return self<Value>
      */
     public static function pure(mixed $value): self
     {
@@ -56,7 +55,7 @@ final class Success extends Either
      * @return Result|Right
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function getOrElse(mixed $value): mixed
+    public function getOrElse(mixed $value = null): mixed
     {
         return $this->get();
     }
@@ -73,7 +72,7 @@ final class Success extends Either
     /**
      * @template Result
      * @param callable(Right):Result $fn
-     * @phpstan-return Either<Left,Result>
+     * @phpstan-return Either<Result>
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function map(callable $fn): Either
@@ -94,6 +93,6 @@ final class Success extends Either
 
     public function toMaybe(): Maybe
     {
-        return Maybe::of($this->getOrElse(null));
+        return Maybe::of($this->getOrElse());
     }
 }
