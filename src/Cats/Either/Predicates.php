@@ -4,20 +4,17 @@ declare(strict_types=1);
 
 namespace j45l\functional\Cats\Either;
 
-/**
- * @param Either<mixed,mixed> $either
- * @phpstan-return ($either is Success<mixed,mixed> ? true : false)
- */
-function isSuccess(Either $either): bool
+function isSuccess(mixed $either): bool
 {
     return $either instanceof Success;
 }
 
-/**
- * @param Either<mixed,mixed> $either
- * @return bool
- */
-function isFailure(Either $either): bool
+function isEither(mixed $either): bool
+{
+    return $either instanceof Either;
+}
+
+function isFailure(mixed $either): bool
 {
     return $either instanceof Failure;
 }

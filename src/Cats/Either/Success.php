@@ -23,13 +23,12 @@ final class Success extends Either
      * @template Result
      * @param callable(Right):Result $fn
      * @return self<mixed,Result>
-     * @noinspection PhpPossiblePolymorphicInvocationInspection
      */
     public function andThen(callable $fn): Either
     {
-        return with(self::try(fn() => $fn($this->get())))(static fn (Either $either) => match (true) {
-            isSuccess($either) => $either->get(),
-            default => $either
+        return with(self::try(fn() => $fn($this->get())))(static fn (mixed $response) => match (true) {
+            isSuccess($response) && isEither($response->get()) => $response->get(),
+            default => $response,
         });
     }
 

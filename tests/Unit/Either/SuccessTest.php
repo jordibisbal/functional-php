@@ -45,6 +45,14 @@ final class SuccessTest extends TestCase
         );
     }
 
+    public function testSuccessAndThenNotEither(): void
+    {
+        assertEquals(
+            Success(42),
+            Success(1)->andThen(fn () => 42)
+        );
+    }
+
     public function testSuccessAndThenIncrementSuccess(): void
     {
         assertEquals(
