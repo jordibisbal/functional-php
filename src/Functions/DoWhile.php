@@ -8,7 +8,7 @@ namespace j45l\functional;
  * @template TResult
  * @param callable():bool $predicate
  * @param callable():TResult|null $else
- * @return TResult
+ * @phpstan-return ($else is null ? null : TResult)
  */
 function doWhile(callable $predicate, callable $fn, callable $else = null): mixed
 {
