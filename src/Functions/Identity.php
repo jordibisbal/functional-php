@@ -9,7 +9,7 @@ namespace j45l\functional;
  * @param T $x
  * @return T
  */
-function identity(mixed $x): mixed
+function identity(mixed $x = null): mixed
 {
     return $x;
 }

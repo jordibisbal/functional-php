@@ -8,12 +8,12 @@ use PHPUnit\Framework\TestCase;
 use function Functional\map;
 use function j45l\functional\cartesianProduct;
 use function j45l\functional\yieldIterable;
+use function PHPUnit\Framework\assertEquals;
 
 class CartesianProductTest extends TestCase
 {
     /**
      * @return       array<mixed>
-     * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
      */
     public function quotientProductProvider(): array
     {
@@ -43,40 +43,35 @@ class CartesianProductTest extends TestCase
      * @param        array<mixed>|Null   $result
      * @param        array<array<mixed>> $vectors
      * @dataProvider quotientProductProvider
-     * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
      */
     public function testCartesianProductOfVectors(?array $result, array $vectors): void
     {
-        $this->assertEquals($result, cartesianProduct($vectors, $this->productFunction()));
+        $this->assertEquals($result, cartesianProduct($vectors, $this->stringProduct(...)));
     }
 
     /**
      * @param        array<mixed>|Null   $result
      * @param        array<array<mixed>> $vectors
      * @dataProvider quotientProductProvider
-     * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
      */
     public function testCartesianProductOfGenerators(?array $result, array $vectors): void
     {
-        $vectors = map($vectors, function ($item) {
-            return yieldIterable($item);
-        });
-
-        $this->assertEquals($result, cartesianProduct($vectors, $this->productFunction()));
+        $this->assertEquals(
+            $result,
+            cartesianProduct($vectors, $this->stringProduct(...))
+        );
     }
 
     public function testCartesianProductReturnsPairsIfNoProductFunctionIsProvided(): void
     {
-        $this->assertEquals([Pair::from(1, 'a'), Pair::from(1, 'b')], cartesianProduct([[1],['a','b']]));
+        assertEquals(
+            [Pair::from(1, 'a'), Pair::from(1, 'b')],
+            cartesianProduct([[1],['a','b']])
+        );
     }
 
-    /**
-     * @return Closure
-     */
-    private function productFunction(): Closure
+    private function stringProduct(string $one, string $another): string
     {
-        return function ($one, $another) {
-            return sprintf("%s x %s", $one, $another);
-        };
+        return sprintf('%s x %s', $one, $another);
     }
 }

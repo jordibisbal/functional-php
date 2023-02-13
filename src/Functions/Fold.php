@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace j45l\functional;
 
+use Closure;
+
 use function Functional\head;
 use function Functional\tail;
 
 /**
  * @phpstan-param iterable<mixed> $collection Collection
- * @phpstan-param callable(mixed $value, mixed $initial): mixed $callback
+ * @phpstan-param Closure(mixed $value, mixed $initial): mixed $callback
  * @phpstan-param mixed|null $default
  * @return        mixed|null
  * @noinspection  PhpPluralMixedCanBeReplacedWithArrayInspection
  */
-function fold(iterable $collection, callable $callback, $default = null)
+function fold(iterable $collection, Closure $callback, mixed $default = null): mixed
 {
     return reduce(
         tail($collection),
