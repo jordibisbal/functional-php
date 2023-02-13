@@ -14,14 +14,14 @@ Functions intended to filter, select and reject collection
 
 ---
 #### best
-Selects the best according to *$criteria* (<=> like).
+Selects the best according to *$criteria* (true if the first is better than the second).
 
 ```PHP
 function best(iterable $collection, Closure $criteria, mixed $default = null): mixed
 ```
-* $criteria: Closure(mixed $first, mixed $second): int
+* $criteria: Closure(mixed $first, mixed $second): bool
 ```PHP
-> best([1, 3, 2], fn ($x, $y) => $x <=> $y);
+> best([1, 3, 2], fn ($x, $y) => $x > $y);
 
 3
 ```
@@ -70,11 +70,11 @@ Search for the nearest two integers in an array.
 
 ```PHP
 > best(
-      crossCompareSet([1, 5, 7, 15]), 
-      fn (Pair $a, Pair $b) => ($a->first() - $a->second()) <=> ($b->first() - $b->second())
+      crossCompareSet([1, 5, 7, 10]), 
+      fn (Pair $a, Pair $b) => abs(($a->first() - $a->second())) < abs(($b->first() - $b->second()))
   )
 
-Pair::__set_state(['first' => 7, 'second' => 5,])
+Pair::__set_state(['first' => 5, 'second' => 7,])
 ```
 ---
 ### Object operations
