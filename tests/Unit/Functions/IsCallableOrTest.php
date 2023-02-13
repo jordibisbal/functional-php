@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\falseFn;
 use function j45l\functional\identity;
-use function j45l\functional\isCallableOr;
+use function j45l\functional\isClosureOr;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNull;
 
@@ -16,7 +16,7 @@ class IsCallableOrTest extends TestCase
     {
         assertEquals(
             identity(...),
-            isCallableOr(identity(...), falseFn(...))
+            isClosureOr(identity(...), falseFn(...))
         );
     }
 
@@ -24,12 +24,12 @@ class IsCallableOrTest extends TestCase
     {
         assertEquals(
             falseFn(...),
-            isCallableOr(42, falseFn(...))
+            isClosureOr(42, falseFn(...))
         );
     }
 
     public function testIsCallableIsNotDefaultsNull(): void
     {
-        assertNull(isCallableOr(42));
+        assertNull(isClosureOr(42));
     }
 }

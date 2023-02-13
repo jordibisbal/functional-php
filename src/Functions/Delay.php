@@ -13,12 +13,9 @@ namespace j45l\functional;
  */
 function delay(float $seconds, callable $callable, callable $delayFn = null)
 {
-    $delayFn = $delayFn
-        ?? function (float $seconds) {
-            usleep((int)($seconds * 1E6));
-        }
-    ;
+    $delayFn ??= static fn (float $seconds) => usleep((int)($seconds * 1E6));
 
     $delayFn($seconds);
+
     return $callable();
 }

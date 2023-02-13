@@ -6,6 +6,7 @@ namespace j45l\functional;
 
 use Closure;
 use Traversable;
+
 use function iterator_to_array as iteratorToArray;
 
 /**

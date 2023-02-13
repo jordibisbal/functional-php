@@ -6,9 +6,6 @@ namespace j45l\functional;
 
 use Closure;
 
-use function Functional\head;
-use function Functional\tail;
-
 /**
  * @phpstan-param iterable<mixed> $collection Collection
  * @phpstan-param Closure(mixed $value, mixed $initial): mixed $callback

@@ -3,9 +3,6 @@
 namespace j45l\functional;
 
 use j45l\functional\Tuples\Pair;
-use function Functional\but_last;
-use function Functional\head;
-use function Functional\last;
 
 /**
  * @param array<mixed> $vectors
@@ -47,7 +44,7 @@ function cartesianProduct(array $vectors, callable $productFunction = null): arr
             []
         )),
         default=> toArray(($cartesianProduct)(
-            [cartesianProduct(but_last($vectors), $productFunction), toArray(last($vectors))],
+            [cartesianProduct(butLast($vectors), $productFunction), toArray(last($vectors))],
             $productFunction
         ))
     };

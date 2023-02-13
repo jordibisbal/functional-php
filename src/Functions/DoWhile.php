@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace j45l\functional;
 
+use Closure;
+
 /**
- * @template TResult
- * @param callable():bool $predicate
- * @param callable():TResult|null $else
- * @phpstan-return ($else is null ? null : TResult)
+ * @template R
+ * @param Closure():bool $predicate
+ * @param Closure():R|null $onFinish
+ * @phpstan-return ($onFinish is null ? null : R)
  */
-function doWhile(callable $predicate, callable $fn, callable $else = null): mixed
+function doWhile(Closure $predicate, Closure $fn, Closure $onFinish = null): mixed
 {
     while ($predicate()) {
         $fn();
     }
 
-    return ($else ?? nop(...))();
+    return ($onFinish ?? nop(...))();
 }

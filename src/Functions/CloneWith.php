@@ -8,7 +8,7 @@ use Closure;
 
 /**
  * @template T of object
- * @param T $object
+ * @phpstan-param T $object
  * @param Closure(mixed):mixed $closure
  * @return T
  */
