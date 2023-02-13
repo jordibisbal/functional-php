@@ -55,7 +55,7 @@ cartesianProduct(array $collections, Closure $productFunction = null): array
 [3, 5, 6, 10]
 ```
 
-### crossCompareSet
+#### crossCompareSet
 Returns an array of **Pair**s for every unique combination of elements in `$collection`, if `$collection` has fewer than
 two elements, an empty array is returned, i.e. the triangular half of the matrix resultant of the cartesian product of 
 `$collection` with itself, excluding the diagonal.
