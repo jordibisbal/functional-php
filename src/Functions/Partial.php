@@ -11,7 +11,7 @@ use function array_merge as arrayMerge;
 /**
  * @param mixed $arguments
  */
-function partial(callable $callback, ...$arguments): Closure
+function partial(Closure $callback, ...$arguments): Closure
 {
     return static fn(...$innerArguments) => $callback(...arrayMerge($arguments, $innerArguments));
 }
