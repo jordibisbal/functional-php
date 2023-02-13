@@ -13,12 +13,9 @@ use Traversable;
  */
 function toArray($item): array
 {
-    switch (true) {
-        case $item instanceof Traversable:
-            return iterator_to_array($item);
-        case is_array($item):
-            return $item;
-        default:
-            return [$item];
-    }
+    return match (true) {
+        $item instanceof Traversable => iterator_to_array($item),
+        is_array($item) => $item,
+        default => [$item],
+    };
 }

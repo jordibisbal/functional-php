@@ -3,48 +3,36 @@
 namespace j45l\functional;
 
 use j45l\functional\Tuples\Pair;
+use Closure;
 
 /**
- * @param array<mixed> $vectors
- * @param null|callable(mixed, mixed): mixed $productFunction
+ * @param array<mixed> $collections
+ * @param null|Closure(mixed, mixed): mixed $productFunction
  * @return array<mixed>
  * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
   */
-function cartesianProduct(array $vectors, callable $productFunction = null): array
+function cartesianProduct(array $collections, Closure $productFunction = null): array
 {
-    $productFunction = $productFunction ?? function ($one, $another): Pair {
-        return Pair::from($one, $another);
-    };
-
-    $cartesianProduct = static function (array $vectors, callable $productFunction) {
-        [$one, $another] = $vectors;
-        return reduce(
-            $one,
-            /**  @SuppressWarnings(PHPMD.UnusedFormalParameter) */
-            function ($acc, $one) use ($productFunction, $another) {
-                return reduce(
-                    $another,
-                    function ($acc, $another) use ($one, $productFunction) {
-                        return merge($acc, toIterable($productFunction($one, $another)));
-                    },
-                    $acc
-                );
+    $productFunction = $productFunction ?? static fn ($one, $another): Pair => Pair::from($one, $another);
+    $cartesianProduct = static fn(array $collections, callable $productFunction) => with(
+        ...$collections
+    )(static fn ($one, $another) => reduce(
+        $one,
+        fn($acc, $one) => reduce(
+            $another,
+            function ($acc, $another) use ($one, $productFunction) {
+                return merge($acc, toArray($productFunction($one, $another)));
             },
-            []
-        );
-    };
+            $acc
+        ),
+        []
+    ));
 
     return match (true) {
-        count($vectors) === 0 => [],
-        count($vectors) === 1 => toArray(reduce(
-            head($vectors),
-            function ($acc, $item) {
-                return merge($acc, toIterable($item));
-            },
-            []
-        )),
-        default=> toArray(($cartesianProduct)(
-            [cartesianProduct(butLast($vectors), $productFunction), toArray(last($vectors))],
+        count($collections) === 0 => [],
+        count($collections) === 1 => toArray(head($collections)),
+        default => toArray(($cartesianProduct)(
+            [cartesianProduct(butLast($collections), $productFunction), toArray(last($collections))],
             $productFunction
         ))
     };

@@ -1,6 +1,10 @@
 <?php
 
+namespace j45l\functional;
+
+use Traversable;
 use j45l\functional\Tuples\Pair;
+use function iterator_to_array as iteratorToArray;
 
 /**
  * @param iterable<mixed> $collection
@@ -9,7 +13,7 @@ use j45l\functional\Tuples\Pair;
  */
 function crossCompareSet(iterable $collection): array
 {
-    $collection = $collection instanceof Traversable ? iterator_to_array($collection) : $collection;
+    $collection = unindex($collection instanceof Traversable ? iteratorToArray($collection) : $collection);
     $aggregation = [];
 
     foreach (range(0, count($collection) - 2) as $i) {
