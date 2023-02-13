@@ -23,6 +23,7 @@ include_once(__DIR__ . '/Functions/Last.php');
 include_once(__DIR__ . '/Functions/Nop.php');
 include_once(__DIR__ . '/Functions/Not.php');
 include_once(__DIR__ . '/Functions/Merge.php');
+include_once(__DIR__ . '/Functions/MergeGenerator.php');
 include_once(__DIR__ . '/Functions/Partial.php');
 include_once(__DIR__ . '/Functions/PartialRight.php');
 include_once(__DIR__ . '/Functions/Pipe.php');

@@ -6,7 +6,7 @@ namespace j45l\functional;
 
 use Closure;
 
-function isClosureOr(mixed $target, Closure $default = null): callable|null
+function isClosureOr(mixed $target, Closure $default = null): Closure|null
 {
     return $target instanceof Closure ? $target : $default;
 }

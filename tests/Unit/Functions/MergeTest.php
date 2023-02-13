@@ -6,7 +6,7 @@ namespace j45l\functional\Test\Unit\Functions;
 
 use PHPUnit\Framework\TestCase;
 
-use function j45l\functional\merge;
+use function j45l\functional\mergeGenerator;
 use function j45l\functional\toArray;
 use function j45l\functional\yieldIterable;
 
@@ -33,6 +33,6 @@ class MergeTest extends TestCase
      */
     public function testRelay(array $expected, array $collections): void
     {
-        self::assertEquals($expected, toArray(merge(...$collections)));
+        self::assertEquals($expected, toArray(mergeGenerator(...$collections)));
     }
 }

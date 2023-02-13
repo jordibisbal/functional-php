@@ -4,18 +4,11 @@ declare(strict_types=1);
 
 namespace j45l\functional;
 
-use Generator;
-
 /**
- * @phpstan-param iterable<iterable<mixed>> $generators
- * @return        Generator
- * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
+ * @param array<mixed> ...$arrays
+ * @return array<mixed>
  */
-function merge(...$generators): Generator
+function merge(array ...$arrays): array
 {
-    foreach ($generators as $generator) {
-        foreach ($generator as $value) {
-            yield $value;
-        }
-    }
+    return array_merge(...$arrays);
 }

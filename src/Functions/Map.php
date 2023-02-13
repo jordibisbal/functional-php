@@ -6,9 +6,6 @@ namespace j45l\functional;
 
 use Closure;
 
-use function Functional\head;
-use function Functional\tail;
-
 /**
  * @template T
  * @template T2
