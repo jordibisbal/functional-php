@@ -60,7 +60,7 @@ Returns an array of **Pair**s for every unique combination of elements in `$coll
 two elements, an empty array is returned, i.e. the triangular half of the matrix resultant of the cartesian product of 
 `$collection` with itself, excluding the diagonal.
 
-Useful to check, for instance, all the elements of `$collection` with each other to select the best one.
+Useful to compare, for instance, all the elements of `$collection` with each other to select the best one.
 
 ```PHP
 function crossCompareSet(iterable $collection): array
