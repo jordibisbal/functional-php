@@ -70,7 +70,7 @@ Search for the nearest two integers in an array.
 
 ```PHP
 > best(
-      crossCompareSet([1, 5, 7, 10]), 
+      crossCompareSet([1, 10, 5, 7]), 
       fn (Pair $a, Pair $b) => abs(($a->first() - $a->second())) < abs(($b->first() - $b->second()))
   )
 
