@@ -15,7 +15,7 @@ use Closure;
  * @param T2|null $default
  * @return T2|null
  */
-function firstMap(iterable $collection, Closure $map, Closure $predicate = null, mixed $default = null): mixed
+function mapFirst(iterable $collection, Closure $map, Closure $predicate = null, mixed $default = null): mixed
 {
     $predicate ??= trueFn(...);
 

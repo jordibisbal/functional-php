@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace j45l\functional;
 
+use Closure;
+
 /**
  * @template T
  * @phpstan-param float $seconds
- * @phpstan-param callable():T $callable
- * @phpstan-param callable(float):void $delayFn
+ * @phpstan-param Closure():T $callable
+ * @phpstan-param Closure(float):void $delayFn
  * @phpstan-return T
  */
-function delay(float $seconds, callable $callable, callable $delayFn = null)
+function delay(float $seconds, Closure $callable, Closure $delayFn = null): mixed
 {
     $delayFn ??= static fn (float $seconds) => usleep((int)($seconds * 1E6));
 

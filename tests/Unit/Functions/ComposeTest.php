@@ -18,6 +18,11 @@ class ComposeTest extends TestCase
         assertEquals(42, compose()(42));
     }
 
+    public function testEmptyComposeCanBeCalledWithOutParameters(): void
+    {
+        assertEquals(42, compose(fn () => 42)());
+    }
+
     public function testSingleComposeEvaluation(): void
     {
         assertEquals(42, compose(fn ($x) => $x + 1)(41));
@@ -28,9 +33,9 @@ class ComposeTest extends TestCase
         assertEquals(
             42,
             compose(
-                fn ($x) => $x * 3,
-                fn ($x) => $x + 6,
-            )(12)
+                fn ($x) => $x * 10,
+                fn ($x) => $x + 2,
+            )(4)
         );
     }
 }

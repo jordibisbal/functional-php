@@ -39,6 +39,20 @@ function butLast(iterable $collection): array
 
 [1, 2]
 ```
+
+---
+#### first
+
+Returns the first element of the collection or `$default` if collection is empty.
+
+```PHP
+function first(iterable $collection, Closure $predicate = null, mixed $default = null): mixed
+```
+```PHP
+> first([1, 2, 3])
+
+1
+```
 ---
 ### Collection operations
 Operations between collections
@@ -77,13 +91,31 @@ Search for the nearest two integers in an array.
 Pair::__set_state(['first' => 5, 'second' => 7,])
 ```
 ---
+### Composition
+
+---
+#### compose
+Return a new function that is the composition of the given ones. So `compose(f,g)(x)` becomes `g(f(x))` (right composition).
+```PHP
+function compose(Closure ...$functions): Closure
+```
+
+```PHP
+> compose(
+      fn ($x) => $x * 10,
+      fn ($x) => $x + 2,
+  )(4)
+
+42
+```
+---
 ### Object operations
 Operations on objects
 
 ---
 #### cloneWith
 Clones the given object (no shallow copy), executes the given closure on after binding it
-so even the object private properties can be mutated.
+so even the object private properties can be mutated once cloned.
 
 ```PHP
 cloneWith(object $object, Closure $closure): object
@@ -97,3 +129,106 @@ cloneWith(object $object, Closure $closure): object
 ```
 
 Note it cannot mutate readonly properties if already defined (e.g. initialized in the constructor).
+---
+### Environment
+
+---
+#### delay
+Waits for `$seconds` seconds then executes the function and returns its return value, if a `delayFn` is given, executes 
+it instead of usleep to wait.
+
+```PHP
+function delay(float $seconds, Closure $callable, Closure $delayFn = null): mixed
+```
+
+```PHP
+> delay(1, fn () => 42)
+
+(after 1 second)
+42
+```
+---
+### Logic functions
+
+---
+#### falseFn
+
+Return a function than returns 'false'.
+
+```PHP
+function falseFn(): bool
+```
+
+```PHP
+> falseFn()()
+
+false
+```
+---
+### Repeat functions
+
+---
+#### doUntil
+
+Repeats `$fn` until $predicate is `true`, then returns the result of evaluating `$return` or null if not given.
+Equivalent to a `do { ... } while ()` loop.
+
+```PHP
+function doUntil(Closure $predicate, Closure $fn, Closure $return = null): mixed
+```
+
+```PHP
+> doUntil(
+      fn (): bool => $this->endOfFile($handle), 
+      fn () => $this->process($this->readLine($handle)), 
+      fn (): int => $this->processedLinesCount 
+  )
+
+123
+```
+
+Be aware:
+
+* `$fn` is executed at least one. So in the previous example, it could file when reading empty file by reading past the end of the file.
+* Arrow functions can not modify, nor access to mutated values, so use classic lambdas with by reference uses if needed.
+
+```PHP
+doUntil(
+    trueFn(...),
+    function () use (&$effect) {
+        $effect = 42;
+    }
+)
+```
+---
+#### doWhile
+
+Repeats `$fn` while $predicate is `true`, then returns the result of evaluating `$return` or null if not given.
+Equivalent to a `while() { ... }` loop.
+
+```PHP
+function doWhile(Closure $predicate, Closure $fn, Closure $return = null): mixed
+```
+
+```PHP
+> doWhile(
+      fn (): bool => !$this->endOfFile($handle), 
+      fn () => $this->process($this->readLine($handle)), 
+      fn (): int => $this->processedLinesCount 
+  )
+
+123
+```
+
+Be aware:
+
+* Arrow functions can not modify, nor access to mutated values, so use classic lambdas with by reference uses if needed.
+
+```PHP
+doUntil(
+    trueFn(...),
+    function () use (&$effect) {
+        $effect = 42;
+    }
+)
+`

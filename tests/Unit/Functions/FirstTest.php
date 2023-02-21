@@ -32,6 +32,7 @@ class FirstTest extends TestCase
 
     public function testFirstReturnsNullIfNoStatedDefaultAndNoMatching(): void
     {
+        /** @phpstan-ignore-next-line */
         assertNull(first([1, 2, 3], fn (int $x): bool => $x === 4));
     }
 
