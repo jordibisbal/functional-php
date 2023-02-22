@@ -7,7 +7,7 @@
             - [butLast](#butlast)
             - [first](#first)
             - [head](#head)
-        + [last](#last)
+            - [last](#last)
         + [Collection transformation functions](#collection-transformation-functions)
             - [cartesianProduct](#cartesianproduct)
             - [crossCompareSet](#crosscompareset)
@@ -98,7 +98,7 @@ is not true for any. If predicate is not given, just the first one is returned.
 Alias function of [first](#first)
 
 ---
-### last
+#### last
 Returns the last element of the collection that `$predicate` if true for or `$default` if collection is empty or ` $predicate`
 is not true for any. If predicate is not given, just the first one is returned.
 
