@@ -18,6 +18,7 @@ class FirstTest extends TestCase
         assertEquals(1, first([1, 2, 3], fn (int $x): bool => $x === 1));
         assertEquals(2, first([1, 2, 3], fn (int $x): bool => $x === 2));
         assertEquals(3, first([1, 2, 3], fn (int $x): bool => $x === 3));
+        assertEquals(2, first([1, 2, 3], fn (int $x): bool => $x > 1));
     }
 
     public function testFirstReturnsNullIfNoMatching(): void

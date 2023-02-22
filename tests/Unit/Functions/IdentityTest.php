@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 use function j45l\functional\identity;
 use function PHPUnit\Framework\assertSame;
 
-class IdTest extends TestCase
+class IdentityTest extends TestCase
 {
     /**
      * @return array<mixed>

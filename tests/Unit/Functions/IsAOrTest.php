@@ -20,6 +20,14 @@ class IsAOrTest extends TestCase
         );
     }
 
+    public function testIsAIsNotTHenWrapping(): void
+    {
+        assertEquals(
+            new ValueObjectA('1'),
+            isAOr('1', ValueObjectA::class, fn ($x): ValueObjectA => new ValueObjectA($x))
+        );
+    }
+
     public function testIsAIsNot(): void
     {
         assertEquals(

@@ -28,8 +28,8 @@ class IsCallableOrTest extends TestCase
         );
     }
 
-    public function testIsCallableIsNotDefaultsNull(): void
+    public function testIsCallableIsNotDefaultsNop(): void
     {
-        assertNull(isClosureOr(42));
+        assertNull(isClosureOr(42)());
     }
 }

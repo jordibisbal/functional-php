@@ -20,7 +20,7 @@ class MapFirstTest extends TestCase
             return [1 => 'A', 2 => 'B', 3 => 'C'][$item];
         };
 
-        assertEquals('A', mapFirst([1, 2, 3], $map));
+        assertEquals('A', mapFirst(['a' => 1, 'b' => 2, 'c' => 3], $map));
         assertEquals(1, $mappedTimes);
     }
 

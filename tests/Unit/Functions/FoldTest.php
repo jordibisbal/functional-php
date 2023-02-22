@@ -12,10 +12,9 @@ class FoldTest extends TestCase
 {
     public function testFold(): void
     {
-        $concat = static function ($value, $initial): string {
-            return $initial . $value;
-        };
-
-        self::assertEquals('ABC', fold(['A', 'B', 'C'], $concat));
+        self::assertEquals(
+            'ABC',
+            fold(['A', 'B', 'C'], static fn($value, $initial): string => $initial . $value)
+        );
     }
 }

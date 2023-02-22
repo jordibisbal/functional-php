@@ -6,17 +6,15 @@ namespace j45l\functional;
 
 /**
  * @phpstan-param iterable<mixed> $collection
- * @phpstan-param callable(mixed $first, mixed $second): int $callback
- * @param         mixed|null $default
- * @return        mixed|null
+ * @phpstan-param callable(mixed $first, mixed $second): bool $bestPredicate
  * @noinspection  PhpPluralMixedCanBeReplacedWithArrayInspection
  */
-function worst(iterable $collection, callable $callback, $default = null)
+function worst(iterable $collection, callable $bestPredicate, mixed $default = null): mixed
 {
     return fold(
         $collection,
-        function ($value, $initial) use ($callback) {
-            return $callback($value, $initial) < 0 ? $value : $initial;
+        function ($value, $initial) use ($bestPredicate) {
+            return !$bestPredicate($value, $initial) ? $value : $initial;
         },
         $default
     );

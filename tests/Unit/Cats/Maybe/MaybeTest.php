@@ -14,7 +14,6 @@ use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertInstanceOf;
 
 /**
- * @covers ::\j45l\functional\Optional\Optional()
  * @covers \j45l\functional\Cats\Maybe\Maybe
  */
 final class MaybeTest extends TestCase
@@ -32,7 +31,6 @@ final class MaybeTest extends TestCase
         $some = Maybe(42);
 
         assertInstanceOf(Some::class, $some);
-        /** @noinspection PhpPossiblePolymorphicInvocationInspection */
         assertEquals(42, $some->get());
     }
 

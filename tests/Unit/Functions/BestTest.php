@@ -22,7 +22,7 @@ class BestTest extends TestCase
         self::assertEquals(42, best([], $this->biggerThan(...), 42));
     }
 
-    public function testWorstReturnsWorst(): void
+    public function testBestReturnsBest(): void
     {
         self::assertEquals(
             2,
@@ -33,7 +33,7 @@ class BestTest extends TestCase
         );
     }
 
-    public function testWorstReturnsFirstWorst(): void
+    public function testBestReturnsFirstBest(): void
     {
         self::assertEquals(
             'B',
@@ -44,17 +44,17 @@ class BestTest extends TestCase
         );
     }
 
-    public function biggerThan(int $first, int $second): int
+    public function biggerThan(int $first, int $second): bool
     {
-        return $first <=> $second;
+        return $first > $second;
     }
 
     /**
      * @param Pair<string, int> $value
      * @param Pair<string, int> $initial
      */
-    public function biggerSecondThan(Pair $value, Pair $initial): int
+    public function biggerSecondThan(Pair $value, Pair $initial): bool
     {
-        return $value->second() <=>  $initial->second();
+        return $value->second() >  $initial->second();
     }
 }

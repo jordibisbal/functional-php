@@ -6,11 +6,11 @@ namespace j45l\functional;
 
 use Generator;
 
-/** @param Generator|array<mixed> ...$generators */
-function mergeGenerator(Generator|array ...$generators): Generator
+/** @param Generator|array<mixed> ...$collections */
+function mergeGenerator(Generator|array ...$collections): Generator
 {
-    foreach ($generators as $generator) {
-        foreach ($generator as $value) {
+    foreach ($collections as $collection) {
+        foreach ($collection as $value) {
             yield $value;
         }
     }
