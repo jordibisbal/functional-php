@@ -79,7 +79,7 @@ function butLast(iterable $collection): array
 
 ---
 #### first
-Returns the first element of the collection that `$predicate` if true for or `$default` if collection is empty or ` $predicate` 
+Returns the first element of the collection that `$predicate` if true for or `$default` if collection is empty, or `$predicate` 
 is not true for any. If predicate is not given, just the first one is returned.
 
 ```PHP
@@ -92,14 +92,14 @@ function first(iterable $collection, Closure $predicate = null, mixed $default =
 ```
 ---
 #### head
-Returns the first element of the collection that `$predicate` if true for or `$default` if collection is empty or ` $predicate`
+Returns the first element of the collection that `$predicate` if true for, or `$default` if collection is empty or `$predicate`
 is not true for any. If predicate is not given, just the first one is returned.
 
 Alias function of [first](#first)
 
 ---
 #### last
-Returns the last element of the collection that `$predicate` if true for or `$default` if collection is empty or ` $predicate`
+Returns the last element of the collection that `$predicate` if true for, or `$default` if collection is empty or `$predicate`
 is not true for any. If predicate is not given, just the first one is returned.
 
 ```PHP
