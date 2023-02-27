@@ -6,9 +6,7 @@ namespace j45l\functional\Test\Unit\Functions;
 
 use PHPUnit\Framework\TestCase;
 
-use function j45l\functional\mergeGenerator;
-use function j45l\functional\toArray;
-use function j45l\functional\yieldIterable;
+use function j45l\functional\merge;
 
 class MergeTest extends TestCase
 {
@@ -16,23 +14,28 @@ class MergeTest extends TestCase
      * @phpstan-return mixed[][][]
      * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
      */
-    public function relayDataProvider(): array
+    public function mergeDataProvider(): array
     {
         return [
             'arrays' => [[1, 2, 'A', 'B'], [[1, 2], ['A', 'B']]],
-            'generators' => [[1, 2, 'A', 'B'], [yieldIterable([1, 2]), yieldIterable(['A', 'B'])]],
-            'mixed' => [[1, 2, 'A', 'B'], [[1, 2], yieldIterable(['A', 'B'])]],
+            'override with right' => [
+                ['A' => 'a', 'B' => 'br', 0 => 'C', 1 => 'cr'],
+                [['A' => 'a', 'B' => 'b', 2 => 'C'], ['B' => 'br', 3 => 'cr']]
+            ],
+            'merge not recursive' => [
+                ['A' => ['br']], [['A' => ['b', 'c']], ['A' => ['br']]]
+            ]
         ];
     }
 
     /**
      * @param mixed[] $expected
      * @param mixed[] $collections
-     * @dataProvider relayDataProvider
+     * @dataProvider mergeDataProvider
      * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
      */
-    public function testRelay(array $expected, array $collections): void
+    public function testMerge(array $expected, array $collections): void
     {
-        self::assertEquals($expected, toArray(mergeGenerator(...$collections)));
+        self::assertEquals($expected, merge(...$collections));
     }
 }

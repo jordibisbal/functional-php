@@ -10,8 +10,8 @@ use Generator;
 function mergeGenerator(Generator|array ...$collections): Generator
 {
     foreach ($collections as $collection) {
-        foreach ($collection as $value) {
-            yield $value;
+        foreach ($collection as $key => $value) {
+            yield $key => $value;
         }
     }
 }

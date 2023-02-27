@@ -7,11 +7,12 @@ namespace j45l\functional;
 use Traversable;
 
 /**
- * @param    mixed|iterable<mixed> $item
- * @return   array<mixed>
+ * @template T
+ * @param    T|\Traversable<T> $item
+ * @return   array<T>
  * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
  */
-function toArray($item): array
+function toArray(mixed $item): array
 {
     return match (true) {
         $item instanceof Traversable => iterator_to_array($item),

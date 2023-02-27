@@ -196,7 +196,6 @@ function map(iterable $collection, Closure $function): array
 [4, 8, 12]
 ```
 ---
----
 #### mapFirst
 
 Maps (transform) through `$function` the first element of `$collection` where `$predicate` is true (every element if
@@ -210,6 +209,27 @@ function mapFirst(iterable $collection, Closure $map, Closure $predicate = null,
 > mapFirst([1, 2, 3], fn ($x): int => $x * 4)
 
 4
+```
+
+#### Merge
+
+Merges some collections (arrays), alias to `array_merge`.
+When merging, numeric keys are not preserved and all elements are present on the output array, non-numeric keys are preserved
+if repeated the rightmost one overrides the others.
+The merge is not recursive.
+
+```PHP
+function merge(array ...$arrays): array
+```
+
+```PHP
+> merge(['A' => 'a', 'B' => 'b', 2 => 'C'], ['B' => 'br', 3 => 'Cr'])
+
+['A' => 'a', 'B' => 'br', 0 => 'C', 1 => 'Cr']
+
+> merge(['A' => ['B', 'C']], ['A' => ['Br']])
+
+['A' => ['Br']]
 ```
 ---
 ### Function composition, partial application and curling
