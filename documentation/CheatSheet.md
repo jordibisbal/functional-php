@@ -1,36 +1,5 @@
 # j45l/functional-php
 
-- [j45l/functional-php](#j45lfunctional-php)
-    * [Functional primitives for PHP](#functional-primitives-for-php)
-        + [Collection filtering](#collection-filtering)
-            - [best](#best)
-            - [butLast](#butlast)
-            - [first](#first)
-            - [head](#head)
-            - [last](#last)
-        + [Collection transformation functions](#collection-transformation-functions)
-            - [cartesianProduct](#cartesianproduct)
-            - [crossCompareSet](#crosscompareset)
-            - [fold](#fold)
-            - [foldRight](#foldright)
-            - [map](#map)
-            - [mapFirst](#mapfirst)
-        + [Function composition, partial application and curling](#function-composition-partial-application-and-curling)
-            - [compose](#compose)
-        + [Transform functions](#transform-functions)
-            - [cloneWith](#clonewith)
-            - [identity](#identity)
-            - [isAOr](#isaor)
-            - [isClosureOr](#isclosureor)
-        + [Environment](#environment)
-            - [delay](#delay)
-        + [Logic functions](#logic-functions)
-            - [falseFn](#falsefn)
-        + [Repeat functions](#repeat-functions)
-            - [doUntil](#dountil)
-            - [doWhile](#dowhile)
-
-
 ## Functional primitives for PHP
 
 https://github.com/jordibisbal/functional-php
@@ -46,7 +15,7 @@ you need to use one, just wrap it in an arrow function, and you are good to go.
 Check function's unit test for further insight.
 
 ---
-### Collection filtering
+### Collection filtering and selection
 Functions intended to filter, select and reject elements on collections.
 
 ---
@@ -110,6 +79,32 @@ function last(iterable $collection, Closure $predicate = null, mixed $default = 
 
 3
 ```
+
+---
+#### pluck
+Return the `$propertyName` element from each element from the `$collection`, 
+`$defaultValue` if the property is not found for the element.
+
+If an array is given as `$propertyName` then they are pluck one over the other, so 
+`pluck($collection, ['a', 'b'])` is the same as `pluck(pluck($collection, 'A'), 'B')`.
+
+Pluck retrieves the property value using the first of the following (uses take internally, so same rules apply):
+* The element is an object and a `$propertyName` is a method, then the method is invoked with no parameters.
+* The element is an object and has a public `$propertyName` property, then the property value.
+* The element is an array, then the value at index `$propertyName`
+```PHP
+function pluck(iterable $collection, string|array $propertyName, mixed $defaultValue = null): array
+```
+
+```PHP
+> pluck(
+      [ 123 => ['name' => 'alice', 'email' => 'alice@mail.com'], 456 => ['name' => 'bob', 'email' => 'bob@mail.com'] ],
+      'email'
+  )
+
+[123 => 'alice@gmail.com', 456 => 'bob@gmail.com']
+```
+
 
 ---
 ### Collection transformation functions
@@ -211,6 +206,7 @@ function mapFirst(iterable $collection, Closure $map, Closure $predicate = null,
 4
 ```
 
+---
 #### Merge
 
 Merges some collections (arrays), alias to `array_merge`.
@@ -232,9 +228,28 @@ function merge(array ...$arrays): array
 ['A' => ['Br']]
 ```
 ---
+
+#### MergeGenerator
+
+Merges iterables (generators and/or arrays) and produces a generator that yields all key/values.
+We aware the keys can be repeated.
+
+```PHP
+function mergeGenerator(Generator|array ...$collections): Generator
+```
+
+```PHP
+> mergeGenerator(['A' => 'a', 'B' => 'b'], ['B' => 'br'])
+
+yieldIterable(['A', 'B', 'B'], ['a', 'b', 'br'])
+// The following is generated: 'A' => 'a', 'B' => 'b' and 'B' => 'br' 
+```
+---
+
 ### Function composition, partial application and curling
 
 ---
+
 #### compose
 Return a new function that is the composition of the given ones. So `compose(f,g)(x)` becomes `g(f(x))` (right composition).
 ```PHP
@@ -249,9 +264,57 @@ function compose(Closure ...$functions): Closure
 
 42
 ```
+
 ---
-### Transform functions
-Functions transforming values
+
+#### partial
+Return a new function with a partial left application of the given function, it returns a new
+function that call the given one with the first parameters set to `$arguments`.
+```PHP
+function partial(Closure $fn, ...$arguments): Closure
+```
+
+```PHP
+> partial(static fn (...$values) => concat($values), 'a', 'b')('c', 'd')
+
+abcd
+```
+
+---
+
+#### partialRight
+Return a new function with a partial right application of the given function, it returns a new
+function that call the given one with the last parameters set to `$arguments`.
+```PHP
+function partialRight(Closure $fn, ...$arguments): Closure
+```
+
+```PHP
+> partialRight(static fn (...$values) => concat($values), 'c', 'd')('a', 'b')
+
+abcd
+```
+
+---
+
+#### pipe
+Returns the composition of the given `functions` with null as the (first) parameter. Alias to `compose(...$functions)(null)`
+```PHP
+function pipe(Closure ...$functions): mixed
+```
+
+```PHP
+> pipe(
+      fn () => 4,
+      fn ($x) => $x * 10,
+      fn ($x) => $x + 2,
+  )
+
+42
+```
+---
+### Object & type functions
+Functions to check/enforce type and object manipulation
 
 ---
 #### cloneWith
@@ -271,19 +334,6 @@ cloneWith(object $object, Closure $closure): object
 
 Note it cannot mutate readonly properties if already defined (e.g. initialized in the constructor).
 
----
-#### identity
-Return the passed value.
-
-```PHP
-function identity(mixed $x = null): mixed
-```
-
-```PHP
-> identity(42);
-
-42
-```
 ---
 #### isAOr
 Return the `$value` if is an object of the given `$class`, elsewhere returns `$default`. If `$default` if a closure
@@ -322,30 +372,14 @@ false
 ```
 
 ---
-### Environment
+### Value functions
 
----
-#### delay
-Waits for `$seconds` seconds then executes the function and returns its return value, if a `delayFn` is given, executes 
-it instead of usleep to wait.
-
-```PHP
-function delay(float $seconds, Closure $callable, Closure $delayFn = null): mixed
-```
-
-```PHP
-> delay(1, fn () => 42)
-
-(after 1 second)
-42
-```
----
-### Logic functions
+Functions aimed to provide values and default values and behaviours.
 
 ---
 #### falseFn
 
-Return a function than returns 'false'.
+Return a function than returns `false`.
 
 ```PHP
 function falseFn(): bool
@@ -353,6 +387,61 @@ function falseFn(): bool
 
 ```PHP
 > falseFn()()
+
+false
+```
+---
+#### identity
+Return the passed value.
+
+```PHP
+function identity(mixed $x = null): mixed
+```
+
+```PHP
+> identity(42);
+
+42
+```
+---
+#### nop
+
+Return a function than returns `null`, works as 'no operation'.
+
+```PHP
+function nop(): bool
+```
+
+```PHP
+> nopFn()()
+
+false
+```
+---
+#### trueFn
+
+Return a function than returns `true`.
+
+```PHP
+function trueFn(): bool
+```
+
+```PHP
+> trueFn()()
+
+false
+```
+---
+### Logic functions
+
+Negates the value of the given closure as boolean.
+
+```PHP
+function not(Closure $fn): Closure
+```
+
+```PHP
+> not(fn () => true)
 
 false
 ```
@@ -422,4 +511,45 @@ doUntil(
         $effect = 42;
     }
 )
-`
+```
+
+---
+### Effect functions
+
+Function to produce effects or that rely on them.
+
+---
+
+#### also
+
+Executes a given function with while returns the passed value.
+
+```PHP
+function also(Closure $function): Closure
+```
+
+```PHP
+> $effect = 20;
+> also( function ($x) use (&$effect) { $effect = $effect + $x; } )(22)
+
+22
+
+> $effect
+
+42
+```
+---
+#### delay
+Waits for `$seconds` seconds then executes the function and returns its return value, if a `delayFn` is given, executes
+it instead of usleep to wait.
+
+```PHP
+function delay(float $seconds, Closure $callable, Closure $delayFn = null): mixed
+```
+
+```PHP
+> delay(1, fn () => 42)
+
+(after 1 second)
+42
+```

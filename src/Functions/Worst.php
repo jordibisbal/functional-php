@@ -11,10 +11,10 @@ namespace j45l\functional;
  */
 function worst(iterable $collection, callable $bestPredicate, mixed $default = null): mixed
 {
-    return fold(
+    return foldRight(
         $collection,
-        function ($value, $initial) use ($bestPredicate) {
-            return !$bestPredicate($value, $initial) ? $value : $initial;
+        function ($value, $acc) use ($bestPredicate) {
+            return !$bestPredicate($value, $acc) ? $value : $acc;
         },
         $default
     );

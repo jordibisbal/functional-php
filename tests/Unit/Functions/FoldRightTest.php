@@ -14,7 +14,7 @@ class FoldRightTest extends TestCase
     {
         self::assertEquals(
             'CBA',
-            foldRight(['A', 'B', 'C'], static fn($value, $initial): string => $initial . $value)
+            foldRight(['A', 'B', 'C'], static fn($initial, $value): string => $initial . $value)
         );
     }
 }

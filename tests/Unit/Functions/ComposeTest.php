@@ -6,10 +6,8 @@ namespace j45l\functional\Test\Unit\Functions;
 
 use PHPUnit\Framework\TestCase;
 
-use function j45l\functional\cloneWith;
 use function j45l\functional\compose;
 use function PHPUnit\Framework\assertEquals;
-use function PHPUnit\Framework\assertNotSame;
 
 class ComposeTest extends TestCase
 {

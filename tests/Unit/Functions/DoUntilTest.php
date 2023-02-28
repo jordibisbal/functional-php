@@ -4,9 +4,7 @@ namespace j45l\functional\Test\Unit\Functions;
 
 use PHPUnit\Framework\TestCase;
 
-use function j45l\functional\delay;
 use function j45l\functional\doUntil;
-use function j45l\functional\falseFn;
 use function j45l\functional\nop;
 use function j45l\functional\trueFn;
 use function PHPUnit\Framework\assertEquals;

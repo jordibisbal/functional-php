@@ -14,7 +14,7 @@ class FoldTest extends TestCase
     {
         self::assertEquals(
             'ABC',
-            fold(['A', 'B', 'C'], static fn($value, $initial): string => $initial . $value)
+            fold(['A', 'B', 'C'], static fn($initial, $value): string => $initial . $value)
         );
     }
 }

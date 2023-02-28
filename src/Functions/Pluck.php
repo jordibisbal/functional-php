@@ -14,13 +14,7 @@ namespace j45l\functional;
  * @no-named-arguments
  * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
  */
-function pluck(iterable $collection, $propertyName, $defaultValue = null): array
+function pluck(iterable $collection, string|array $propertyName, mixed $defaultValue = null): array
 {
-    $aggregation = [];
-
-    foreach ($collection as $index => $element) {
-        $aggregation[$index] = take($element, $propertyName, $defaultValue);
-    }
-
-    return $aggregation;
+    return map($collection, fn ($item) => take($item, $propertyName, $defaultValue));
 }

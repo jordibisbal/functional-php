@@ -14,8 +14,8 @@ function best(iterable $collection, Closure $bestPredicate, mixed $default = nul
 {
     return fold(
         $collection,
-        function ($value, $initial) use ($bestPredicate) {
-            return $bestPredicate($value, $initial) ? $value : $initial;
+        function ($acc, $value) use ($bestPredicate) {
+            return $bestPredicate($value, $acc) ? $value : $acc;
         },
         $default
     );

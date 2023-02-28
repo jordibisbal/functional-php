@@ -24,8 +24,8 @@ class PluckTest extends TestCase
                 'email',
             ],
             'Nested' => [
-                ['emailValue', 'secondEmail'],
-                [['user' => ['email' => 'emailValue']], ['user' => ['email' => 'secondEmail']]],
+                [123 => 'emailValue', 456 => 'secondEmail'],
+                [123 => ['user' => ['email' => 'emailValue']], 456 => ['user' => ['email' => 'secondEmail']]],
                 ['user', 'email'],
             ],
         ];
@@ -38,7 +38,7 @@ class PluckTest extends TestCase
      * @dataProvider pluckDataProvider
      * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
      */
-    public function testPluck(array $expected, array $collection, $properties): void
+    public function testPluck(array $expected, array $collection, mixed $properties): void
     {
         self::assertEquals($expected, pluck($collection, $properties, 'default'));
     }

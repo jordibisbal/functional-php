@@ -8,10 +8,7 @@ use Closure;
 
 use function array_merge as arrayMerge;
 
-/**
- * @param mixed $arguments
- */
-function partial(Closure $callback, ...$arguments): Closure
+function partial(Closure $fn, mixed ...$arguments): Closure
 {
-    return static fn(...$innerArguments) => $callback(...arrayMerge($arguments, $innerArguments));
+    return static fn(...$innerArguments) => $fn(...$arguments, ...$innerArguments);
 }
