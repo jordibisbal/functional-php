@@ -246,12 +246,14 @@ function mapFirst(iterable $collection, Closure $map, Closure $predicate = null,
 ```
 
 ---
-#### Merge
+#### merge
 
 Merges some collections (arrays), alias to `array_merge`.
-When merging, numeric keys are not preserved and all elements are present on the output array, non-numeric keys are preserved
-if repeated the rightmost one overrides the others.
-The merge is not recursive.
+
+When merging, numeric keys are not preserved and all elements are present on the output array, non-numeric keys are preserved,
+if repeated, the rightmost one overrides the others.
+
+merge is not recursive.
 
 ```PHP
 function merge(array ...$arrays): array
@@ -268,7 +270,7 @@ function merge(array ...$arrays): array
 ```
 ---
 
-#### MergeGenerator
+#### mergeGenerator
 
 Merges iterables (generators and/or arrays) and produces a generator that yields all key/values.
 We aware the keys can be repeated.
@@ -580,7 +582,7 @@ function also(Closure $function): Closure
 ---
 #### delay
 Waits for `$seconds` seconds then executes the function and returns its return value, if a `delayFn` is given, executes
-it instead of usleep to wait.
+it instead of `usleep($seconds * 1E6)` to wait.
 
 ```PHP
 function delay(float $seconds, Closure $callable, Closure $delayFn = null): mixed
