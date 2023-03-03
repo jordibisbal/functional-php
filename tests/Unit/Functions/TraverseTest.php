@@ -186,11 +186,32 @@ class TraverseTest extends TestCase
                 $whiskeys,
                 [
                     [ fn($_, $type) => $type === 'Single Malt' ],
-                    [ trueFn(...), fn($distillery) => $distillery['whiskeys'] ],
+                    [ trueFn(...), fn ($distillery) => $distillery['whiskeys'] ],
                     [
                         fn ($value) => (float) $value['price'] < 200,
                         fn ($node, $path) =>
                             ['distillery' => $path[1], 'name' => $node['name'], 'price' => $node['price']]
+                    ],
+                ]
+            )
+        );
+
+        assertEquals(
+            [
+                [ 'distillery' => 'Macallan', 'name' => '12 Year Double Cask', 'price' => '79.00', ],
+            ],
+            traverse(
+                $whiskeys,
+                [
+                    [ fn ($_, $type) => $type === 'Single Malt' ],
+                    [
+                        fn ($distillery) => $distillery['region'] !== 'Japan',
+                        fn ($distillery) => $distillery['whiskeys']
+                    ],
+                    [
+                        fn ($whiskey) => (float) $whiskey['price'] < 200,
+                        fn ($whiskey, $path) =>
+                        ['distillery' => $path[1], 'name' => $whiskey['name'], 'price' => $whiskey['price']]
                     ],
                 ]
             )

@@ -299,19 +299,18 @@ from the original collection by using `$path` as `$path` is built while traversi
 > traverse(
       $whiskeys,
       [
-          [ fn($_, $type) => $type === 'Single Malt' ],
-          [ trueFn(...), fn($distillery) => $distillery['whiskeys'] ],
+          [ fn ($_, $type) => $type === 'Single Malt' ],
+          [ fn ($distillery) => $distillery['region'] !== 'Japan', fn (`$distillery`) => $distillery['whiskeys'] ],
           [
-              fn ($value) => (float) $value['price'] < 200,
-              fn ($node, $path) =>
-                  ['distillery' => $path[1], 'name' => $node['name'], 'price' => $node['price']]
+              fn ($whiskey) => (float) $whiskey['price'] < 200,
+              fn ($whiskey, $path) =>
+                  ['distillery' => $path[1], 'name' => $whiskey['name'], 'price' => $whiskey['price']]
           ],
       ]
   )
   
 [
-    [ 'distillery' => 'Macallan', 'name' => '12 Year Double Cask', 'price' => '79.00', ],
-    [ 'distillery' => 'Yamazaki', 'name' => '12 Year Old', 'price' => '180.00', ]
+     [ 'distillery' => 'Macallan', 'name' => '12 Year Double Cask', 'price' => '79.00', ],
 ],
 ```
 
