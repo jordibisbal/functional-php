@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\identity;
 use function j45l\functional\traverse;
+use function j45l\functional\trueFn;
+use function PHPUnit\Framework\assertEquals;
 
 /** @covers ::\j45l\functional\traverse() */
 class TraverseTest extends TestCase
@@ -137,6 +139,59 @@ class TraverseTest extends TestCase
                     [fn ($value, $key) => ($value['bacon'] ?? null) === 'spam', fn ($value) => $value['eggs'] ?? null],
                     [fn ($value, $key) => $key === 'sausage'],
                     [fn ($value, $key) => $key === 'lobster'],
+                ]
+            )
+        );
+    }
+
+    public function testExampleData(): void
+    {
+        $whiskeys = [
+            'Single Malt' => [
+                'Glenmorangie' => [
+                    'region' => 'Highland, Scotland',
+                    'whiskeys' => [
+                        [ 'name' => 'Signet', 'price' => '236.00' ],
+                    ],
+                ],
+                'Macallan' => [
+                    'region' => 'Highland, Scotland',
+                    'whiskeys' => [
+                        [ 'name' => '12 Year Double Cask', 'price' => '79.00' ],
+                    ],
+                ],
+                'Yamazaki' => [
+                    'region' => 'Japan',
+                    'whiskeys' => [
+                        [ 'name' => '12 Year Old', 'price' => '180.00' ],
+                    ],
+                ],
+            ],
+            'Blended' => [
+                'Buchanan' => [
+                    'region' => 'Scotland',
+                    'whiskeys' => [
+                        [ 'name' => '12 Year Scotch', 'price' => '32.00' ]
+                    ],
+                ]
+            ]
+        ];
+
+        assertEquals(
+            [
+                [ 'distillery' => 'Macallan', 'name' => '12 Year Double Cask', 'price' => '79.00', ],
+                [ 'distillery' => 'Yamazaki', 'name' => '12 Year Old', 'price' => '180.00',]
+            ],
+            traverse(
+                $whiskeys,
+                [
+                    [ fn($_, $type) => $type === 'Single Malt' ],
+                    [ trueFn(...), fn($distillery) => $distillery['whiskeys'] ],
+                    [
+                        fn ($value) => (float) $value['price'] < 200,
+                        fn ($node, $path) =>
+                            ['distillery' => $path[1], 'name' => $node['name'], 'price' => $node['price']]
+                    ],
                 ]
             )
         );

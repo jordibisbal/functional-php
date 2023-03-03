@@ -212,6 +212,7 @@ function tail(iterable $collection): array
 [2, 3]
 ```
 
+---
 #### take
 Return the `$propertyName` element from each element from `$target`,
 `$defaultValue` if the property is not found for the element.
@@ -239,6 +240,83 @@ function take(mixed $target, array|int|string $propertyName, mixed $defaultValue
 see also: [pluck](#pluck)
 
 ---
+#### traverse
+Map data selectively from complex collections by matching against a series of `$mapSelect`, one for every depth, just 
+terminal nodes (mapped) are returned.
+This allows to traverse a data tree (acyclic graph) matching complex criteria while mapping each node if needed (e.g. 
+selecting data partially).
+
+```PHP
+function traverse(iterable $collection, array $mapSelect): array
+
+$mapSelect signature: 
+    array<array{
+      0?:(Closure(mixed $value, mixed $key, iterable<mixed> $collection):bool),
+      1?:(Closure(mixed $value, array<string|int> $path,iterable<mixed> $collection):mixed)
+    }>
+```
+
+`$mapSelect` matches and map every node, where: 
+   * index 0, if present: the predicate (a Closure) used to select the collection items, the value (current node), key 
+and the original collection is passed to the predicate. If not present every node is selected. 
+   * index 1, the mapper: maps the current node, the value (current node), the path (an array with every key, in order,
+traversed until current node) and the original collection is passed to the mapper. If not present the node is traversed
+as is.
+
+Be aware that mapping intermediate nodes, by removing nesting levels could disallow you to access some nodes
+from the original collection by using `$path` as `$path` is built while traversing the mapped nodes.
+```PHP
+> $whiskeys = [
+      'Single Malt' => [
+          'Glenmorangie' => [
+              'region' => 'Highland, Scotland',
+              'whiskeys' => [
+                  [ 'name' => 'Signet', 'price' => '236.00' ],
+              ],
+          ],
+          'Macallan' => [
+              'region' => 'Highland, Scotland',
+              'whiskeys' => [
+                  [ 'name' => '12 Year Double Cask', 'price' => '79.00' ],
+              ],
+          ],
+          'Yamazaki' => [
+              'region' => 'Japan',
+              'whiskeys' => [
+                  [ 'name' => '12 Year Old', 'price' => '180.00' ],
+              ],
+          ],
+      ],
+      'Blended' => [
+          'Buchanan' => [
+              'region' => 'Scotland',
+              'whiskeys' => [
+                  [ 'name' => '12 Year Scotch', 'price' => '32.00' ]
+              ],
+          ]
+      ]
+  ]; 
+> traverse(
+      $whiskeys,
+      [
+          [ fn($_, $type) => $type === 'Single Malt' ],
+          [ trueFn(...), fn($distillery) => $distillery['whiskeys'] ],
+          [
+              fn ($value) => (float) $value['price'] < 200,
+              fn ($node, $path) =>
+                  ['distillery' => $path[1], 'name' => $node['name'], 'price' => $node['price']]
+          ],
+      ]
+  )
+  
+[
+    [ 'distillery' => 'Macallan', 'name' => '12 Year Double Cask', 'price' => '79.00', ],
+    [ 'distillery' => 'Yamazaki', 'name' => '12 Year Old', 'price' => '180.00', ]
+],
+```
+
+---
+
 ### Collection transformation functions
 Functions transforming collections.
 

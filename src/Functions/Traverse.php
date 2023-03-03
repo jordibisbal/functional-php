@@ -4,36 +4,41 @@ declare(strict_types=1);
 
 namespace j45l\functional;
 
+use Closure;
 use function is_iterable as isIterable;
 
 /**
  * @phpstan-param iterable<mixed> $collection Collection
  * @phpstan-param array<array{
- *         0:(callable(mixed,mixed,iterable<mixed>):bool),
- *         1?:callable(mixed,mixed,iterable<mixed>):bool
- *     }> $queries
+ *         0?:(Closure(mixed $value, mixed $key, iterable<mixed> $collection):bool),
+ *         1?:(Closure(mixed $value, array<string|int> $path,iterable<mixed> $collection):mixed)
+ *     }> $mapSelect
  * @phpstan-return array<mixed>
  * @SuppressWarnings(PHPMD.UnusedFormalParameter)
  */
-function traverse(iterable $collection, array $queries): array
+function traverse(iterable $collection, array $mapSelect): array
 {
-    return with(
-        first($queries)[0] ?? trueFn(...),
-        first($queries)[1] ?? identity(...),
-        tail($queries)
-    )(static fn ($currentPredicate, $currentMapper, $queriesLeft) => reduce(
-        $collection,
-        fn ($projections, $node, $index) => [
-            ...$projections,
-            ...!$currentPredicate($node, $index, $collection) ? [] : match (true) {
-                empty($queriesLeft) =>
-                    [$index => $currentMapper($node)],
-                isIterable($mappedNode = $currentMapper($node)) =>
-                    traverse($mappedNode, $queriesLeft),
-                default =>
-                    []
-            }
-        ],
-        []
-    ));
+    return ($traverse =
+        static function (iterable $branch, array $mapSelect, array $path) use (&$traverse, $collection) {
+            return with(
+                first($mapSelect)[0] ?? trueFn(...),
+                first($mapSelect)[1] ?? identity(...),
+                tail($mapSelect)
+            )(static fn($currentPredicate, $currentMapper, $mapSelectLeft) => reduce(
+                $branch,
+                fn($projections, $node, $index) => [
+                    ...$projections,
+                    ...!$currentPredicate($node, $index, $branch)
+                        ? []
+                        : match (true) {
+                            empty($mapSelectLeft) => [$index => $currentMapper($node, $path, $collection)],
+                            isIterable($mappedNode = $currentMapper($node, $path, $collection)) =>
+                                $traverse($mappedNode, $mapSelectLeft, [...$path, $index]),
+                            default => []
+                        }
+                ],
+                []
+            ));
+        }
+    )($collection, $mapSelect, []);
 }
