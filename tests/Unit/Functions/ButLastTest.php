@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 use function j45l\functional\butLast;
 use function PHPUnit\Framework\assertEquals;
 
+/** @covers ::\j45l\functional\butLast() */
 class ButLastTest extends TestCase
 {
     public function testEmptyArray(): void

@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use function j45l\functional\cartesianProduct;
 use function PHPUnit\Framework\assertEquals;
 
+/** @covers ::\j45l\functional\cartesianProduct() */
 class CartesianProductTest extends TestCase
 {
     /**

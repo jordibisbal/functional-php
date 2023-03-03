@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 use function j45l\functional\also;
 use function PHPUnit\Framework\assertEquals;
 
+/** @covers ::\j45l\functional\also() */
 class AlsoTest extends TestCase
 {
     public function testCanProduceEffect(): void

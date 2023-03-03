@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use function j45l\functional\toIterable;
 use function j45l\functional\yieldIterable;
 
+/** @covers ::\j45l\functional\toIterator() */
 class ToIterableTest extends TestCase
 {
     public function testToArray(): void

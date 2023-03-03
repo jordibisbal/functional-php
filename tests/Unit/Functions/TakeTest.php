@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\take;
 
+/** @covers ::\j45l\functional\take() */
 class TakeTest extends TestCase
 {
     /**

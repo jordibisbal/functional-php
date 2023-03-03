@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 use function Functional\tail;
 
+/** @covers ::\j45l\functional\tail() */
 class TailTest extends TestCase
 {
     /** @var int[] */

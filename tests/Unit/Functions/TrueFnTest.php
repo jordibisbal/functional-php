@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 use function j45l\functional\trueFn;
 use function PHPUnit\Framework\assertTrue;
 
+/** @covers ::\j45l\functional\trueFn() */
 class TrueFnTest extends TestCase
 {
     public function testFalse(): void

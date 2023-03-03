@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use function j45l\functional\toArray;
 use function j45l\functional\toGenerator;
 
+/** @covers ::\j45l\functional\toGenerator() */
 class ToGeneratorTest extends TestCase
 {
     public function testToGeneratorIsNotConsumedByCurrent(): void

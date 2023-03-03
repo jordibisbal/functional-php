@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\select;
 
+/** @covers ::\j45l\functional\select() */
 class SelectTest extends TestCase
 {
     /** @var Array<mixed> */

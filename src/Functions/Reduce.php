@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace j45l\functional;
 
+use Closure;
+
 /**
  * @phpstan-param iterable<mixed> $collection Collection
- * @phpstan-param callable(mixed $initial, mixed $value, mixed $index, mixed $collection): mixed $callback
+ * @phpstan-param Closure(mixed $initial, mixed $value, mixed $index, mixed $collection): mixed $fn
  * @noinspection  PhpPluralMixedCanBeReplacedWithArrayInspection
  */
-function reduce(iterable $collection, callable $callback, mixed $initial = null): mixed
+function reduce(iterable $collection, Closure $fn, mixed $initial = null): mixed
 {
     foreach ($collection as $index => $value) {
-        $initial = $callback($initial, $value, $index, $collection);
+        $initial = $fn($initial, $value, $index, $collection);
     }
 
     return $initial;

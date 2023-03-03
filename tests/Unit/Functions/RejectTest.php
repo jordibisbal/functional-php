@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\reject;
 
+/** @covers ::\j45l\functional\reject() */
 class RejectTest extends TestCase
 {
     /** @var Array<mixed> */
@@ -29,16 +30,18 @@ class RejectTest extends TestCase
         $this->hash = ['k1' => 'value', 'k2' => 'correct', 'k3' => 'correct'];
         $this->hashIterator = new ArrayIterator($this->hash);
     }
+
     /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
     public function test(): void
     {
-        $callback = static fn($value, $key, $collection) => $value === 'value' || $key === 'k2';
+        $predicate = static fn($value, $key, $collection) => $value === 'value' || $key === 'k2';
 
-        self::assertSame([1 => 'correct'], reject($this->list, $callback));
-        self::assertSame([1 => 'correct'], reject($this->listIterator, $callback));
-        self::assertSame(['k3' => 'correct'], reject($this->hash, $callback));
-        self::assertSame(['k3' => 'correct'], reject($this->hashIterator, $callback));
+        self::assertSame([1 => 'correct'], reject($this->list, $predicate));
+        self::assertSame([1 => 'correct'], reject($this->listIterator, $predicate));
+        self::assertSame(['k3' => 'correct'], reject($this->hash, $predicate));
+        self::assertSame(['k3' => 'correct'], reject($this->hashIterator, $predicate));
     }
+
     public function testPassNoCallable(): void
     {
         self::assertSame([], reject($this->list));

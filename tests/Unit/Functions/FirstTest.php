@@ -11,6 +11,7 @@ use function j45l\functional\trueFn;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNull;
 
+/** @covers ::\j45l\functional\first() */
 class FirstTest extends TestCase
 {
     public function testFirstReturnsFirstMatching(): void

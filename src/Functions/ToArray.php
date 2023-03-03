@@ -8,15 +8,15 @@ use Traversable;
 
 /**
  * @template T
- * @param    T|\Traversable<T> $item
+ * @param    T|Traversable<T> $item
  * @return   array<T>
  * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
  */
 function toArray(mixed $item): array
 {
     return match (true) {
-        $item instanceof Traversable => iterator_to_array($item),
         is_array($item) => $item,
+        $item instanceof Traversable => iterator_to_array($item),
         default => [$item],
     };
 }

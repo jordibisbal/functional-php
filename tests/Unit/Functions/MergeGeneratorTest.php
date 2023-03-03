@@ -12,6 +12,7 @@ use function j45l\functional\mergeGenerator;
 use function j45l\functional\PHPUnit\assertYields;
 use function j45l\functional\yieldIterable;
 
+/** @covers ::\j45l\functional\mergeGenerator() */
 class MergeGeneratorTest extends TestCase
 {
     /**

@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\unindex;
 
+/** @covers ::\j45l\functional\unindex() */
 class UnindexTest extends TestCase
 {
     public function testUnindexedArray(): void

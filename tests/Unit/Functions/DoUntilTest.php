@@ -11,6 +11,7 @@ use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertNull;
 
+/** @covers ::\j45l\functional\doUntil() */
 class DoUntilTest extends TestCase
 {
     public function testDoUntilExecutedAtLeastOnce(): void

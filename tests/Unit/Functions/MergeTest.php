@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\merge;
 
+/** @covers ::\j45l\functional\merge() */
 class MergeTest extends TestCase
 {
     /**

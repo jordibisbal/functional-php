@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\unzip;
 
+/** @covers ::\j45l\functional\unzip() */
 class UnzipTest extends TestCase
 {
     public function testUnzipArray(): void

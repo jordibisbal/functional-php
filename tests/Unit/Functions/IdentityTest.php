@@ -9,24 +9,25 @@ use PHPUnit\Framework\TestCase;
 use function j45l\functional\identity;
 use function PHPUnit\Framework\assertSame;
 
+/** @covers ::\j45l\functional\identity() */
 class IdentityTest extends TestCase
 {
     /**
      * @return array<mixed>
      */
-    public function thingsProvider(): array
+    public function valuesProvider(): array
     {
         return [
             'int' => [1],
             'null' => [null],
             'float' => [1.0],
-            'string' => ["1"],
+            'string' => ['1'],
             'array' => [[1, 2]],
             'object' => [(object) [1]],
         ];
     }
 
-    /** @dataProvider thingsProvider */
+    /** @dataProvider valuesProvider */
     public function testFalse(mixed $x): void
     {
         assertSame($x, identity($x));

@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\value;
 
+/** @covers ::\j45l\functional\value() */
 class ValueTest extends TestCase
 {
     public function testValueWrapsValue(): void

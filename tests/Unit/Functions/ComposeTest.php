@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 use function j45l\functional\compose;
 use function PHPUnit\Framework\assertEquals;
 
+/** @covers ::\j45l\functional\compose() */
 class ComposeTest extends TestCase
 {
     public function testEmptyComposeReturnsIdentity(): void

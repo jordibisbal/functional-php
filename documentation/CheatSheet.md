@@ -8,6 +8,10 @@
         + [head](#head)
         + [last](#last)
         + [pluck](#pluck)
+        + [reject](#reject)
+        + [select](#select)
+        + [tail](#tail)
+        + [take](#take)
     * [Collection transformation functions](#collection-transformation-functions)
         + [cartesianProduct](#cartesianproduct)
         + [crossCompareSet](#crosscompareset)
@@ -15,9 +19,16 @@
         + [foldRight](#foldright)
         + [map](#map)
         + [mapFirst](#mapfirst)
-        + [Merge](#merge)
-        + [MergeGenerator](#mergegenerator)
-    * [Function composition, partial application and curling](#function-composition--partial-application-and-curling)
+        + [merge](#merge)
+        + [mergeGenerator](#mergegenerator)
+        + [reduce](#reduce)
+        + [reduceRight](#reduceright)
+        + [recurseTimes](#recursetimes)
+        + [sum](#sum)
+        + [toArray](#toarray)
+        + [toGenerator](#togenerator)
+        + [toIterable](#toiterable)
+    * [Function composition, partial application and curling.](#function-composition--partial-application-and-curling)
         + [compose](#compose)
         + [partial](#partial)
         + [partialRight](#partialright)
@@ -32,13 +43,13 @@
         + [nop](#nop)
         + [trueFn](#truefn)
     * [Logic functions](#logic-functions)
-    * [Repeat functions](#repeat-functions)
+    * [Loop functions](#loop-functions)
         + [doUntil](#dountil)
         + [doWhile](#dowhile)
     * [Effect functions](#effect-functions)
         + [also](#also)
         + [delay](#delay)
-
+      
 ## Functional primitives for PHP
 
 https://github.com/jordibisbal/functional-php
@@ -144,6 +155,88 @@ function pluck(iterable $collection, string|array $propertyName, mixed $defaultV
 [123 => 'alice@gmail.com', 456 => 'bob@gmail.com']
 ```
 
+see also: [take](#take)
+
+---
+
+#### reject
+Return the elements of the `$collection` for which the `$predicate` is false, if no `$predicate` is provided, return the
+falsy ones. Keys are preserved.
+
+```PHP
+function reject(iterable $collection, Closure $predicate = null): array
+
+$predicate signature: Closure(mixed $element, mixed $index, iterable $collection): bool
+```
+
+```PHP
+> reject(
+      ['reject', 'value', 'rejectKey' => 'value'];, 
+      static fn($value, $key, $collection) => $value === 'reject' || $key === 'rejectKey'
+  )
+
+[1 => 'value']
+```
+
+#### select
+Return the elements of the `$collection` for which the `$predicate` is true, if no `$predicate` is provided, return the
+truly ones. Keys are preserved.
+
+```PHP
+function select(iterable $collection, Closure $predicate = null): array
+
+$predicate signature: Closure(mixed $element, mixed $index, iterable $collection): bool
+```
+
+```PHP
+> reject(
+      ['select', 'value', 'selectKey' => 'value'];, 
+      static fn($value, $key, $collection) => $value === 'select' || $key === 'selectKey'
+  )
+
+[0 => 'select', 'selectKey' => 'value']
+```
+
+see also: [reject](#reject)
+
+#### tail
+Returns `$collection` without the first element. Be aware the `$collection` is first converted to array, so ***Generators***
+and other alike types are fully consumed.
+
+```PHP
+function tail(iterable $collection): array
+```
+```PHP
+> tail([1, 2, 3])
+
+[2, 3]
+```
+
+#### take
+Return the `$propertyName` element from each element from `$target`,
+`$defaultValue` if the property is not found for the element.
+
+If an array is given as `$propertyName` then they are token one over the other, so
+`take($target, ['a', 'b'])` is the same as `take(take($target, 'A'), 'B')`.
+
+take retrieves the property value using the first of the following:
+* `$target` is an object and a `$propertyName` is a method, then the method is invoked with no parameters.
+* `$target` is an object and has a public `$propertyName` property, then the property value.
+* `$target` is an array, then the value at index `$propertyName`
+```PHP
+function take(mixed $target, array|int|string $propertyName, mixed $defaultValue = null): mixed
+```
+
+```PHP
+> take(
+      ['name' => 'alice', 'email' => 'alice@mail.com'],
+      'email'
+  )
+
+'alice@gmail.com'
+```
+
+see also: [pluck](#pluck)
 
 ---
 ### Collection transformation functions
@@ -193,11 +286,15 @@ function fold(iterable $collection, Closure $callback, mixed $default = null): m
 ```
 
 ```PHP
-> fold(['A', 'B', 'C'], static fn($value, $initial): string => $initial . $value)
+> fold(['A', 'B', 'C'], static fn($initial, $value): string => $initial . $value)
 
 'ABC' 
 ```
+
+see also: [foldRight](#foldRight), [reduce](#reduce), [reduceRight](#reduceRight), [recurseTimes](#recurseTimes)
+
 ---
+
 #### foldRight
 
 Folds from the right all elements of the collection returning a single scalar value, if the collection is empty, `$default`
@@ -208,10 +305,12 @@ function foldRight(iterable $collection, Closure $callback, mixed $default = nul
 ```
 
 ```PHP
-> foldRight(['A', 'B', 'C'], static fn($value, $initial): string => $initial . $value)
+> foldRight(['A', 'B', 'C'], static fn($initial, $value): string => $initial . $value)
 
 'CBA' 
 ```
+see also: [fold](#fold), [reduce](#reduce), [reduceRight](#reduceRight), [recurseTimes](#recurseTimes)
+
 ---
 #### map
 
@@ -285,9 +384,157 @@ function mergeGenerator(Generator|array ...$collections): Generator
 yieldIterable(['A', 'B', 'B'], ['a', 'b', 'br'])
 // The following is generated: 'A' => 'a', 'B' => 'b' and 'B' => 'br' 
 ```
+
+#### reduce
+
+Reduce from the left all elements of the collection returning a single scalar value. If `$collection` is empty, `$initial` 
+is returned.
+
+```PHP
+function reduce(iterable $collection, Closure $fn, mixed $initial = null): mixed
+
+$fn signature: Closure(mixed $initial, mixed $value, mixed $index, mixed $collection): mixed
+```
+
+```PHP
+> reduce(['A', 'B', 'C'], static fn($initial, $value): string => $initial . $value, '')
+
+'ABC' 
+```
+
+see also: [fold](#fold), [foldRight](#foldRight), [reduceRight](#reduceRight), [recurseTimes](#recurseTimes)
+
 ---
 
-### Function composition, partial application and curling
+#### reduceRight
+
+Reduce from the right all elements of the collection returning a single scalar value. If `$collection` is empty, `$initial`
+is returned.
+
+```PHP
+function reduceRight(iterable $collection, Closure $fn, mixed $initial = null): mixed
+
+$fn signature: Closure(mixed $initial, mixed $value, mixed $index, mixed $collection): mixed
+```
+
+```PHP
+> reduce(['A', 'B', 'C'], static fn($initial, $value): string => $initial . $value, '')
+
+'CBA' 
+```
+
+see also: [fold](#fold), [foldRight](#foldRight), [reduce](#reduce), [recurseTimes](#recurseTimes)
+
+---
+
+#### recurseTimes
+
+Returns a function thant recurse `$times` times the mapping function upon the result of itself.
+
+```PHP
+function recurseTimes(Closure $map): Closure
+
+returned signature: Closure($times): Closure
+    returned signature: Closure(mixed): mixed
+```
+
+```PHP
+> $fn = repeatPipe(fn ($x) => $x * 2)(8)
+> $fn(1);
+
+
+256
+```
+
+#### sum
+
+Returns the sum of all the `$collection` elements. $collection elements should be preferment  either ***float*** or 
+***int***, the sum if done by means on ***+*** so if $collection elements are mixed take in account possible casting 
+(e.g. ***float*** to ***int***, ***string*** to ***float*** or ***int***...).  
+
+```PHP
+function sum(iterable $collection): mixed
+```
+
+```PHP
+> sum([39.1, 2, 0.9]))
+
+42.0
+
+> sum([1, 2, 39])
+
+42
+
+> sum([1, 2, '39'])
+
+42
+```
+
+---
+
+#### toArray
+
+Returns `$item` as an array, if `$item` is already an array, returns it as is, if is a ***Traversable*** 
+(e.g. a ***Generator) consumes it and returns an array with the returned elements (we aware of duplicated keys), 
+otherwise returns a single item array with `$item` as unique content.
+
+```PHP
+function toArray(mixed $item): array
+```
+
+```PHP
+> toArray(1)
+
+[1]
+
+> toArray(yieldIterable([1, 2, 3])))
+
+[1, 2, 3]
+```
+
+see also: [toGenerator](#toGenerator), [toIterable](#toIterable), [yieldIterable](#yieldIterable)
+
+---
+
+#### toGenerator
+
+Returns a ***Generator*** that yields every item of `$iterable`, it does not consume `$iterable` beforehand but as needed 
+(i.e. if iterable is not an array), it supports duplicated keys om `$iterable`.
+
+```PHP
+function toGenerator(iterable $iterable): Generator
+```
+
+```PHP
+> toGenerator([1, 2, 3])->next()->current
+
+2
+```
+
+see also: [toArray](#toArray), [toIterable](#toIterable), [yieldIterable](#yieldIterable)
+
+---
+
+#### toIterable
+
+Returns an iterable from  ***$item***, if `$item` is already one, it returns it as is, if not returns and array with 
+`$item` as its sole element.
+
+```PHP
+function toIterable(mixed $item): iterable
+```
+
+```PHP
+> toIterable(1)
+
+[1]
+```
+
+see also: [toArray](#toArray), [toGenerator](#toGenerator), [yieldIterable](#yieldIterable)
+
+---
+
+### Function composition, partial application and curling.
 
 ---
 
@@ -487,7 +734,7 @@ function not(Closure $fn): Closure
 false
 ```
 ---
-### Repeat functions
+### Loop functions
 
 ---
 #### doUntil

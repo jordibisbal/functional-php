@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\foldRight;
 
+/** @covers ::\j45l\functional\foldRight() */
 class FoldRightTest extends TestCase
 {
     public function testFold(): void

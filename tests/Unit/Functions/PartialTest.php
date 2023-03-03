@@ -8,6 +8,7 @@ use function j45l\functional\partial;
 use function j45l\functional\sum;
 use function PHPUnit\Framework\assertEquals;
 
+/** @covers ::\j45l\functional\partial() */
 class PartialTest extends TestCase
 {
     public function testPartialWithNoArguments(): void

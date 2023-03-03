@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\reduceRight;
 
+/** @covers ::\j45l\functional\reduceRight() */
 class ReduceRightTest extends TestCase
 {
     /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */

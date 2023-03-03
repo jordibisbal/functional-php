@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\delay;
 
+/** @covers ::\j45l\functional\delay() */
 class DelayTest extends TestCase
 {
     public function testFunctionCalledAfterDelay(): void

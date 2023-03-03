@@ -17,21 +17,23 @@ use function is_iterable as isIterable;
  */
 function traverse(iterable $collection, array $queries): array
 {
-    return with(first($queries)[0] ?? trueFn(...), first($queries)[1] ?? identity(...), tail($queries))(
-        static fn ($currentPredicate, $currentMapper, $queriesLeft) => reduce(
-            $collection,
-            fn ($projections, $node, $index) => [
-                ...$projections,
-                ...!$currentPredicate($node, $index, $collection) ? [] : match (true) {
-                    empty($queriesLeft) =>
-                        [$index => $currentMapper($node)],
-                    isIterable($mappedNode = $currentMapper($node)) =>
-                        traverse($mappedNode, $queriesLeft),
-                    default =>
-                        []
-                }
-            ],
-            []
-        )
-    );
+    return with(
+        first($queries)[0] ?? trueFn(...),
+        first($queries)[1] ?? identity(...),
+        tail($queries)
+    )(static fn ($currentPredicate, $currentMapper, $queriesLeft) => reduce(
+        $collection,
+        fn ($projections, $node, $index) => [
+            ...$projections,
+            ...!$currentPredicate($node, $index, $collection) ? [] : match (true) {
+                empty($queriesLeft) =>
+                    [$index => $currentMapper($node)],
+                isIterable($mappedNode = $currentMapper($node)) =>
+                    traverse($mappedNode, $queriesLeft),
+                default =>
+                    []
+            }
+        ],
+        []
+    ));
 }

@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\reduce;
 
+/** @covers ::\j45l\functional\reduce() */
 class ReduceTest extends TestCase
 {
     /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */

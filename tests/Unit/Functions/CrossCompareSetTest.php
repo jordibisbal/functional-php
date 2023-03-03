@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use function j45l\functional\crossCompareSet;
 use function j45l\functional\yieldIterable;
 
+/** @covers ::\j45l\functional\crossCompareSet() */
 class CrossCompareSetTest extends TestCase
 {
     /**

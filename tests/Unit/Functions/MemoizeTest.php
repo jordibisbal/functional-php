@@ -16,6 +16,7 @@ interface MemoizingSubject
     public function calls(): int;
 }
 
+/** @covers ::\j45l\functional\memoize() */
 class MemoizeTest extends TestCase // phpcs:ignore
 {
     /** @use MemoizeTrait<int> */

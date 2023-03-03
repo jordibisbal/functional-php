@@ -9,6 +9,7 @@ use Throwable;
 
 use function j45l\functional\tryOrThrow;
 
+/** @covers ::\j45l\functional\tryOrThrow() */
 final class TryOrThrowTest extends TestCase
 {
     /**

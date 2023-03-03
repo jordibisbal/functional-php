@@ -8,6 +8,7 @@ use j45l\functional\Tuples\Pair;
 use PHPUnit\Framework\TestCase;
 use function j45l\functional\worst;
 
+/** @covers ::\j45l\functional\worst() */
 class WorstTest extends TestCase
 {
     public function testWorstOnEmptyReturnsNullWhenNoDefault(): void

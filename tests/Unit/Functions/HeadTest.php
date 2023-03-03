@@ -10,6 +10,7 @@ use function j45l\functional\head;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNull;
 
+/** @covers ::\j45l\functional\head() */
 class HeadTest extends TestCase
 {
     public function testFirstReturnsFirst(): void

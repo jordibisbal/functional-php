@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\pluck;
 
+/** @covers ::\j45l\functional\pluck() */
 class PluckTest extends TestCase
 {
     /**

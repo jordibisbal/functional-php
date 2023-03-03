@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 use function j45l\functional\mapFirst;
 use function PHPUnit\Framework\assertEquals;
 
+/** @covers ::\j45l\functional\mapFirst() */
 class MapFirstTest extends TestCase
 {
     public function testFirstMapped(): void

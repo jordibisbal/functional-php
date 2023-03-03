@@ -9,12 +9,10 @@ namespace j45l\functional;
  * @return   iterable<mixed>
  * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
  */
-function toIterable($item): iterable
+function toIterable(mixed $item): iterable
 {
-    switch (true) {
-        case is_iterable($item):
-            return $item;
-        default:
-            return [$item];
-    }
+    return match (true) {
+        is_iterable($item) => $item,
+        default => [$item]
+    };
 }

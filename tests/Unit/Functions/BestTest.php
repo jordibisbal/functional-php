@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\best;
 
+/** @covers ::\j45l\functional\best() */
 class BestTest extends TestCase
 {
     public function testBestOnEmptyReturnsNullWhenNoDefault(): void

@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 use function j45l\functional\identity;
 use function j45l\functional\traverse;
 
+/** @covers ::\j45l\functional\traverse() */
 class TraverseTest extends TestCase
 {
     public function testTraverseSingleValue(): void

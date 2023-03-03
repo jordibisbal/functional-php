@@ -10,6 +10,7 @@ use function j45l\functional\pipe;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNull;
 
+/** @covers ::\j45l\functional\pipe() */
 class PipeTest extends TestCase
 {
     public function testEmptyPipeReturnsNull(): void

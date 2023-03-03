@@ -10,6 +10,7 @@ use function j45l\functional\cloneWith;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNotSame;
 
+/** @covers ::\j45l\functional\cloneWith() */
 class CloneWithTest extends TestCase
 {
     public function testCanCloneChangingPrivateProperties(): void

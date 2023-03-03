@@ -7,6 +7,7 @@ use function j45l\functional\not;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertTrue;
 
+/** @covers ::\j45l\functional\not() */
 class NotTest extends TestCase
 {
     public function testNotNegates(): void
