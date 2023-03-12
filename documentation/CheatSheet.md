@@ -315,7 +315,7 @@ from the original collection by using `$path` as `$path` is built while traversi
       $whiskeys,
       [
           [ fn ($_, $type) => $type === 'Single Malt' ],
-          [ fn ($distillery) => $distillery['region'] !== 'Japan', fn (`$distillery`) => $distillery['whiskeys'] ],
+          [ fn ($distillery) => $distillery['region'] !== 'Japan', fn ($distillery) => $distillery['whiskeys'] ],
           [
               fn ($whiskey) => (float) $whiskey['price'] < 200,
               fn ($whiskey, $path) =>
