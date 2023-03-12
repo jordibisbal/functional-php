@@ -6,8 +6,8 @@ use LogicException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Throwable;
-
 use function j45l\functional\tryOrThrow;
+use function PHPUnit\Framework\assertEquals;
 
 /** @covers ::\j45l\functional\tryOrThrow() */
 final class TryOrThrowTest extends TestCase
@@ -17,8 +17,11 @@ final class TryOrThrowTest extends TestCase
      */
     public function testThrowsNothingWhenNoException(): void
     {
-        tryOrThrow(static function () {
-        }, new RuntimeException('Thrown exception'));
+        tryOrThrow(
+            static function () {
+            },
+            new RuntimeException('Thrown exception')
+        );
 
         $this->expectNotToPerformAssertions();
     }
@@ -36,6 +39,22 @@ final class TryOrThrowTest extends TestCase
                 throw new LogicException('Original Exception');
             },
             new RuntimeException('Thrown exception')
+        );
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function testWhenNotThrowingReturnResult(): void
+    {
+        assertEquals(
+            42,
+            tryOrThrow(
+                function (): int {
+                    return 42;
+                },
+                new RuntimeException('Thrown exception')
+            )
         );
     }
 }

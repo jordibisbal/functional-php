@@ -6,8 +6,7 @@ namespace j45l\functional\Test\Unit\Functions;
 
 use ArrayIterator;
 use PHPUnit\Framework\TestCase;
-
-use function Functional\tail;
+use function j45l\functional\tail;
 
 /** @covers ::\j45l\functional\tail() */
 class TailTest extends TestCase
@@ -34,8 +33,8 @@ class TailTest extends TestCase
     {
         $fn = static fn ($x): bool => $x > 2;
 
-        self::assertSame([2 => 3, 3 => 4], tail($this->list, $fn));
-        self::assertSame([2 => 3, 3 => 4], tail($this->listIterator, $fn));
+        self::assertSame([3 => 4], tail($this->list, $fn));
+        self::assertSame([3 => 4], tail($this->listIterator, $fn));
         self::assertSame([], tail($this->badArray, $fn));
         self::assertSame([], tail($this->badIterator, $fn));
     }

@@ -37,6 +37,7 @@ include_once(__DIR__ . '/Functions/Reject.php');
 include_once(__DIR__ . '/Functions/Select.php');
 include_once(__DIR__ . '/Functions/Sum.php');
 include_once(__DIR__ . '/Functions/Tail.php');
+include_once(__DIR__ . '/Functions/TailRecursion.php');
 include_once(__DIR__ . '/Functions/Take.php');
 include_once(__DIR__ . '/Functions/ToArray.php');
 include_once(__DIR__ . '/Functions/ToGenerator.php');

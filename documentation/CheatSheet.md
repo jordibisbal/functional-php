@@ -12,6 +12,7 @@
         + [select](#select)
         + [tail](#tail)
         + [take](#take)
+        + [traverse](#traverse)
     * [Collection transformation functions](#collection-transformation-functions)
         + [cartesianProduct](#cartesianproduct)
         + [crossCompareSet](#crosscompareset)
@@ -43,13 +44,16 @@
         + [nop](#nop)
         + [trueFn](#truefn)
     * [Logic functions](#logic-functions)
+        + [not](#not)
     * [Loop functions](#loop-functions)
         + [doUntil](#dountil)
         + [doWhile](#dowhile)
     * [Effect functions](#effect-functions)
         + [also](#also)
         + [delay](#delay)
-      
+    * [Optimization functions](#optimization-functions)
+        + [tailRecursion](#tailrecursion)
+    
 ## Functional primitives for PHP
 
 https://github.com/jordibisbal/functional-php
@@ -111,8 +115,8 @@ function first(iterable $collection, Closure $predicate = null, mixed $default =
 ```
 ---
 #### head
-Returns the first element of the collection that `$predicate` if true for, or `$default` if collection is empty or `$predicate`
-is not true for any. If predicate is not given, just the first one is returned.
+Returns the first element of the collection that `$predicate` if true for, or `$default` if collection is empty or 
+`$predicate` is not true for any. If predicate is not given, just the first one is returned.
 
 Alias function of [first](#first)
 
@@ -178,6 +182,8 @@ $predicate signature: Closure(mixed $element, mixed $index, iterable $collection
 [1 => 'value']
 ```
 
+see also: [select](#select)
+
 #### select
 Return the elements of the `$collection` for which the `$predicate` is true, if no `$predicate` is provided, return the
 truly ones. Keys are preserved.
@@ -201,16 +207,24 @@ see also: [reject](#reject)
 
 #### tail
 Returns `$collection` without the first element. Be aware the `$collection` is first converted to array, so ***Generators***
-and other alike types are fully consumed.
+and other alike types are fully consumed. If `$collection` is empty or just have one element, an empty array is returned.
+If ` $predicate` is given, be aware the collection is filtered (**select**ed) **before**.
 
 ```PHP
-function tail(iterable $collection): array
+function tail(iterable $collection, Closure $predicate = null): array
+
+$predicate signature: Closure(T, string|int): bool
 ```
 ```PHP
 > tail([1, 2, 3])
 
 [2, 3]
+
+> tail([1, 2, 3, 4], fn (x) => x > 2)
+
+[4]
 ```
+see also: [head](#head), [select](#select)
 
 ---
 #### take
@@ -296,6 +310,7 @@ from the original collection by using `$path` as `$path` is built while traversi
           ]
       ]
   ]; 
+  
 > traverse(
       $whiskeys,
       [
@@ -506,7 +521,7 @@ see also: [fold](#fold), [foldRight](#foldRight), [reduce](#reduce), [recurseTim
 
 #### recurseTimes
 
-Returns a function thant recurse `$times` times the mapping function upon the result of itself.
+Returns a function that recurses `$times` times the mapping function upon the result of itself.
 
 ```PHP
 function recurseTimes(Closure $map): Closure
@@ -516,7 +531,7 @@ returned signature: Closure($times): Closure
 ```
 
 ```PHP
-> $fn = repeatPipe(fn ($x) => $x * 2)(8)
+> $fn = recurseTimes(fn ($x) => $x * 2)(8)
 > $fn(1);
 
 
@@ -630,6 +645,8 @@ function compose(Closure ...$functions): Closure
 42
 ```
 
+see also: [pipe](#pipe)
+
 ---
 
 #### partial
@@ -663,7 +680,8 @@ abcd
 ---
 
 #### pipe
-Returns the composition of the given `functions` with null as the (first) parameter. Alias to `compose(...$functions)(null)`
+Returns the result of the composition of the given `$functions` with null as the (first) parameter. 
+Alias to `compose(...$functions)(null)`
 ```PHP
 function pipe(Closure ...$functions): mixed
 ```
@@ -677,6 +695,9 @@ function pipe(Closure ...$functions): mixed
 
 42
 ```
+
+see also: [compose](#compose)
+
 ---
 ### Object & type functions
 Functions to check/enforce type and object manipulation
@@ -799,6 +820,8 @@ false
 ---
 ### Logic functions
 
+#### not
+
 Negates the value of the given closure as boolean.
 
 ```PHP
@@ -918,3 +941,56 @@ function delay(float $seconds, Closure $callable, Closure $delayFn = null): mixe
 (after 1 second)
 42
 ```
+
+### Optimization functions
+
+---
+#### tailRecursion
+
+Return a new function that decorates `$recursiveFn` with tail recursion using trampoline, be aware the format of 
+`$recursiveFn` is really tricky, so use the examples below as guideline, do not inline any variable reference without
+fully understanding its consequences, and test it really thoroughly. Take a look to 
+***\j45l\functional\Test\Unit\Functions\TailRecursionTest***.
+
+```PHP
+function tailRecursion(Closure $recursiveFn): Closure
+```
+
+```PHP
+> $tailRecursion = static function ($x) use (&$tailRecursion) {
+      /** @phpstan-var Closure $tailRecursion */
+      return match (true) {
+          $x === 1000 => $x,
+          default => $tailRecursion($x + 1),
+      };
+  };
+
+>  $tailRecursion = tailRecursion($tailRecursion);
+>  $tailRecursion(1);
+
+1000
+
+> class Foo {
+      public function invoke() {
+          $tailRecursion = tailRecursion($this->depthRecursive(1000, $tailRecursion));
+                    
+          return $tailRecursion(1);
+      }
+    
+      private function depthRecursive(int $times, mixed &$recurse): Closure
+      {
+          return static function ($x) use ($times, &$recurse) {
+              return match (true) {
+                  $x === $times => $x,
+                  default => $recurse($x + 1),
+              };
+          };
+      }
+  }
+  
+> (new Foo())->invoke();
+
+1000
+```
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
