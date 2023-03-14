@@ -6,6 +6,7 @@ use LogicException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Throwable;
+
 use function j45l\functional\tryOrThrow;
 use function PHPUnit\Framework\assertEquals;
 

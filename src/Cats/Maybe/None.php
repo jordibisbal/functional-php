@@ -15,7 +15,6 @@ use RuntimeException;
  */
 final class None extends Maybe
 {
-
     private function __construct()
     {
     }

@@ -6,6 +6,7 @@ namespace j45l\functional\Test\Unit\Functions;
 
 use j45l\functional\Tuples\Pair;
 use PHPUnit\Framework\TestCase;
+
 use function j45l\functional\worst;
 
 /** @covers ::\j45l\functional\worst() */

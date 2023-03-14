@@ -6,6 +6,7 @@ namespace j45l\functional\Test\Unit\Functions;
 
 use ArrayIterator;
 use PHPUnit\Framework\TestCase;
+
 use function j45l\functional\tail;
 
 /** @covers ::\j45l\functional\tail() */

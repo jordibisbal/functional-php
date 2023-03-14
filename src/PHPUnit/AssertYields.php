@@ -37,7 +37,8 @@ function assertYields(Generator $expected, Generator $actual): void
     );
 
     $ordinal = 1;
-    while (match (true) {
+    while (
+        match (true) {
         !$expected->valid() && !$actual->valid() => false,
         !$expected->valid() =>
         throw new ExpectationFailedException('Expected generator exhausted before actual.'),
@@ -55,7 +56,8 @@ function assertYields(Generator $expected, Generator $actual): void
             $expected->next();
             $actual->next();
         })(true),
-    }) {
+        }
+    ) {
         $ordinal++;
     }
 

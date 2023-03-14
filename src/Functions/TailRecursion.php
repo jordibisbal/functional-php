@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace j45l\functional;
 
 use Closure;
+
 use function array_shift as arrayShift;
 
 /** @return Closure */
@@ -27,4 +28,3 @@ function tailRecursion(Closure $recursiveFn): Closure
         return $result;
     };
 }
-

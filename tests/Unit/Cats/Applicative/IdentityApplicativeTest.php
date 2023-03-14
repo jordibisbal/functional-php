@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace j45l\functional\Test\Unit\Cats\Applicative;
 
 use j45l\functional\Cats\Functors\IdentityApplicative;
+
 use function j45l\functional\identity;
 
 /**

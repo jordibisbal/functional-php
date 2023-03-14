@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace j45l\functional\Cats\Maybe;
 
-use j45l\functional\Cats\Either\Either;
-use j45l\functional\Cats\Either\Success;
-
 /**
  * @template T
  * @extends Maybe<T>

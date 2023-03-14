@@ -15,7 +15,7 @@ class IdentityTest extends TestCase
     /**
      * @return array<mixed>
      */
-    public function valuesProvider(): array
+    public static function valuesProvider(): array
     {
         return [
             'int' => [1],

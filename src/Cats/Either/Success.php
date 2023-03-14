@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace j45l\functional\Cats\Either;
 
 use j45l\functional\Cats\Maybe\Maybe;
+
 use function j45l\functional\with;
 
 /**

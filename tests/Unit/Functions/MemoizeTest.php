@@ -7,7 +7,6 @@ namespace j45l\functional\Test\Unit\Functions;
 use j45l\functional\Optimization\MemoizeTrait;
 use PHPUnit\Framework\TestCase;
 
-use function j45l\functional\first;
 use function j45l\functional\identity;
 
 interface MemoizingSubject
@@ -16,7 +15,7 @@ interface MemoizingSubject
     public function calls(): int;
 }
 
-/** @covers ::\j45l\functional\memoize() */
+/** @covers \j45l\functional\Optimization\MemoizeTrait */
 class MemoizeTest extends TestCase // phpcs:ignore
 {
     /** @use MemoizeTrait<int> */
@@ -71,18 +70,12 @@ class MemoizeTest extends TestCase // phpcs:ignore
 
     private function buildTestMemoizingSubject(): MemoizingSubject
     {
-        return new class() implements MemoizingSubject {
-
+        return new class () implements MemoizingSubject {
             private int $calls = 0;
 
             /** @use MemoizeTrait<int> */
             use MemoizeTrait {
                 memoize as parentMemoize;
-            }
-
-            private static function memoizeTraitKey(int ...$arguments): string /** @phpstan-ignore-line */
-            {
-                return (string) first($arguments);
             }
 
             public function memoize(int ...$arguments): int

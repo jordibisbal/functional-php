@@ -32,6 +32,7 @@ function cartesianProduct(array $collections, Closure $productFunction = null): 
         count($collections) === 0 => [],
         count($collections) === 1 => toArray(head($collections)),
         default => toArray(($cartesianProduct)(
+            /** @phpstan-ignore-next-line */
             [cartesianProduct(butLast($collections), $productFunction), toArray(last($collections))],
             $productFunction
         ))

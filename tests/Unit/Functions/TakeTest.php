@@ -15,7 +15,7 @@ class TakeTest extends TestCase
      * @return array<array<mixed>>
      * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
      */
-    public function takeDataProvider(): array
+    public static function takeDataProvider(): array
     {
         $target = [
             1 => 'one',

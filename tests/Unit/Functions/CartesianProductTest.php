@@ -3,17 +3,20 @@
 namespace j45l\functional\Test\Unit\Functions;
 
 use j45l\functional\Tuples\Pair;
+use PHPUnit\Framework\Attributes\CoversFunction;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+
 use function j45l\functional\cartesianProduct;
 use function PHPUnit\Framework\assertEquals;
 
-/** @covers ::\j45l\functional\cartesianProduct() */
+#[CoversFunction('j45l\functional\cartesianProduct')]
 class CartesianProductTest extends TestCase
 {
     /**
      * @return       array<mixed>
      */
-    public function quotientProductProvider(): array
+    public static function quotientProductProvider(): array
     {
         return [
             'no vectors' => [[], []],
@@ -42,8 +45,8 @@ class CartesianProductTest extends TestCase
     /**
      * @param        array<mixed>|Null   $result
      * @param        array<array<mixed>> $vectors
-     * @dataProvider quotientProductProvider
      */
+    #[DataProvider('quotientProductProvider')]
     public function testCartesianProductOfVectors(?array $result, array $vectors): void
     {
         $this->assertEquals($result, cartesianProduct($vectors, $this->stringProduct(...)));
@@ -52,8 +55,8 @@ class CartesianProductTest extends TestCase
     /**
      * @param        array<mixed>|Null   $result
      * @param        array<array<mixed>> $vectors
-     * @dataProvider quotientProductProvider
      */
+    #[DataProvider('quotientProductProvider')]
     public function testCartesianProductOfGenerators(?array $result, array $vectors): void
     {
         $this->assertEquals(

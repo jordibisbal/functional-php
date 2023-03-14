@@ -10,8 +10,8 @@ use function j45l\functional\isClosureOr;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNull;
 
-/** @covers ::\j45l\functional\isCallableOr() */
-class IsCallableOrTest extends TestCase
+/** @covers ::\j45l\functional\isClosureOr */
+class IsClosureOrTest extends TestCase
 {
     public function testIsCallableIs(): void
     {

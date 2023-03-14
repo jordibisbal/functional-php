@@ -7,6 +7,7 @@ namespace j45l\functional\Cats\Either;
 use j45l\functional\Cats\Either\Reason\Reason;
 use j45l\functional\Cats\Maybe\None;
 use RuntimeException;
+
 use function j45l\functional\with;
 
 /**
@@ -71,7 +72,7 @@ final class Failure extends Either
         });
     }
 
-    public function reason(): reason
+    public function reason(): Reason
     {
         return $this->reason;
     }

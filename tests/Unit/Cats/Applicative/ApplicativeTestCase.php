@@ -12,7 +12,6 @@ use PHPUnit\Framework\TestCase;
  */
 abstract class ApplicativeTestCase extends TestCase
 {
-
     /** @var Applicative<A> */
     private Applicative $applicative;
 

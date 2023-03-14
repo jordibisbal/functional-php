@@ -4,6 +4,7 @@ namespace j45l\functional;
 
 use Traversable;
 use j45l\functional\Tuples\Pair;
+
 use function iterator_to_array as iteratorToArray;
 
 /**

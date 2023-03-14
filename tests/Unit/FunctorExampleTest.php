@@ -6,8 +6,8 @@ namespace j45l\functional\Test\Unit;
 
 use j45l\functional\Cats\Functors\Functor;
 use PHPUnit\Framework\TestCase;
-use function PHPUnit\Framework\assertEquals;
 
+use function PHPUnit\Framework\assertEquals;
 
 final class FunctorExampleTest extends TestCase
 {

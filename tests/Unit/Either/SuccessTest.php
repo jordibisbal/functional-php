@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace j45l\functional\Test\Unit\Either;
 
 use PHPUnit\Framework\TestCase;
-
 use RuntimeException;
+
 use function j45l\functional\Cats\Either\Because;
 use function j45l\functional\Cats\Either\BecauseException;
 use function j45l\functional\Cats\Either\Failure;

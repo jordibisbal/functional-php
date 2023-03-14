@@ -7,6 +7,7 @@ namespace j45l\functional\Test\Unit\Functions;
 use Closure;
 use RuntimeException;
 use PHPUnit\Framework\TestCase;
+
 use function j45l\functional\tailRecursion;
 
 /** @covers ::\j45l\functional\tailRecursion() */
@@ -44,7 +45,7 @@ class TailRecursionTest extends TestCase
     public function testItCannotRecurseAboveLimitTimesForMethod(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectErrorMessage('Too depth.');
+        $this->expectExceptionMessage('Too depth.');
 
         $tailRecursion = $this->depthRecursive(1000, $tailRecursion);
         $tailRecursion(1);

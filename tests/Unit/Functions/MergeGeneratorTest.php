@@ -19,7 +19,7 @@ class MergeGeneratorTest extends TestCase
      * @phpstan-return mixed[][][]
      * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
      */
-    public function mergeGeneratorDataProvider(): array
+    public static function mergeGeneratorDataProvider(): array
     {
         return [
             'arrays' => [[0, 1, 0 , 1], [1, 2, 'A', 'B'], [[1, 2], ['A', 'B']]],

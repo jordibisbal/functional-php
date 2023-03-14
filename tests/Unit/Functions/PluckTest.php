@@ -15,7 +15,7 @@ class PluckTest extends TestCase
      * @return array<array<mixed>>
      * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
      */
-    public function pluckDataProvider(): array
+    public static function pluckDataProvider(): array
     {
         return [
             'No elements' => [[], [], 'none'],

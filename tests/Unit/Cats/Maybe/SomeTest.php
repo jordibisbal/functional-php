@@ -6,7 +6,6 @@ namespace j45l\functional\Test\Unit\Cats\Maybe;
 
 use PHPUnit\Framework\TestCase;
 
-use function j45l\functional\Cats\Either\Success;
 use function j45l\functional\Cats\Maybe\Some;
 use function PHPUnit\Framework\assertEquals;
 

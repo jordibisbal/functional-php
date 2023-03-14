@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace j45l\functional\Optimization;
@@ -6,8 +7,6 @@ namespace j45l\functional\Optimization;
 use Closure;
 
 use function is_null as isNull;
-use function j45l\functional\identity;
-use function j45l\functional\map;
 use function j45l\functional\pipe;
 use function j45l\functional\with;
 
@@ -23,7 +22,7 @@ trait MemoizeTrait
     }
 
     /**
-     * @param ?Closure($arguments):T $callback
+     * @param ((Closure(mixed...):T)|null) $callback
      * @return ?T
      */
     private static function memoize(Closure $callback = null, mixed ...$arguments): mixed
