@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace j45l\functional\Test\Unit\Sequences;
 
 use j45l\functional\Sequences\ExponentialSequence;
-use j45l\functional\Sequences\LinearSequence;
 use j45l\functional\Sequences\SequenceIterator;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertTrue;
 
