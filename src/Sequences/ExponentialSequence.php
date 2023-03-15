@@ -4,47 +4,41 @@ declare(strict_types=1);
 
 namespace j45l\functional\Sequences;
 
-use function pow;
-
+/**
+ * @implements Sequence<int|float>
+ */
 final class ExponentialSequence implements Sequence
 {
-    /** @var int|float */
-    private $scale;
+    private int|float $scale;
 
-    /** @var int|float */
-    private $base;
+    private int|float $base;
 
-    /** @var int */
-    private $iteration;
+    private int $iteration;
 
-    /**
-     * @param int|float $base
-     * @param int|float $scale
-     * @param int $iteration
-     */
-    private function __construct($base, $scale, int $iteration = 1)
+    private function __construct(float|int $base, float|int $scale, int $iteration = 1)
     {
         $this->scale = $scale;
         $this->base = $base;
         $this->iteration = $iteration;
     }
 
-    /**
-     * @param int|float $base
-     * @param int|float $scale
-     */
-    public static function create($base, $scale = 1): ExponentialSequence
+    public static function create(float|int $base, float|int $scale = 1): ExponentialSequence
     {
         return new self($base, $scale);
     }
 
-    public function value()
+    public function value(): float|int
     {
-        return $this->scale * pow($this->base, $this->iteration - 1);
+        return $this->scale * ($this->base ** ($this->iteration - 1));
     }
 
     public function next(): Sequence
     {
         return new self($this->base, $this->scale, $this->iteration + 1);
+    }
+
+    public function iteration(): int
+    {
+        return $this->iteration;
     }
 }

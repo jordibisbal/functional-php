@@ -1,12 +1,11 @@
 <?php
 
-namespace j45l\functional\Test\Unit;
+namespace j45l\functional\Test\Unit\Tuples;
 
 use j45l\functional\Test\Unit\Fixtures\ValueObjectA;
 use j45l\functional\Test\Unit\Fixtures\ValueObjectB;
 use j45l\functional\Tuples\Pair;
 use PHPUnit\Framework\TestCase;
-
 use function j45l\functional\Tuples\Pair;
 
 /**

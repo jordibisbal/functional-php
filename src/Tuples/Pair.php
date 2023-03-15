@@ -62,19 +62,4 @@ class Pair
     {
         return [$this->first, $this->second];
     }
-
-    /**
-     * @param iterable<mixed> $collection
-     * @return array<Pair<T1, T2>>
-     * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
-     */
-    public static function arrayFromIndexed(iterable $collection): array
-    {
-        $aggregate = [];
-        foreach ($collection as $key => $value) {
-            $aggregate[] = static::from($key, $value);
-        }
-
-        return $aggregate;
-    }
 }

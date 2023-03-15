@@ -4,40 +4,41 @@ declare(strict_types=1);
 
 namespace j45l\functional\Sequences;
 
+/**
+ * @implements Sequence<int|float>
+ */
 final class LinearSequence implements Sequence
 {
-    /** @var int|float */
-    private $value;
+    private int|float $value;
 
-    /** @var int|float */
-    private $increment;
+    private int|float $increment;
 
-    /**
-     * @param int|float $start
-     * @param int|float $increment
-     */
-    private function __construct($start, $increment)
+    private int $iteration;
+
+    private function __construct(float|int $start, float|int $increment, int $iteration = 1)
     {
         $this->value = $start;
         $this->increment = $increment;
+        $this->iteration = $iteration;
     }
 
-    /**
-     * @param int|float $start
-     * @param int|float $increment
-     */
-    public static function create($start, $increment): LinearSequence
+    public static function create(float|int $start, float|int $increment): LinearSequence
     {
         return new self($start, $increment);
     }
 
     public function next(): Sequence
     {
-        return self::create($this->value + $this->increment, $this->increment);
+        return new self($this->value + $this->increment, $this->increment, $this->iteration + 1);
     }
 
-    public function value()
+    public function value(): int|float
     {
         return $this->value;
+    }
+
+    public function iteration(): int
+    {
+        return $this->iteration;
     }
 }

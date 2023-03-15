@@ -27,6 +27,22 @@ final class ExponentialSequenceTest extends TestCase
         assertEquals([1, 2, 4, 8], $returned);
     }
 
+    public function testReturnsExpectedIterationDefaultSequence(): void
+    {
+        $returned = [];
+        $sequence = ExponentialSequence::create(2, 1);
+
+        $returned[] = $sequence->iteration();
+        $sequence = $sequence->next();
+        $returned[] = $sequence->iteration();
+        $sequence = $sequence->next();
+        $returned[] = $sequence->iteration();
+        $sequence = $sequence->next();
+        $returned[] = $sequence->iteration();
+
+        assertEquals([1, 2, 3, 4], $returned);
+    }
+
     public function testReturnsExpectedScaledSequence(): void
     {
         $returned = [];

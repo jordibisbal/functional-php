@@ -27,6 +27,23 @@ final class LinearSequenceTest extends TestCase
         assertEquals([1, 3, 5, 7], $returned);
     }
 
+    public function testReturnsExpectedIterationSequence(): void
+    {
+        $returned = [];
+        $sequence = LinearSequence::create(1, 2);
+
+
+        $returned[] = $sequence->iteration();
+        $sequence = $sequence->next();
+        $returned[] = $sequence->iteration();
+        $sequence = $sequence->next();
+        $returned[] = $sequence->iteration();
+        $sequence = $sequence->next();
+        $returned[] = $sequence->iteration();
+
+        assertEquals([1, 2, 3, 4], $returned);
+    }
+
     public function testSequenceDoesNotChange(): void
     {
         $sequence = LinearSequence::create(1, 2);

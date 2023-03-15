@@ -22,7 +22,6 @@ function yieldIterable(iterable $collection, iterable $values = null): Generator
         return;
     }
 
-    $nextIndex = 0;
     foreach ($values as $value) {
         $index = match (true) {
             $collection instanceof Iterator => also(function () use (&$collection) {
@@ -31,10 +30,6 @@ function yieldIterable(iterable $collection, iterable $values = null): Generator
             default =>  also(function () use (&$collection) {
                 next($collection);
             })(current($collection)),
-        };
-        $nextIndex = match (true) {
-            is_int($index) => max($index + 1, $nextIndex),
-            default => $nextIndex
         };
         yield $index => $value;
     }

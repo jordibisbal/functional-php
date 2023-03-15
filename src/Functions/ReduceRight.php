@@ -4,18 +4,20 @@ declare(strict_types=1);
 
 namespace j45l\functional;
 
-use j45l\functional\Tuples\Pair;
+use function is_null as isNull;
 
 /**
  * @phpstan-param iterable<mixed> $collection Collection
- * @phpstan-param callable(mixed $initial, mixed $value, mixed $index, mixed $collection): mixed $callback
+ * @phpstan-param callable(mixed $initial, mixed $value, mixed $index, mixed $collection): mixed $fn
  * @return        mixed|null
  * @noinspection  PhpPluralMixedCanBeReplacedWithArrayInspection
  */
-function reduceRight(iterable $collection, callable $callback, mixed $initial = null): mixed
+function reduceRight(iterable $collection, callable $fn, mixed $initial = null): mixed
 {
-    foreach (array_reverse(Pair::arrayFromIndexed($collection)) as $pair) {
-        $initial = $callback($initial, $pair->second(), $pair->first(), $collection);
+    end($collection);
+    while (!isNull(key($collection))) {
+        $initial = $fn($initial, current($collection), key($collection), $collection);
+        prev($collection);
     }
 
     return $initial;
