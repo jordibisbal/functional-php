@@ -11,15 +11,15 @@ use Throwable;
  * @template T of Throwable
  * @template T2
  * @param Closure():T2 $function
- * @param T $throwable
+ * @phpstan-param T $throwable
  * @return T2
  * @throws T
  */
-function tryOrThrow(Closure $function, $throwable): mixed
+function tryOrThrow(Closure $function, Throwable $throwable): mixed
 {
     try {
         return $function();
-    } catch (Throwable $caughtThrowable) {
+    } catch (Throwable) {
         throw $throwable;
     }
 }

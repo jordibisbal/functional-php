@@ -622,6 +622,20 @@ function toIterable(mixed $item): iterable
 [1]
 ```
 
+#### unindex
+
+Alias to array_values, returns the collection without indices.
+
+```PHP
+function unindex(array $collection): array
+```
+
+```PHP
+> unindex([1, 'a' => 2, '1' => 3]
+
+[1, 2, 3]
+```
+
 see also: [toArray](#toArray), [toGenerator](#toGenerator), [yieldIterable](#yieldIterable)
 
 ---
@@ -940,6 +954,24 @@ function delay(float $seconds, Closure $callable, Closure $delayFn = null): mixe
 
 (after 1 second)
 42
+```
+
+---
+#### tryOrThrow
+Executes the `$function` closure, if a throwable is raised, then $throwable is raised instead.
+
+```PHP
+function tryOrThrow(Closure $function, Throwable $throwable): mixed
+```
+
+```PHP
+> tryOrThrow(fn () => throw new RuntimeError(), new LogicException());
+
+
+PHP Fatal error:  Uncaught LogicException in /tmp/_.php:_
+Stack trace:
+#0 {main}
+  thrown in /tmp/_.php on line _
 ```
 
 ### Optimization functions
