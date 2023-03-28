@@ -77,8 +77,8 @@ function tests() {
 
 function codeQuality() {
     phpmd="clear; echo -e 'Phpmd:\\n\\n'; vendor/bin/phpmd src ansi phpmdRules.xml"
-    phpcs="echo -e '\\nPhpcs:\\n\\n'; vendor/bin/phpcs -p --cache=build/cache/phpcs_cache --no-colors src tests"
-    phpstan="echo -e '\\nPhpstan:\\n\\n'; vendor/bin/phpstan analyze -c phpstan.neon"
+    phpcs="echo -e '\\nPhpcs:\\n\\n'; vendor/bin/phpcs -s -p --cache=build/cache/phpcs_cache --no-colors src tests"
+    phpstan="echo -e '\\nPhpstan:\\n\\n';XDEBUG_MODE=off vendor/bin/phpstan analyze -c phpstan.neon"
 
 	while true
 	do

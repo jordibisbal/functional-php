@@ -53,3 +53,5 @@ include_once(__DIR__ . '/Functions/Worst.php');
 include_once(__DIR__ . '/Functions/YieldIterable.php');
 
 include_once(__DIR__ . '/PHPUnit/AssertYields.php');
+
+require_once(__DIR__ . '/Tuples/Factories.php');

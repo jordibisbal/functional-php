@@ -1,6 +1,7 @@
 # Functional-php
 
-Inspired (when not copying from) several functional libraries like https://github.com/lstrojny/functional-php.
+Inspired (when not copying from) several functional libraries like 
+https://github.com/lstrojny/functional-php, https://github.com/Lambdish/phunctional and some adhoc ones.
 
 ## Install
 
@@ -8,4 +9,4 @@ Inspired (when not copying from) several functional libraries like https://githu
 
 ## Documentation
 
-[CheatSheet](./documentation/CheatSheet.md)
+[Functions](./documentation/Functions.md)

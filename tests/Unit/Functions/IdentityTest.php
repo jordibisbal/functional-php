@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace j45l\functional\Test\Unit\Functions;
 
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\identity;
 use function PHPUnit\Framework\assertSame;
 
-/** @covers ::\j45l\functional\identity() */
+#[CoversFunction('j45l\functional\identity')]
 class IdentityTest extends TestCase
 {
     /**

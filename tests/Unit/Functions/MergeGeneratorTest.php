@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace j45l\functional\Test\Unit\Functions;
 
 use Generator;
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\also;
@@ -12,7 +13,7 @@ use function j45l\functional\mergeGenerator;
 use function j45l\functional\PHPUnit\assertYields;
 use function j45l\functional\yieldIterable;
 
-/** @covers ::\j45l\functional\mergeGenerator() */
+#[CoversFunction('j45l\functional\mergeGenerator')]
 class MergeGeneratorTest extends TestCase
 {
     /**

@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace j45l\functional\Test\Unit\Functions;
 
 use Closure;
+use PHPUnit\Framework\Attributes\CoversFunction;
 use RuntimeException;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\tailRecursion;
 
-/** @covers ::\j45l\functional\tailRecursion() */
+#[CoversFunction('j45l\functional\tailRecursion')]
 class TailRecursionTest extends TestCase
 {
     public function testItCanRecurseAThousandTimes(): void

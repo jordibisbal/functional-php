@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace j45l\functional\Test\Unit\Functions;
 
 use Generator;
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
@@ -12,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 use function j45l\functional\PHPUnit\assertYields;
 use function j45l\functional\yieldIterable;
 
-/** @covers ::\j45l\functional\PHPUnit\assertYields */
+#[CoversFunction('j45l\functional\PHPUnit\assertYields')]
 class AssertYieldsTest extends TestCase
 {
     /** @return array<string, array<mixed, mixed>> */

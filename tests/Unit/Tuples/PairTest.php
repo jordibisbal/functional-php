@@ -5,13 +5,14 @@ namespace j45l\functional\Test\Unit\Tuples;
 use j45l\functional\Test\Unit\Fixtures\ValueObjectA;
 use j45l\functional\Test\Unit\Fixtures\ValueObjectB;
 use j45l\functional\Tuples\Pair;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\Tuples\Pair;
 
-/**
- * @covers \j45l\functional\Tuples\Pair
- */
+#[CoversClass(Pair::class)]
+#[CoversFunction(Pair::class)]
 class PairTest extends TestCase
 {
     public function testAPairCanBeCreateFromTwoPrimitives(): void

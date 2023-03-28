@@ -34,8 +34,7 @@
         },
         "files": [
             "src/Functions.php",
-            "src/PHPUnitFunctions.php",
-            "src/FunctionsLoader.php"
+            "src/PHPUnitFunctions.php"
         ]
     },
     "autoload-dev": {

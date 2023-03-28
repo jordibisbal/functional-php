@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace j45l\functional\Test\Unit\Functions;
 
 use ArrayIterator;
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\tail;
 
-/** @covers ::\j45l\functional\tail() */
+#[CoversFunction('j45l\functional\tail')]
 class TailTest extends TestCase
 {
     /** @var int[] */

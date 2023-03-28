@@ -3,6 +3,7 @@
 namespace j45l\functional\Test\Unit\Functions;
 
 use LogicException;
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Throwable;
@@ -10,7 +11,7 @@ use Throwable;
 use function j45l\functional\tryOrThrow;
 use function PHPUnit\Framework\assertEquals;
 
-/** @covers ::\j45l\functional\tryOrThrow() */
+#[CoversFunction('j45l\functional\tryOrThrow')]
 final class TryOrThrowTest extends TestCase
 {
     /**

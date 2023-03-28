@@ -7,6 +7,7 @@ namespace j45l\functional\Test\Unit\Functions;
 use j45l\functional\Sequences\ExponentialSequence;
 use j45l\functional\Sequences\LinearSequence;
 use j45l\functional\Sequences\SequenceIterator;
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\yieldIterable;
@@ -14,7 +15,7 @@ use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertTrue;
 
-/** @covers ::\j45l\functional\yieldIterable() */
+#[CoversFunction('j45l\functional\yieldIterable')]
 class YieldsIterableTest extends TestCase
 {
     public function testIterableArrayCanBeConsumed(): void

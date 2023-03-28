@@ -3,11 +3,12 @@
 namespace j45l\functional\Test\Unit\Functions;
 
 use Closure;
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\recurseTimes;
 
-/** @covers ::\j45l\functional\recurseTimes() */
+#[CoversFunction('j45l\functional\recurseTimes')]
 class RecurseTimesTest extends TestCase
 {
     public function testRepeatWithZeroReturnInitialValue(): void

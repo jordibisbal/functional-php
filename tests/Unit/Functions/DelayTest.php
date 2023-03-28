@@ -2,11 +2,12 @@
 
 namespace j45l\functional\Test\Unit\Functions;
 
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\delay;
 
-/** @covers ::\j45l\functional\delay() */
+#[CoversFunction('j45l\functional\delay')]
 class DelayTest extends TestCase
 {
     public function testFunctionCalledAfterDelay(): void

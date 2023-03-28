@@ -2,12 +2,13 @@
 
 namespace j45l\functional\Test\Unit\Functions;
 
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\toArray;
 use function j45l\functional\yieldIterable;
 
-/** @covers ::\j45l\functional\toArray() */
+#[CoversFunction('j45l\functional\toArray')]
 class ToArrayTest extends TestCase
 {
     public function testToArray(): void

@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace j45l\functional\Test\Unit\Functions;
 
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\mapFirst;
 use function PHPUnit\Framework\assertEquals;
 
-/** @covers ::\j45l\functional\mapFirst() */
+#[CoversFunction('j45l\functional\mapFirst')]
 class MapFirstTest extends TestCase
 {
     public function testFirstMapped(): void

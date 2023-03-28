@@ -2,6 +2,7 @@
 
 namespace j45l\functional\Test\Unit\Functions;
 
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\doUntil;
@@ -11,7 +12,7 @@ use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertNull;
 
-/** @covers ::\j45l\functional\doUntil() */
+#[CoversFunction('j45l\functional\doUntil')]
 class DoUntilTest extends TestCase
 {
     public function testDoUntilExecutedAtLeastOnce(): void

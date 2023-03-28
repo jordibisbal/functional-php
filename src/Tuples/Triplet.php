@@ -9,31 +9,15 @@ namespace j45l\functional\Tuples;
  * @template T2
  * @template T3
  */
-class Triplet
+readonly class Triplet
 {
-    /**
-     * @var T1
-     */
-    private mixed $first;
-    /**
-     * @var T2
-     */
-    private mixed $second;
-    /**
-     * @var T3
-     */
-    private mixed $third;
-
     /**
      * @param T1 $first
      * @param T2 $second
      * @param T3 $third
      */
-    private function __construct(mixed $first, mixed $second, mixed $third)
+    private function __construct(private mixed $first, private mixed $second, private mixed $third)
     {
-        $this->first = $first;
-        $this->second = $second;
-        $this->third = $third;
     }
 
     /**
@@ -42,7 +26,7 @@ class Triplet
      * @param  T3 $third
      * @return Triplet<T1, T2, T3>
      */
-    public static function from(mixed $first, mixed $second, mixed $third): self
+    public static function from(mixed $first, mixed $second, mixed $third): Triplet
     {
         return new self($first, $second, $third);
     }
@@ -69,5 +53,13 @@ class Triplet
     public function third()
     {
         return $this->third;
+    }
+
+    /**
+     * @return array{T1, T2}
+     */
+    public function toArray(): array
+    {
+        return [$this->first, $this->second, $this->third];
     }
 }

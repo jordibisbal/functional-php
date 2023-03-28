@@ -2,6 +2,7 @@
 
 namespace j45l\functional\Test\Unit\Functions;
 
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\concat;
@@ -9,7 +10,7 @@ use function j45l\functional\partial;
 use function j45l\functional\sum;
 use function PHPUnit\Framework\assertEquals;
 
-/** @covers ::\j45l\functional\partial() */
+#[CoversFunction('j45l\functional\partial')]
 class PartialTest extends TestCase
 {
     public function testPartialWithNoArguments(): void

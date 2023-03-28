@@ -8,25 +8,14 @@ namespace j45l\functional\Tuples;
  * @template T1
  * @template T2
  */
-class Pair
+readonly class Pair
 {
-    /**
-     * @var T1
-     */
-    private $first;
-    /**
-     * @var T2
-     */
-    private $second;
-
     /**
      * @param T1 $first
      * @param T2 $second
      */
-    private function __construct($first, $second)
+    private function __construct(private mixed $first, private mixed $second)
     {
-        $this->first = $first;
-        $this->second = $second;
     }
 
     /**

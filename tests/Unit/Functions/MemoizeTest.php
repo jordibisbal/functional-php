@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace j45l\functional\Test\Unit\Functions;
 
 use j45l\functional\Optimization\MemoizeTrait;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\first;
@@ -16,7 +17,7 @@ interface MemoizingSubject
     public function calls(): int;
 }
 
-/** @covers \j45l\functional\Optimization\MemoizeTrait */
+#[CoversClass(MemoizeTrait::class)]
 class MemoizeTest extends TestCase // phpcs:ignore
 {
     /** @use MemoizeTrait<int> */

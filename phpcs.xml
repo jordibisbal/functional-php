@@ -11,7 +11,9 @@
     <arg name="extensions" value="php"/>
     <arg name="tab-width" value="4"/>
 
-    <rule ref="PSR12"/>
+    <rule ref="PSR1">
+        <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
+    </rule>
 
     <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
         <properties>

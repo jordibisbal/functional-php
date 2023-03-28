@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace j45l\functional\Test\Unit\Functions;
 
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\reduce;
 
-/** @covers ::\j45l\functional\reduce() */
+#[CoversFunction('j45l\functional\reduce')]
 class ReduceTest extends TestCase
 {
     /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */

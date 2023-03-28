@@ -2,11 +2,12 @@
 
 namespace j45l\functional\Test\Unit\Functions;
 
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\unzip;
 
-/** @covers ::\j45l\functional\unzip() */
+#[CoversFunction('j45l\functional\unzip')]
 class UnzipTest extends TestCase
 {
     public function testUnzipArray(): void

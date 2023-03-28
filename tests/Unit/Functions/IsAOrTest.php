@@ -4,13 +4,14 @@ namespace j45l\functional\Test\Unit\Functions;
 
 use j45l\functional\Test\Unit\Fixtures\ValueObjectA;
 use j45l\functional\Test\Unit\Fixtures\ValueObjectB;
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\functional\isAOr;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertNull;
 
-/** @covers ::\j45l\functional\isAOr() */
+#[CoversFunction('j45l\functional\isAOr')]
 class IsAOrTest extends TestCase
 {
     public function testIsAIs(): void
