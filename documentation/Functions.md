@@ -631,12 +631,45 @@ function unindex(array $collection): array
 ```
 
 ```PHP
-> unindex([1, 'a' => 2, '1' => 3]
+> unindex([1, 'a' => 2, '1' => 3])
 
 [1, 2, 3]
 ```
 
 see also: [toArray](#toArray), [toGenerator](#toGenerator), [yieldIterable](#yieldIterable)
+
+#### unzip
+
+Given a collection of two dimensional arrays, return an array with the array with the first elements and a second one with
+the second.
+
+```PHP
+function unzip(array $collection, mixed $defaultLeft = null, mixed $defaultRight = null): array
+```
+
+```PHP
+> unzip([[1, 'a'], [2, 'b'],  [3, 'c']])
+[[1, 2, 3], ['a', 'b', 'c']]
+```
+
+see also: [zip](#zip)
+
+#### zip
+
+Given a collection of two dimensional arrays, return an array with the array with the first elements and a second one with
+the second.
+
+```PHP
+function unzip(array $collection, mixed $defaultLeft = null, mixed $defaultRight = null): array
+```
+
+```PHP
+> unzip([[1, 'a'], [2, 'b'],  [3, 'c']])
+[[1, 2, 3], ['a', 'b', 'c']]
+```
+
+see also: [zip](#zip)
+
 
 ---
 

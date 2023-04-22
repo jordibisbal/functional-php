@@ -2,19 +2,12 @@
 <!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
 <phpunit
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
+  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd"
   colors="true"
   cacheDirectory="build/.phpunit.cache"
+  executionOrder="random"
 >
-  <coverage>
-    <include>
-      <directory suffix=".php">src</directory>
-    </include>
-    <exclude>
-      <file>src/Functions.php</file>
-      <file>src/PHPUnitFunctions.php</file>
-    </exclude>
-  </coverage>
+  <coverage/>
   <php>
     <ini name="error_reporting" value="-1"/>
     <server name="SHELL_VERBOSITY" value="-1"/>
@@ -24,4 +17,13 @@
       <directory>tests/Unit</directory>
     </testsuite>
   </testsuites>
+  <source>
+    <include>
+      <directory>src</directory>
+    </include>
+    <exclude>
+      <file>src/Functions.php</file>
+      <file>src/PHPUnitFunctions.php</file>
+    </exclude>
+  </source>
 </phpunit>

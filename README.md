@@ -1,7 +1,7 @@
 # Functional-php
 
-Inspired (when not copying from) several functional libraries like 
-https://github.com/lstrojny/functional-php, https://github.com/Lambdish/phunctional and some adhoc ones.
+Highly inspired from several functional libraries like 
+https://github.com/lstrojny/functional-php, https://typelevel.org/cats/, scala, SML, etc.
 
 ## Install
 

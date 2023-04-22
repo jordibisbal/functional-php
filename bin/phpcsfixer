@@ -1,3 +1,4 @@
 #!/bin/bash
 export XDEBUG_MODE=off
-"$( dirname -- "${BASH_SOURCE[0]}" )"/../vendor/bin/php-cs-fixer "$@"
+export BASE_PATH="$( dirname -- "${BASH_SOURCE[0]}" )"
+$BASE_PATH/../vendor/bin/php-cs-fixer "$@"  --cache-file=$BASE_PATH/../build/phpcs-fixer-cache

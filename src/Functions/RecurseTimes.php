@@ -6,8 +6,6 @@ namespace j45l\functional;
 
 use Closure;
 
-use function Functional\tail_recursion;
-
 /**
  * @template T
  * @param Closure(T):T $map
@@ -15,7 +13,7 @@ use function Functional\tail_recursion;
  */
 function recurseTimes(Closure $map): Closure
 {
-    $doMap = tail_recursion(
+    $doMap = tailRecursion(
         static function ($initial, $times) use ($map, &$doMap) {
             if ($times < 1) {
                 return $initial;

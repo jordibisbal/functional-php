@@ -145,6 +145,7 @@ class TraverseTest extends TestCase
         );
     }
 
+    /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
     public function testExampleData(): void
     {
         $whiskeys = [
@@ -186,7 +187,7 @@ class TraverseTest extends TestCase
             traverse(
                 $whiskeys,
                 [
-                    [ fn($_, $type) => $type === 'Single Malt' ],
+                    [ fn ($_, $type) => $type === 'Single Malt' ],
                     [ trueFn(...), fn ($distillery) => $distillery['whiskeys'] ],
                     [
                         fn ($value) => (float) $value['price'] < 200,
@@ -204,7 +205,8 @@ class TraverseTest extends TestCase
             traverse(
                 $whiskeys,
                 [
-                    [ fn ($_, $type) => $type === 'Single Malt' ],
+                    [
+                        fn ($_, $type) => $type === 'Single Malt' ],
                     [
                         fn ($distillery) => $distillery['region'] !== 'Japan',
                         fn ($distillery) => $distillery['whiskeys']
