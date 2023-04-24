@@ -549,7 +549,7 @@ function reindex(iterable $collection, Closure $function): array
 ```PHP
 > reindex([1, 2, 3], fn ($x): int => $x * 4)
 
-[4, 4 => 8, 8 => 12]
+[1, 4 => 2, 8 => 3]
 ```
 ---
 #### sum
