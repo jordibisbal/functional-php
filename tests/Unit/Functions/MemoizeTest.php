@@ -25,19 +25,19 @@ class MemoizeTest extends TestCase // phpcs:ignore
 
     public function testMemoizeReturnsValueOnceMemoized(): void
     {
-        self::memoize(identity(...), 42);
-        self::assertEquals(42, self::memoize(identity(...), 42));
+        self::memoize(identity(...))(42);
+        self::assertEquals(42, self::memoize(identity(...))(42));
     }
 
     public function testMemoizeReturnsDifferentValuesByArguments(): void
     {
-        self::memoize(identity(...), 42);
-        self::memoize(identity(...), 43);
-        self::memoize(identity(...), 44, 45);
+        self::memoize(identity(...))(42);
+        self::memoize(identity(...))(43);
+        self::memoize(identity(...))(44, 45);
 
-        self::assertEquals(42, self::memoize(identity(...), 42));
-        self::assertEquals(43, self::memoize(identity(...), 43));
-        self::assertEquals(44, self::memoize(identity(...), 44, 45));
+        self::assertEquals(42, self::memoize(identity(...))(42));
+        self::assertEquals(43, self::memoize(identity(...))(43));
+        self::assertEquals(44, self::memoize(identity(...))(44, 45));
     }
 
     public function testMemoizeEvaluatesCallbackJustOnceByArguments(): void
@@ -50,14 +50,32 @@ class MemoizeTest extends TestCase // phpcs:ignore
             return 42;
         };
 
-        self::memoize($callback, 42, 1);
+        self::memoize($callback)( 42, 1);
 
-        self::assertEquals(42, self::memoize($callback, 42, 1));
-        self::assertEquals(42, self::memoize($callback, 42, 1));
+        self::assertEquals(42, self::memoize($callback)( 42, 1));
+        self::assertEquals(42, self::memoize($callback)( 42, 1));
         self::assertEquals(1, $calls);
 
-        self::assertEquals(42, self::memoize($callback, 42, 777));
-        self::assertEquals(42, self::memoize($callback, 42, 1));
+        self::assertEquals(42, self::memoize($callback)( 42, 777));
+        self::assertEquals(42, self::memoize($callback)( 42, 1));
+        self::assertEquals(2, $calls);
+    }
+
+    public function testMemoizeCanBeCleared(): void
+    {
+        $calls = 0;
+
+        $callback = static function () use (&$calls) {
+            $calls++;
+
+            return 42;
+        };
+
+        self::memoize($callback)(42, 1);
+
+        self::memoizeTraitForget();
+
+        self::assertEquals(42, self::memoize($callback)(42, 1));
         self::assertEquals(2, $calls);
     }
 
@@ -95,9 +113,8 @@ class MemoizeTest extends TestCase // phpcs:ignore
                     function () use ($arguments) {
                         $this->calls++;
                         return array_sum($arguments);
-                    },
-                    ...$arguments
-                );
+                    }
+                )(...$arguments);
             }
 
             public function calls(): int
@@ -110,6 +127,6 @@ class MemoizeTest extends TestCase // phpcs:ignore
     protected function setUp(): void
     {
         parent::setUp();
-        self::memoize();
+        self::memoizeTraitForget();
     }
 }

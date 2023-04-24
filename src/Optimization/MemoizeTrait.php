@@ -21,26 +21,28 @@ trait MemoizeTrait
         return serialize($arguments);
     }
 
+    private static function memoizeTraitForget(): void
+    {
+        self::$memoizeTraitCache = [];
+    }
+
     /**
      * @param ((Closure(mixed...):T)|null) $callback
-     * @return ?T
+     * @return Closure(mixed...):?T
      */
-    private static function memoize(Closure $callback = null, mixed ...$arguments): mixed
+    private static function memoize(Closure $callback = null): Closure
     {
-        return match (true) {
-            isNull($callback) => pipe(
-                fn () => self::$memoizeTraitCache = [],
-                fn () => null
-            ),
-            default => with(self::memoizeTraitKey(...$arguments))(static fn (string $key) => self::$memoizeTraitCache[
-                match (true) {
-                    array_key_exists($key, self::$memoizeTraitCache) => $key,
-                    default => pipe(
-                        fn () => self::$memoizeTraitCache[$key] = $callback(...$arguments),
-                        fn () => $key
-                    )
-                }
-            ]),
-        };
+        return static fn (mixed ...$arguments) =>
+            with(self::memoizeTraitKey(...$arguments))(
+                static fn (string $key) => self::$memoizeTraitCache[
+                    match (true) {
+                        array_key_exists($key, self::$memoizeTraitCache) => $key,
+                        default => pipe(
+                            fn () => self::$memoizeTraitCache[$key] = $callback(...$arguments),
+                            fn () => $key
+                        )
+                    }
+                ]
+            );
     }
 }
