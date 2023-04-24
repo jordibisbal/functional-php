@@ -537,7 +537,21 @@ returned signature: Closure($times): Closure
 
 256
 ```
+#### reindex
 
+Maps (transform) through `$function` every key of the `$collection`, returning an array, if some key is repeated in
+`$collection` (e.g. in generators), the last produced result is used.
+
+```PHP
+function reindex(iterable $collection, Closure $function): array
+```
+
+```PHP
+> reindex([1, 2, 3], fn ($x): int => $x * 4)
+
+[4, 4 => 8, 8 => 12]
+```
+---
 #### sum
 
 Returns the sum of all the `$collection` elements. $collection elements should be preferment  either ***float*** or 

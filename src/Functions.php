@@ -33,6 +33,7 @@ include_once(__DIR__ . '/Functions/Pluck.php');
 include_once(__DIR__ . '/Functions/RecurseTimes.php');
 include_once(__DIR__ . '/Functions/Reduce.php');
 include_once(__DIR__ . '/Functions/ReduceRight.php');
+include_once(__DIR__ . '/Functions/Reindex.php');
 include_once(__DIR__ . '/Functions/Reject.php');
 include_once(__DIR__ . '/Functions/Select.php');
 include_once(__DIR__ . '/Functions/Sum.php');
