@@ -886,7 +886,9 @@ false
 
 #### every
 
-Returns `true` if every of the elements of `$collection` passes the `$predicate` (`$predicate` is true for)
+Returns `true` if every of the elements of `$collection` passes the `$predicate` (`$predicate` is true for).
+
+If not `$predicate` is given it is checked for truly.
 
 ```PHP
 function every(iterable $collection, Closure $predicate): Closure
@@ -906,7 +908,9 @@ true
 ---
 #### none
 
-Returns `true` if none of the elements of `$collection` passes the `$predicate` (`$predicate` is true for)
+Returns `true` if none of the elements of `$collection` passes the `$predicate` (`$predicate` is true for).
+
+If not `$predicate` is given it is checked for truly.
 
 ```PHP
 function none(iterable $collection, Closure $predicate): Closure
@@ -940,7 +944,9 @@ false
 ---
 #### some
 
-Returns `true` if some of the elements of `$collection` passes the `$predicate` (`$predicate` is true for)
+Returns `true` if some of the elements of `$collection` passes the `$predicate` (`$predicate` is true for).
+
+If not `$predicate` is given it is checked for truly.
 
 ```PHP
 function some(iterable $collection, Closure $predicate): Closure

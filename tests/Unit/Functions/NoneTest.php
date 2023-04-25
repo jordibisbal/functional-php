@@ -28,4 +28,14 @@ class NoneTest extends TestCase
     {
         assertTrue(none([1, 3, 5], fn ($x) => $x % 2 === 0));
     }
+
+    public function testTrueIfAllFalseBool(): void
+    {
+        assertTrue(none([false, false, false]));
+    }
+
+    public function testFalseIfNotAllFalseBool(): void
+    {
+        assertFalse(none([false, true, false]));
+    }
 }

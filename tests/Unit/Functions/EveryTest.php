@@ -28,4 +28,14 @@ class EveryTest extends TestCase
     {
         assertFalse(every([1, 3, 5], fn ($x) => $x % 2 === 0));
     }
+
+    public function testFalseIfSomeFalseBool(): void
+    {
+        assertFalse(every([true, true, false]));
+    }
+
+    public function testTrueIfAllTrueBool(): void
+    {
+        assertTrue(every([true, true, true]));
+    }
 }

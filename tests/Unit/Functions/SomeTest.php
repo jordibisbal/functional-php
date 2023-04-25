@@ -28,4 +28,14 @@ class SomeTest extends TestCase
     {
         assertFalse(some([1, 3, 5], fn ($x) => $x % 2 === 0));
     }
+
+    public function testTrueIfSomeTrueBool(): void
+    {
+        assertTrue(some([false, true, false]));
+    }
+
+    public function testFalseIfNoneTrueBool(): void
+    {
+        assertFalse(some([false, false, false]));
+    }
 }
