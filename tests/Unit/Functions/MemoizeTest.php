@@ -50,14 +50,14 @@ class MemoizeTest extends TestCase // phpcs:ignore
             return 42;
         };
 
-        self::memoize($callback)( 42, 1);
+        self::memoize($callback)(42, 1);
 
-        self::assertEquals(42, self::memoize($callback)( 42, 1));
-        self::assertEquals(42, self::memoize($callback)( 42, 1));
+        self::assertEquals(42, self::memoize($callback)(42, 1));
+        self::assertEquals(42, self::memoize($callback)(42, 1));
         self::assertEquals(1, $calls);
 
-        self::assertEquals(42, self::memoize($callback)( 42, 777));
-        self::assertEquals(42, self::memoize($callback)( 42, 1));
+        self::assertEquals(42, self::memoize($callback)(42, 777));
+        self::assertEquals(42, self::memoize($callback)(42, 1));
         self::assertEquals(2, $calls);
     }
 
@@ -90,7 +90,7 @@ class MemoizeTest extends TestCase // phpcs:ignore
 
     private function buildTestMemoizingSubject(): MemoizingSubject
     {
-        return new class () implements MemoizingSubject {
+        return new class() implements MemoizingSubject {
             private int $calls = 0;
 
             /** @use MemoizeTrait<int> */

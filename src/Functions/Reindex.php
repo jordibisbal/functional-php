@@ -8,9 +8,8 @@ use Closure;
 
 /**
  * @template T
- * @template T2 of (int|string)
  * @param iterable<T> $collection Collection
- * @param Closure(T2 $key, T $value, iterable<T> $collection):T2 $function
+ * @param Closure((int|string) $key, T $value, iterable<T> $collection):(int|string) $function
  * @return array<T>
  */
 function reindex(iterable $collection, Closure $function): array

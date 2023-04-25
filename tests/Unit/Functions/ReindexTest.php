@@ -29,13 +29,13 @@ class ReindexTest extends TestCase
     public function testMapEmpty(): void
     {
         $mappedTimes = 0;
-        $map = function (int $item) use (&$mappedTimes): string {
+        $reindex = function (int|string $item) use (&$mappedTimes): string {
             $mappedTimes++;
 
             return [1 => 'A', 2 => 'B', 3 => 'C'][$item];
         };
 
-        assertEquals([], reindex([], $map));
+        assertEquals([], reindex([], $reindex));
         assertEquals(0, $mappedTimes);
     }
 }

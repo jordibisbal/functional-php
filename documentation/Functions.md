@@ -44,7 +44,10 @@
         + [nop](#nop)
         + [trueFn](#truefn)
     * [Logic functions](#logic-functions)
+        + [every](#every)
+        + [none](#none)
         + [not](#not)
+        + [some](#some)
     * [Loop functions](#loop-functions)
         + [doUntil](#dountil)
         + [doWhile](#dowhile)
@@ -881,6 +884,46 @@ false
 ---
 ### Logic functions
 
+#### every
+
+Returns `true` if every of the elements of `$collection` passes the `$predicate` (`$predicate` is true for)
+
+```PHP
+function every(iterable $collection, Closure $predicate): Closure
+```
+
+```PHP
+> some([1, 2] fn ($item) => $item === 1)
+
+false
+```
+
+```PHP
+> some([1, 2] fn ($item) => $item !== 3)
+
+true
+```
+---
+#### none
+
+Returns `true` if none of the elements of `$collection` passes the `$predicate` (`$predicate` is true for)
+
+```PHP
+function none(iterable $collection, Closure $predicate): Closure
+```
+
+```PHP
+> none([1, 2] fn ($item) => $item === 1)
+
+false
+```
+
+```PHP
+> none([1, 2] fn ($item) => $item === 3)
+
+true
+```
+---
 #### not
 
 Negates the value of the given closure as boolean.
@@ -891,6 +934,26 @@ function not(Closure $fn): Closure
 
 ```PHP
 > not(fn () => true)
+
+false
+```
+---
+#### some
+
+Returns `true` if some of the elements of `$collection` passes the `$predicate` (`$predicate` is true for)
+
+```PHP
+function some(iterable $collection, Closure $predicate): Closure
+```
+
+```PHP
+> some([1, 2] fn ($item) => $item === 1)
+
+true
+```
+
+```PHP
+> some([1, 2] fn ($item) => $item === 3)
 
 false
 ```
