@@ -36,7 +36,7 @@ final class SequenceIterator implements Iterator
 
     public function current(): mixed
     {
-        return $this->sequence->value();
+        return $this->sequence->current();
     }
 
     public function next(): void

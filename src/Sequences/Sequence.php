@@ -8,7 +8,7 @@ namespace j45l\functional\Sequences;
 interface Sequence
 {
     /** @return T */
-    public function value(): mixed;
+    public function current(): mixed;
 
     /** @return Sequence<T> */
     public function next(): Sequence;

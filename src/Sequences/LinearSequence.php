@@ -32,7 +32,7 @@ final class LinearSequence implements Sequence
         return new self($this->value + $this->increment, $this->increment, $this->iteration + 1);
     }
 
-    public function value(): int|float
+    public function current(): int|float
     {
         return $this->value;
     }

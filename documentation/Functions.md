@@ -268,8 +268,8 @@ function traverse(iterable $collection, array $mapSelect): array
 
 $mapSelect signature: 
     array<array{
-      0?:(Closure(mixed $value, mixed $key, iterable<mixed> $collection):bool),
-      1?:(Closure(mixed $value, array<string|int> $path,iterable<mixed> $collection):mixed)
+      0?:(Closure(mixed $current, mixed $key, iterable<mixed> $collection):bool),
+      1?:(Closure(mixed $current, array<string|int> $path,iterable<mixed> $collection):mixed)
     }>
 ```
 
@@ -488,7 +488,7 @@ is returned.
 ```PHP
 function reduce(iterable $collection, Closure $fn, mixed $initial = null): mixed
 
-$fn signature: Closure(mixed $initial, mixed $value, mixed $index, mixed $collection): mixed
+$fn signature: Closure(mixed $initial, mixed $current, mixed $index, mixed $collection): mixed
 ```
 
 ```PHP
@@ -509,7 +509,7 @@ is returned.
 ```PHP
 function reduceRight(iterable $collection, Closure $fn, mixed $initial = null): mixed
 
-$fn signature: Closure(mixed $initial, mixed $value, mixed $index, mixed $collection): mixed
+$fn signature: Closure(mixed $initial, mixed $current, mixed $index, mixed $collection): mixed
 ```
 
 ```PHP

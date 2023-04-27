@@ -27,7 +27,7 @@ final class ExponentialSequence implements Sequence
         return new self($base, $scale);
     }
 
-    public function value(): float|int
+    public function current(): float|int
     {
         return $this->scale * ($this->base ** ($this->iteration - 1));
     }

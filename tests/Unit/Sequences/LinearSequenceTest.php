@@ -16,13 +16,13 @@ final class LinearSequenceTest extends TestCase
         $returned = [];
         $sequence = LinearSequence::create(1, 2);
 
-        $returned[] = $sequence->value();
+        $returned[] = $sequence->current();
         $sequence = $sequence->next();
-        $returned[] = $sequence->value();
+        $returned[] = $sequence->current();
         $sequence = $sequence->next();
-        $returned[] = $sequence->value();
+        $returned[] = $sequence->current();
         $sequence = $sequence->next();
-        $returned[] = $sequence->value();
+        $returned[] = $sequence->current();
 
         assertEquals([1, 3, 5, 7], $returned);
     }
@@ -50,7 +50,7 @@ final class LinearSequenceTest extends TestCase
 
         $changedSequence = $sequence->next();
 
-        assertEquals(1, $sequence->value());
-        assertEquals(3, $changedSequence->value());
+        assertEquals(1, $sequence->current());
+        assertEquals(3, $changedSequence->current());
     }
 }

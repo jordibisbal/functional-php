@@ -16,13 +16,13 @@ final class ExponentialSequenceTest extends TestCase
         $returned = [];
         $sequence = ExponentialSequence::create(2, 1);
 
-        $returned[] = $sequence->value();
+        $returned[] = $sequence->current();
         $sequence = $sequence->next();
-        $returned[] = $sequence->value();
+        $returned[] = $sequence->current();
         $sequence = $sequence->next();
-        $returned[] = $sequence->value();
+        $returned[] = $sequence->current();
         $sequence = $sequence->next();
-        $returned[] = $sequence->value();
+        $returned[] = $sequence->current();
 
         assertEquals([1, 2, 4, 8], $returned);
     }
@@ -48,13 +48,13 @@ final class ExponentialSequenceTest extends TestCase
         $returned = [];
         $sequence = ExponentialSequence::create(3, 2);
 
-        $returned[] = $sequence->value();
+        $returned[] = $sequence->current();
         $sequence = $sequence->next();
-        $returned[] = $sequence->value();
+        $returned[] = $sequence->current();
         $sequence = $sequence->next();
-        $returned[] = $sequence->value();
+        $returned[] = $sequence->current();
         $sequence = $sequence->next();
-        $returned[] = $sequence->value();
+        $returned[] = $sequence->current();
 
         assertEquals([2, 6, 18, 54], $returned);
     }
@@ -64,13 +64,13 @@ final class ExponentialSequenceTest extends TestCase
         $returned = [];
         $sequence = ExponentialSequence::create(3);
 
-        $returned[] = $sequence->value();
+        $returned[] = $sequence->current();
         $sequence = $sequence->next();
-        $returned[] = $sequence->value();
+        $returned[] = $sequence->current();
         $sequence = $sequence->next();
-        $returned[] = $sequence->value();
+        $returned[] = $sequence->current();
         $sequence = $sequence->next();
-        $returned[] = $sequence->value();
+        $returned[] = $sequence->current();
 
         assertEquals([1, 3, 9, 27], $returned);
     }
@@ -81,7 +81,7 @@ final class ExponentialSequenceTest extends TestCase
 
         $changedSequence = $sequence->next();
 
-        assertEquals(1, $sequence->value());
-        assertEquals(2, $changedSequence->value());
+        assertEquals(1, $sequence->current());
+        assertEquals(2, $changedSequence->current());
     }
 }
