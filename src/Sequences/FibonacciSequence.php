@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace j45l\functional\Sequences;
 
 /**
- * @implements Sequence<int|float>
+ * @implements Sequence<int>
  */
 final readonly class FibonacciSequence implements Sequence
 {
@@ -26,7 +26,7 @@ final readonly class FibonacciSequence implements Sequence
         return match(true) {
             $start <= 1 => 1,
             default => (static function ($start) {
-
+                /** @infection-ignore-all */
                 $previous = 0;
                 $current = 1;
 

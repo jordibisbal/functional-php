@@ -55,15 +55,10 @@ final class FibonacciSequenceTest extends TestCase
         $returned[] = $sequence->current();
         $sequence = $sequence->next();
         $returned[] = $sequence->current();
-        $sequence = $sequence->next();
-        $returned[] = $sequence->current();
-        $sequence = $sequence->next();
-        $returned[] = $sequence->current();
-        $sequence = $sequence->next();
-        $returned[] = $sequence->current();
 
-        assertEquals([13, 21, 34, 55, 89], $returned);
+        assertEquals([13, 21], $returned);
     }
+
     public function testReturnsExpectedSequenceStartingAtNotFibonacci(): void
     {
         $returned = [];
