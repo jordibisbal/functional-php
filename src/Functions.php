@@ -14,6 +14,7 @@ include_once(__DIR__ . '/Functions/DoUntil.php');
 include_once(__DIR__ . '/Functions/Every.php');
 include_once(__DIR__ . '/Functions/FalseFn.php');
 include_once(__DIR__ . '/Functions/First.php');
+include_once(__DIR__ . '/Functions/FlatMap.php');
 include_once(__DIR__ . '/Functions/Fold.php');
 include_once(__DIR__ . '/Functions/FoldRight.php');
 include_once(__DIR__ . '/Functions/Head.php');
