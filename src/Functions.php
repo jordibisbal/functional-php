@@ -9,6 +9,7 @@ include_once(__DIR__ . '/Functions/Compose.php');
 include_once(__DIR__ . '/Functions/Concat.php');
 include_once(__DIR__ . '/Functions/CrossCompareSet.php');
 include_once(__DIR__ . '/Functions/Delay.php');
+include_once(__DIR__ . '/Functions/DoEach.php');
 include_once(__DIR__ . '/Functions/DoWhile.php');
 include_once(__DIR__ . '/Functions/DoUntil.php');
 include_once(__DIR__ . '/Functions/Every.php');
