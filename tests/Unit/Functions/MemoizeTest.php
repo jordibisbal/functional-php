@@ -13,7 +13,7 @@ use function j45l\functional\identity;
 
 interface MemoizingSubject
 {
-    public function memoize(int ...$arguments): int;
+    public function memoize(int ...$arguments): ?int;
     public function calls(): int;
 }
 
@@ -88,6 +88,7 @@ class MemoizeTest extends TestCase // phpcs:ignore
         self::assertEquals(1, $subject->calls());
     }
 
+    /** @noinspection SpellCheckingInspection */
     private function buildTestMemoizingSubject(): MemoizingSubject
     {
         return new class() implements MemoizingSubject {
@@ -100,14 +101,13 @@ class MemoizeTest extends TestCase // phpcs:ignore
 
             /**
              * @noinspection PhpUnusedPrivateMethodInspection
-             * @phpstan-ignore-next-line
              */
             private static function memoizeTraitKey(int ...$arguments): string
             {
                 return (string) first($arguments);
             }
 
-            public function memoize(int ...$arguments): int
+            public function memoize(int ...$arguments): ?int
             {
                 return self::parentMemoize(
                     function () use ($arguments) {

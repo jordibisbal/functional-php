@@ -29,12 +29,12 @@
         + [toArray](#toarray)
         + [toGenerator](#togenerator)
         + [toIterable](#toiterable)
-    * [Function composition, partial application and curling.](#function-composition--partial-application-and-curling)
+    * [Function composition, partial application and curling.](#function-composition-partial-application-and-curling)
         + [compose](#compose)
         + [partial](#partial)
         + [partialRight](#partialright)
         + [pipe](#pipe)
-    * [Object & type functions](#object---type-functions)
+    * [Object & type functions](#object--type-functions)
         + [cloneWith](#clonewith)
         + [isAOr](#isaor)
         + [isClosureOr](#isclosureor)
@@ -686,7 +686,6 @@ function unzip(array $collection, mixed $defaultLeft = null, mixed $defaultRight
 ```
 
 see also: [zip](#zip)
-
 
 ---
 

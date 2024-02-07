@@ -8,12 +8,11 @@ use Closure;
 use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 
-use function array_values as arrayValues;
 use function j45l\functional\flatMap;
 use function j45l\functional\map;
 use function PHPUnit\Framework\assertEquals;
 
-#[CoversFunction('j45l\functional\map')]
+#[CoversFunction('j45l\functional\flatMap')]
 class FlatMapTest extends TestCase
 {
     public function testAllMapped(): void
@@ -45,7 +44,7 @@ class FlatMapTest extends TestCase
         $mappedTimes = 0;
 
         assertEquals(
-            arrayValues(flatMap(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4], $this->mapper($mappedTimes))),
+            ['A', 'B1', 'B2', 'C'],
             flatMap(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4], $this->mapper($mappedTimes))
         );
         assertEquals(4, $mappedTimes);
